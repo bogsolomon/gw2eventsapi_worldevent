@@ -1,0 +1,42 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        <title>World Events Tracker</title>
+        <meta http-equiv="refresh" content="30"/>
+        <style type="text/css">
+			.ui-panel, div.ui-state-hover {
+				margin: 10px;
+			}
+			
+			.ui-dashboard-column {
+				min-width:220px;
+			}
+			.ui-panel-collapsed-h .ui-panel-titlebar {
+				background:#003946;	
+			}
+		</style>
+    </h:head>
+    <h:body>
+        <h:form id="form">
+        	<p:dashboard id="board" model="#{dashboardBean.model}">
+        		 <p:panel id="teqPanel" header="Tequatl" toggleable="true" collapsed="#{dashboardBean.teqCollapsed}">
+        		 	<p:ajax event="toggle" listener="#{dashboardBean.handleTeqToggle}"/>
+        		 	<h:outputText escape="false" value="#{dragonBean.tequatlStatus}"></h:outputText>
+        		 </p:panel>
+        		 
+        		 <p:panel id="shatPanel" header="Shatterer" toggleable="true">
+        		 	<h:outputText escape="false" value="#{dragonBean.shattererStatus}"></h:outputText>
+        		 </p:panel>
+        		 
+        		 <p:panel id="jorPanel" header="Jormag" toggleable="true">
+        		 	<h:outputText escape="false" value="#{dragonBean.jormagStatus}"></h:outputText>
+        		 </p:panel>
+        		 
+        		 <p:panel id="mawPanel" header="Maw" toggleable="true">
+        		 	<h:outputText escape="false" value="#{dragonBean.mawStatus}"></h:outputText>
+        		 </p:panel>
+        	</p:dashboard>
+        </h:form>
+    </h:body>
+</html>

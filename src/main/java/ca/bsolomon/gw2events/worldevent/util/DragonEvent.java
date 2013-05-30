@@ -24,7 +24,7 @@ public enum DragonEvent {
 	public String uid() {return uid;}
 	public String toString() {return prettyName;}
 	
-	public DragonEvent getEvent(String val) {
+	public static DragonEvent getEvent(String val) {
 		if (val.equals("0CA3A7E3-5F66-4651-B0CB-C45D3F0CAD95")) {
 			return JORMAG_CRYSTAL1;
 		} else if (val.equals("96D736C4-D2C6-4392-982F-AC6B8EF3B1C8")) {
