@@ -3,7 +3,7 @@
       xmlns:h="http://java.sun.com/jsf/html">
     <h:head>
         <title>World Events Tracker</title>
-        <meta http-equiv="refresh" content="30"/>
+        <meta http-equiv="refresh" content="15"/>
         <style type="text/css">
 			.ui-panel, div.ui-state-hover {
 				margin: 10px;
@@ -25,15 +25,18 @@
         		 	<h:outputText escape="false" value="#{dragonBean.tequatlStatus}"></h:outputText>
         		 </p:panel>
         		 
-        		 <p:panel id="shatPanel" header="Shatterer" toggleable="true">
+        		 <p:panel id="shatPanel" header="Shatterer" toggleable="true" collapsed="#{dashboardBean.shatCollapsed}">
+        		 	<p:ajax event="toggle" listener="#{dashboardBean.handleShatToggle}"/>
         		 	<h:outputText escape="false" value="#{dragonBean.shattererStatus}"></h:outputText>
         		 </p:panel>
         		 
-        		 <p:panel id="jorPanel" header="Jormag" toggleable="true">
+        		 <p:panel id="jorPanel" header="Jormag" toggleable="true" collapsed="#{dashboardBean.jormagCollapsed}">
+        		 	<p:ajax event="toggle" listener="#{dashboardBean.handleJormagToggle}"/>
         		 	<h:outputText escape="false" value="#{dragonBean.jormagStatus}"></h:outputText>
         		 </p:panel>
         		 
-        		 <p:panel id="mawPanel" header="Maw" toggleable="true">
+        		 <p:panel id="mawPanel" header="Maw" toggleable="true" collapsed="#{dashboardBean.mawCollapsed}">
+        		 	<p:ajax event="toggle" listener="#{dashboardBean.handleMawToggle}"/>
         		 	<h:outputText escape="false" value="#{dragonBean.mawStatus}"></h:outputText>
         		 </p:panel>
         	</p:dashboard>

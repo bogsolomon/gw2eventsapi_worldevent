@@ -229,17 +229,17 @@ public class EventStringFormatter {
 				outStatus = MawEvent.TOTEM.toString();
 				color = "<span style='color: #"+EventStateColor.PREPARATION.color()+";'>";
 			} else if (portalStatus.equals("Active") || guardsStatus.equals("Active") || shamaStatus.equals("Active")) {
-				time = lowLevelEventData.getEventTime(portalStatus);
+				time = lowLevelEventData.getEventTime(portalEventId);
 				
 				outStatus = "Portals/Guards";
 				color = "<span style='color: #"+EventStateColor.PREPARATION.color()+";'>";
 			} else if (chiefStatus.equals("Active") || chiefStatus.equals("Preparation")) {
-				time = lowLevelEventData.getEventTime(chiefStatus);
+				time = lowLevelEventData.getEventTime(chiefEventId);
 				
 				outStatus = MawEvent.CHIEF.toString();
 				color = "<span style='color: #"+EventStateColor.ACTIVE.color()+";'>";
 			}  else {
-				time = lowLevelEventData.getEventTime(chiefStatus);
+				time = lowLevelEventData.getEventTime(chiefEventId);
 				
 				outStatus = "Not up";
 				color = "<span style='color: #"+EventStateColor.FAIL.color()+";'>";	

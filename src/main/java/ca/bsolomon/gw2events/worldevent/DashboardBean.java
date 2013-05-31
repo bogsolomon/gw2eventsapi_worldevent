@@ -19,7 +19,10 @@ public class DashboardBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private DashboardModel model;  
 	
-	private boolean teqCollapsed = true;
+	private boolean teqCollapsed = false;
+	private boolean shatCollapsed = false;
+	private boolean jormagCollapsed = false;
+	private boolean mawCollapsed = false;
       
     public DashboardBean() {  
         model = new DefaultDashboardModel();  
@@ -46,7 +49,31 @@ public class DashboardBean implements Serializable {
     	teqCollapsed = (event.getVisibility() == Visibility.HIDDEN);
     }
 
-	public boolean isTeqCollapsed() {
+    public void handleShatToggle(ToggleEvent event) {  
+    	shatCollapsed = (event.getVisibility() == Visibility.HIDDEN);
+    }
+
+    public void handleJormagToggle(ToggleEvent event) {  
+    	jormagCollapsed = (event.getVisibility() == Visibility.HIDDEN);
+    }
+
+    public void handleMawToggle(ToggleEvent event) {  
+    	mawCollapsed = (event.getVisibility() == Visibility.HIDDEN);
+    }
+    
+    public boolean isTeqCollapsed() {
 		return teqCollapsed;
+	}
+
+	public boolean isShatCollapsed() {
+		return shatCollapsed;
+	}
+
+	public boolean isJormagCollapsed() {
+		return jormagCollapsed;
+	}
+
+	public boolean isMawCollapsed() {
+		return mawCollapsed;
 	}  
 }  

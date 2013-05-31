@@ -4,8 +4,6 @@ import org.joda.time.Chronology;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.chrono.GJChronology;
-import org.primefaces.push.PushContext;
-import org.primefaces.push.PushContextFactory;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -25,8 +23,6 @@ public class DataRetrieveJob implements Job {
 	
 	public void execute(JobExecutionContext context)
 			throws JobExecutionException {
-		PushContext pushContext = PushContextFactory.getDefault().getPushContext();
-		
 		if (GW2EventsAPI.eventIdToName.size() == 0) {
 			System.out.println("Generating Event IDs");
 			GW2EventsAPI.generateEventIds();
@@ -112,7 +108,7 @@ public class DataRetrieveJob implements Job {
 			}
 		}
 		
-		if (teqChanged) {
+		/*if (teqChanged) {
 			String teqStatusString = EventStringFormatter.formatTequatlString(dragonData);
 			
 			pushContext.push("/tequatl", teqStatusString);
@@ -134,7 +130,7 @@ public class DataRetrieveJob implements Job {
 			String mawStatusString = EventStringFormatter.formatMawString(lowLevelEventData);
 			
 			pushContext.push("/maw", mawStatusString);
-		}
+		}*/
 	}
 }
 
