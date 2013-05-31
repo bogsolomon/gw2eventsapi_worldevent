@@ -8,18 +8,26 @@ import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
-import ca.bsolomon.gw2events.worldevent.util.DragonEvent;
-import ca.bsolomon.gw2events.worldevent.util.EventStringFormatter;
+import ca.bsolomon.gw2events.worldevent.enums.DragonEvent;
+import ca.bsolomon.gw2events.worldevent.enums.DredgeEvent;
+import ca.bsolomon.gw2events.worldevent.enums.FireEleEvent;
+import ca.bsolomon.gw2events.worldevent.enums.FoulBearEvent;
+import ca.bsolomon.gw2events.worldevent.enums.GolemEvent;
+import ca.bsolomon.gw2events.worldevent.enums.HarathiChestEvent;
+import ca.bsolomon.gw2events.worldevent.enums.JungleWurmEvent;
+import ca.bsolomon.gw2events.worldevent.enums.MawEvent;
+import ca.bsolomon.gw2events.worldevent.enums.ServerID;
+import ca.bsolomon.gw2events.worldevent.enums.ShadowBehemothEvent;
 import ca.bsolomon.gw2events.worldevent.util.GW2EventsAPI;
 import ca.bsolomon.gw2events.worldevent.util.DragonData;
 import ca.bsolomon.gw2events.worldevent.util.LowLevelEventData;
-import ca.bsolomon.gw2events.worldevent.util.MawEvent;
-import ca.bsolomon.gw2events.worldevent.util.ServerID;
+import ca.bsolomon.gw2events.worldevent.util.LowPriorityEventData;
 
 public class DataRetrieveJob implements Job {
 	
 	private DragonData dragonData = new DragonData();
 	private LowLevelEventData lowLevelEventData = new LowLevelEventData();
+	private LowPriorityEventData lowPriorityEventData = new LowPriorityEventData();
 	
 	public void execute(JobExecutionContext context)
 			throws JobExecutionException {
@@ -32,13 +40,12 @@ public class DataRetrieveJob implements Job {
 		Chronology gregorianJuian = GJChronology.getInstance(zone);
 		DateTime time = new DateTime(gregorianJuian);
 		
-		//format.setCalendar(cal);
-		//String time = format.format(cal.getTime());
-		
 		boolean teqChanged = false;
 		boolean shatChanged = false;
 		boolean jorChanged = false;
 		boolean mawChanged = false;
+		boolean fireeleChanged = false;
+		boolean wurmChanged = false;
 				
 		for (ServerID servId:ServerID.values()) {
 			String teqStatus = GW2EventsAPI.queryServer(servId.uid(), DragonEvent.TEQUATL.uid());
@@ -106,6 +113,64 @@ public class DataRetrieveJob implements Job {
 					mawChanged = true;
 				} 
 			}
+			
+			for (FireEleEvent eventId:FireEleEvent.values()) {
+				String status = GW2EventsAPI.queryServer(servId.uid(), eventId.uid());
+				
+				if (lowLevelEventData.addEventStatus(servId.uid()+"-"+eventId.uid(), status, time)) {
+					fireeleChanged = true;
+				} 
+			}
+			
+			for (JungleWurmEvent eventId:JungleWurmEvent.values()) {
+				String status = GW2EventsAPI.queryServer(servId.uid(), eventId.uid());
+				
+				if (lowLevelEventData.addEventStatus(servId.uid()+"-"+eventId.uid(), status, time)) {
+					wurmChanged = true;
+				} 
+			}
+			
+			for (ShadowBehemothEvent eventId:ShadowBehemothEvent.values()) {
+				String status = GW2EventsAPI.queryServer(servId.uid(), eventId.uid());
+				
+				if (lowLevelEventData.addEventStatus(servId.uid()+"-"+eventId.uid(), status, time)) {
+					wurmChanged = true;
+				} 
+			}
+		}
+		
+		for (ServerID servId:ServerID.values()) {
+			for (GolemEvent eventId:GolemEvent.values()) {
+				String status = GW2EventsAPI.queryServer(servId.uid(), eventId.uid());
+				
+				if (lowPriorityEventData.addEventStatus(servId.uid()+"-"+eventId.uid(), status, time)) {
+					mawChanged = true;
+				} 
+			}
+			
+			for (DredgeEvent eventId:DredgeEvent.values()) {
+				String status = GW2EventsAPI.queryServer(servId.uid(), eventId.uid());
+				
+				if (lowPriorityEventData.addEventStatus(servId.uid()+"-"+eventId.uid(), status, time)) {
+					mawChanged = true;
+				} 
+			}
+			
+			for (HarathiChestEvent eventId:HarathiChestEvent.values()) {
+				String status = GW2EventsAPI.queryServer(servId.uid(), eventId.uid());
+				
+				if (lowPriorityEventData.addEventStatus(servId.uid()+"-"+eventId.uid(), status, time)) {
+					mawChanged = true;
+				} 
+			}
+			
+			for (FoulBearEvent eventId:FoulBearEvent.values()) {
+				String status = GW2EventsAPI.queryServer(servId.uid(), eventId.uid());
+				
+				if (lowPriorityEventData.addEventStatus(servId.uid()+"-"+eventId.uid(), status, time)) {
+					mawChanged = true;
+				} 
+			}
 		}
 		
 		/*if (teqChanged) {
@@ -133,4 +198,3 @@ public class DataRetrieveJob implements Job {
 		}*/
 	}
 }
-

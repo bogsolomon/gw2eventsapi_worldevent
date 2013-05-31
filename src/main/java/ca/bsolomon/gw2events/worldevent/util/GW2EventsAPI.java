@@ -180,7 +180,9 @@ public class GW2EventsAPI {
 	    	e.printStackTrace();
 	    } catch (IOException e) {
 	    	e.printStackTrace();
-	    }	
+	    } catch (Exception e) {
+	    	return "Event error";
+	    }
 		
 		return null;
 	}

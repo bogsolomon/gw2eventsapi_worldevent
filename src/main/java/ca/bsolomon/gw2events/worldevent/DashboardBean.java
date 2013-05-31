@@ -23,6 +23,13 @@ public class DashboardBean implements Serializable {
 	private boolean shatCollapsed = false;
 	private boolean jormagCollapsed = false;
 	private boolean mawCollapsed = false;
+	private boolean fireEleCollapsed = false;
+	private boolean wurmCollapsed = false;
+	private boolean sbCollapsed = false;
+	private boolean golemCollapsed = false;
+	private boolean dredgeCollapsed = false;
+	private boolean harathiCollapsed = false;
+	private boolean ogreCollapsed = false;
       
     public DashboardBean() {  
         model = new DefaultDashboardModel();  
@@ -35,6 +42,14 @@ public class DashboardBean implements Serializable {
         column1.addWidget("jorPanel");
         
         column2.addWidget("mawPanel");
+        column2.addWidget("fireElePanel");
+        column2.addWidget("wurmPanel");
+        column2.addWidget("sbPanel");
+        
+        column3.addWidget("golemPanel");
+        column3.addWidget("dredgePanel");
+        column3.addWidget("harathiPanel");
+        column3.addWidget("ogrePanel");
   
         model.addColumn(column1);  
         model.addColumn(column2);  
@@ -61,6 +76,34 @@ public class DashboardBean implements Serializable {
     	mawCollapsed = (event.getVisibility() == Visibility.HIDDEN);
     }
     
+    public void handleFireEleToggle(ToggleEvent event) {  
+    	fireEleCollapsed = (event.getVisibility() == Visibility.HIDDEN);
+    }
+    
+    public void handleWurmToggle(ToggleEvent event) {  
+    	wurmCollapsed = (event.getVisibility() == Visibility.HIDDEN);
+    }
+    
+    public void handleSBToggle(ToggleEvent event) {  
+    	sbCollapsed = (event.getVisibility() == Visibility.HIDDEN);
+    }
+    
+    public void handleGolemToggle(ToggleEvent event) {  
+    	golemCollapsed = (event.getVisibility() == Visibility.HIDDEN);
+    }
+    
+    public void handleDredgeToggle(ToggleEvent event) {  
+    	dredgeCollapsed = (event.getVisibility() == Visibility.HIDDEN);
+    }
+    
+    public void handleHarathiToggle(ToggleEvent event) {  
+    	harathiCollapsed = (event.getVisibility() == Visibility.HIDDEN);
+    }
+    
+    public void handleOgreToggle(ToggleEvent event) {  
+    	ogreCollapsed = (event.getVisibility() == Visibility.HIDDEN);
+    }
+    
     public boolean isTeqCollapsed() {
 		return teqCollapsed;
 	}
@@ -75,5 +118,33 @@ public class DashboardBean implements Serializable {
 
 	public boolean isMawCollapsed() {
 		return mawCollapsed;
+	}
+
+	public boolean isFireEleCollapsed() {
+		return fireEleCollapsed;
+	}
+
+	public boolean isWurmCollapsed() {
+		return wurmCollapsed;
+	}
+	
+	public boolean isSbCollapsed() {
+		return sbCollapsed;
+	}
+	
+	public boolean isGolemCollapsed() {
+		return golemCollapsed;
+	}
+	
+	public boolean isDredgeCollapsed() {
+		return dredgeCollapsed;
+	}
+	
+	public boolean isHarathiCollapsed() {
+		return harathiCollapsed;
+	}
+	
+	public boolean isOgreCollapsed() {
+		return ogreCollapsed;
 	}  
 }  

@@ -39,6 +39,41 @@
         		 	<p:ajax event="toggle" listener="#{dashboardBean.handleMawToggle}"/>
         		 	<h:outputText escape="false" value="#{dragonBean.mawStatus}"></h:outputText>
         		 </p:panel>
+        		 
+        		 <p:panel id="fireElePanel" header="Fire Elemental" toggleable="true" collapsed="#{dashboardBean.fireEleCollapsed}">
+        		 	<p:ajax event="toggle" listener="#{dashboardBean.handleFireEleToggle}"/>
+        		 	<h:outputText escape="false" value="#{dragonBean.fireEleStatus}"></h:outputText>
+        		 </p:panel>
+        		 
+        		 <p:panel id="wurmPanel" header="Jungle Wurm" toggleable="true" collapsed="#{dashboardBean.wurmCollapsed}">
+        		 	<p:ajax event="toggle" listener="#{dashboardBean.handleWurmToggle}"/>
+        		 	<h:outputText escape="false" value="#{dragonBean.wurmStatus}"></h:outputText>
+        		 </p:panel>
+        		 
+        		 <p:panel id="sbPanel" header="Shadow Behemoth" toggleable="true" collapsed="#{dashboardBean.sbCollapsed}">
+        		 	<p:ajax event="toggle" listener="#{dashboardBean.handleSBToggle}"/>
+        		 	<h:outputText escape="false" value="#{dragonBean.sbStatus}"></h:outputText>
+        		 </p:panel>
+        		 
+        		 <p:panel id="golemPanel" header="Golem" toggleable="true" collapsed="#{dashboardBean.golemCollapsed}">
+        		 	<p:ajax event="toggle" listener="#{dashboardBean.handleGolemToggle}"/>
+        		 	<h:outputText escape="false" value="#{dragonBean.golemStatus}"></h:outputText>
+        		 </p:panel>
+        		 
+        		 <p:panel id="dredgePanel" header="Dredge" toggleable="true" collapsed="#{dashboardBean.dredgeCollapsed}">
+        		 	<p:ajax event="toggle" listener="#{dashboardBean.handleDredgeToggle}"/>
+        		 	<h:outputText escape="false" value="#{dragonBean.dredgeStatus}"></h:outputText>
+        		 </p:panel>
+        		 
+        		 <p:panel id="harathiPanel" header="Kilava Chest" toggleable="true" collapsed="#{dashboardBean.harathiCollapsed}">
+        		 	<p:ajax event="toggle" listener="#{dashboardBean.handleHarathiToggle}"/>
+        		 	<h:outputText escape="false" value="#{dragonBean.harathiStatus}"></h:outputText>
+        		 </p:panel>
+        		 
+        		 <p:panel id="ogrePanel" header="Foulbear Kraal" toggleable="true" collapsed="#{dashboardBean.ogreCollapsed}">
+        		 	<p:ajax event="toggle" listener="#{dashboardBean.handleOgreToggle}"/>
+        		 	<h:outputText escape="false" value="#{dragonBean.ogreStatus}"></h:outputText>
+        		 </p:panel>
         	</p:dashboard>
         </h:form>
     </h:body>
