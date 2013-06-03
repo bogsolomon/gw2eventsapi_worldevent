@@ -1,9 +1,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <title>World Events Tracker</title>
-        <meta http-equiv="refresh" content="15"/>
         <style type="text/css">
 			.ui-panel, div.ui-state-hover {
 				margin: 10px;
@@ -15,10 +15,43 @@
 			.ui-panel-collapsed-h .ui-panel-titlebar {
 				background:#003946;	
 			}
+			
+			.ui-widget, .ui-widget .ui-widget
+			{
+			    font-size: 95% !important;
+			}
+			
+			.ui-layout-north {
+                z-index:20 !important;
+                overflow:visible !important;;
+            }
+
+            .ui-layout-north .ui-layout-unit-content {
+                overflow:visible !important;
+            }
 		</style>
     </h:head>
     <h:body>
+    	<p:layout fullPage="true">
+    	<p:layoutUnit id="top" position="north" size="50">
+
+            <p:menubar>
+                <p:submenu label="Display Type" icon="ui-icon-document">
+                    <p:menuitem value="By Event" url="#" />
+                    <p:menuitem value="By Server" url="indexServer.jsf" />
+                </p:submenu>
+            </p:menubar>
+        </p:layoutUnit>
+    	<p:layoutUnit position="center" header="Events" resizable="true" closable="false" collapsible="false">       
         <h:form id="form">
+        	<p:poll interval="30"   
+            	update="mawPanel, fireElePanel, wurmPanel, sbPanel" 
+            	widgetVar="poll" autoStart="true"/>
+            	
+            <p:poll interval="60"   
+            	update="teqPanel, shatPanel, jorPanel, golemPanel, dredgePanel, harathiPanel, ogrePanel, hydraPanel, fireShamPanel" 
+            	widgetVar="pollLong" autoStart="true"/>    
+        
         	<p:dashboard id="board" model="#{dashboardBean.model}">
         		 <p:panel id="teqPanel" header="Tequatl" toggleable="true" collapsed="#{dashboardBean.teqCollapsed}">
         		 	<p:ajax event="toggle" listener="#{dashboardBean.handleTeqToggle}"/>
@@ -74,7 +107,31 @@
         		 	<p:ajax event="toggle" listener="#{dashboardBean.handleOgreToggle}"/>
         		 	<h:outputText escape="false" value="#{dragonBean.ogreStatus}"></h:outputText>
         		 </p:panel>
+        		 
+        		 <p:panel id="hydraPanel" header="Hydra Queen" toggleable="true" collapsed="#{dashboardBean.hydraCollapsed}">
+        		 	<p:ajax event="toggle" listener="#{dashboardBean.handleHydraToggle}"/>
+        		 	<h:outputText escape="false" value="#{dragonBean.hydraStatus}"></h:outputText>
+        		 </p:panel>
+        		 
+        		 <p:panel id="fireShamPanel" header="Fire Shaman" toggleable="true" collapsed="#{dashboardBean.fireShamCollapsed}">
+        		 	<p:ajax event="toggle" listener="#{dashboardBean.handleFireShamToggle}"/>
+        		 	<h:outputText escape="false" value="#{dragonBean.fireShamStatus}"></h:outputText>
+        		 </p:panel>
         	</p:dashboard>
         </h:form>
+        </p:layoutUnit>
+        <p:layoutUnit position="east" header="Checkboxes" size="200" resizable="true" closable="false" collapsible="true">
+        	<h:form id="checkboxes">
+        		<p:selectManyCheckbox value="#{checkboxBean.selectedEvents}"  
+		            layout="pageDirection" id="smcb">  
+		            <f:selectItems value="#{checkboxBean.events}" />
+		            <p:ajax listener="#{checkboxBean.handleCheckbox}"/> 
+		        </p:selectManyCheckbox>
+		        <p:commandButton value="Clear All" update="smcb" id="ajax"  
+             			actionListener="#{checkboxBean.clearAll}">
+		        </p:commandButton>
+        	</h:form>
+        </p:layoutUnit>
+        </p:layout>  
     </h:body>
 </html>

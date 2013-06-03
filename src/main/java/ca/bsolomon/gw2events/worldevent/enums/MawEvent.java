@@ -1,10 +1,9 @@
 package ca.bsolomon.gw2events.worldevent.enums;
 
 import org.joda.time.DateTime;
-import org.joda.time.Period;
 
+import ca.bsolomon.gw2events.worldevent.util.EventData;
 import ca.bsolomon.gw2events.worldevent.util.EventStringFormatter;
-import ca.bsolomon.gw2events.worldevent.util.LowLevelEventData;
 
 public enum MawEvent {
 
@@ -28,75 +27,79 @@ public enum MawEvent {
 	public String uid() {return uid;}
 	public String toString() {return prettyName;}
 	
-	public static String formatMawString(LowLevelEventData lowLevelEventData) {
+	public static String formatMawString(EventData lowLevelEventData) {
 		StringBuffer sb = new StringBuffer();
 		
 		for (ServerID servId:ServerID.values()) {
-			String outStatus = "";
-			String color = "";
-			DateTime time = null;
-		
-			String protectEventId = servId.uid()+"-"+MawEvent.PROTECT.uid();
-			String escortEventId = servId.uid()+"-"+MawEvent.ESCORT.uid();
-			String totemEventId = servId.uid()+"-"+MawEvent.TOTEM.uid();
-			
-			String portalEventId = servId.uid()+"-"+MawEvent.PORTALS.uid();
-			String guardsEventId = servId.uid()+"-"+MawEvent.GUARDS.uid();
-			String shamanEventId = servId.uid()+"-"+MawEvent.SHAMANS.uid();
-			
-			String chiefEventId = servId.uid()+"-"+MawEvent.CHIEF.uid();
-		
-			String protectStatus = lowLevelEventData.getEventStatus(protectEventId);
-			String escortStatus = lowLevelEventData.getEventStatus(escortEventId);
-			String totemStatus = lowLevelEventData.getEventStatus(totemEventId);
-			String portalStatus = lowLevelEventData.getEventStatus(portalEventId);
-			String guardsStatus = lowLevelEventData.getEventStatus(guardsEventId);
-			String shamaStatus = lowLevelEventData.getEventStatus(shamanEventId);
-			String chiefStatus = lowLevelEventData.getEventStatus(chiefEventId);
-			
-			if (protectStatus != null && protectStatus.equals("Active")) {
-				time = lowLevelEventData.getEventTime(protectEventId);
-				
-				outStatus = MawEvent.PROTECT.toString();
-				color = "<span style='color: #"+EventStateColor.PREPARATION.color()+";'>";
-			} else if (escortStatus != null && (escortStatus.equals("Active") || escortStatus.equals("Preparation"))) {
-				time = lowLevelEventData.getEventTime(protectEventId);
-				
-				outStatus = MawEvent.ESCORT.toString();
-				color = "<span style='color: #"+EventStateColor.PREPARATION.color()+";'>";
-			} else if (totemStatus != null && (totemStatus.equals("Active") || totemStatus.equals("Preparation"))) {
-				time = lowLevelEventData.getEventTime(protectEventId);
-				
-				outStatus = MawEvent.TOTEM.toString();
-				color = "<span style='color: #"+EventStateColor.PREPARATION.color()+";'>";
-			} else if ((portalStatus !=null && guardsStatus!=null && shamaStatus!=null) && 
-					(portalStatus.equals("Active") || guardsStatus.equals("Active") || shamaStatus.equals("Active"))) {
-				time = lowLevelEventData.getEventTime(portalEventId);
-				
-				outStatus = "Portals/Guards";
-				color = "<span style='color: #"+EventStateColor.PREPARATION.color()+";'>";
-			} else if (chiefStatus != null && (chiefStatus.equals("Active") || chiefStatus.equals("Preparation"))) {
-				time = lowLevelEventData.getEventTime(chiefEventId);
-				
-				outStatus = MawEvent.CHIEF.toString();
-				color = "<span style='color: #"+EventStateColor.ACTIVE.color()+";'>";
-			}  else {
-				time = lowLevelEventData.getEventTime(chiefEventId);
-				
-				outStatus = "Not up";
-				color = "<span style='color: #"+EventStateColor.FAIL.color()+";'>";	
-			}
-			
-			String timeStr = EventStringFormatter.format.print(time);
-			
-			DateTime now = new DateTime(EventStringFormatter.gregorianJuian);
-			Period period = new Period(time, now);
-			
-			String periodStr = EventStringFormatter.HHMMSSFormater.print(period);
-			
-			sb.append(timeStr+" - "+ servId.toString()+" - "+color+outStatus+"</span> - "+periodStr+"</br>");
+			formatMawString(lowLevelEventData, sb, servId);
 		}
 		
 		return sb.toString();
+	}
+
+	public static void formatMawString(EventData lowLevelEventData,
+			StringBuffer sb, ServerID servId) {
+		String outStatus = "";
+		String color = "";
+		DateTime time = null;
+		int fontWeight = 400;
+
+		String protectEventId = servId.uid()+"-"+MawEvent.PROTECT.uid();
+		String escortEventId = servId.uid()+"-"+MawEvent.ESCORT.uid();
+		String totemEventId = servId.uid()+"-"+MawEvent.TOTEM.uid();
+		
+		String portalEventId = servId.uid()+"-"+MawEvent.PORTALS.uid();
+		String guardsEventId = servId.uid()+"-"+MawEvent.GUARDS.uid();
+		String shamanEventId = servId.uid()+"-"+MawEvent.SHAMANS.uid();
+		
+		String chiefEventId = servId.uid()+"-"+MawEvent.CHIEF.uid();
+
+		String protectStatus = lowLevelEventData.getEventStatus(protectEventId);
+		String escortStatus = lowLevelEventData.getEventStatus(escortEventId);
+		String totemStatus = lowLevelEventData.getEventStatus(totemEventId);
+		String portalStatus = lowLevelEventData.getEventStatus(portalEventId);
+		String guardsStatus = lowLevelEventData.getEventStatus(guardsEventId);
+		String shamaStatus = lowLevelEventData.getEventStatus(shamanEventId);
+		String chiefStatus = lowLevelEventData.getEventStatus(chiefEventId);
+		
+		if (protectStatus != null && protectStatus.equals("Active")) {
+			time = lowLevelEventData.getEventTime(protectEventId);
+			
+			outStatus = MawEvent.PROTECT.toString();
+			color = EventStateColor.PREPARATION.color();
+			fontWeight = 600;
+		} else if (escortStatus != null && (escortStatus.equals("Active") || escortStatus.equals("Preparation"))) {
+			time = lowLevelEventData.getEventTime(protectEventId);
+			
+			outStatus = MawEvent.ESCORT.toString();
+			color = EventStateColor.PREPARATION.color();
+			fontWeight = 600;
+		} else if (totemStatus != null && (totemStatus.equals("Active") || totemStatus.equals("Preparation"))) {
+			time = lowLevelEventData.getEventTime(protectEventId);
+			
+			outStatus = MawEvent.TOTEM.toString();
+			color = EventStateColor.PREPARATION.color();
+			fontWeight = 600;
+		} else if ((portalStatus !=null && guardsStatus!=null && shamaStatus!=null) && 
+				(portalStatus.equals("Active") || guardsStatus.equals("Active") || shamaStatus.equals("Active"))) {
+			time = lowLevelEventData.getEventTime(portalEventId);
+			
+			outStatus = "Portals/Guards";
+			color = EventStateColor.PREPARATION.color();
+			fontWeight = 600;
+		} else if (chiefStatus != null && (chiefStatus.equals("Active") || chiefStatus.equals("Preparation"))) {
+			time = lowLevelEventData.getEventTime(chiefEventId);
+			
+			outStatus = MawEvent.CHIEF.toString();
+			color = EventStateColor.ACTIVE.color();
+			fontWeight = 900;
+		}  else {
+			time = lowLevelEventData.getEventTime(chiefEventId);
+			
+			outStatus = "Not up";
+			color = EventStateColor.FAIL.color();
+		}
+		
+		EventStringFormatter.generateEventString(sb, servId, outStatus, color, fontWeight, time);
 	}
 }

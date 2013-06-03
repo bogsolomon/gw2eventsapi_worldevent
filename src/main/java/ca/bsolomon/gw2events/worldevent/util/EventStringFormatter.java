@@ -1,12 +1,16 @@
 package ca.bsolomon.gw2events.worldevent.util;
 
 import org.joda.time.Chronology;
+import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
+import org.joda.time.Period;
 import org.joda.time.chrono.GJChronology;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.DateTimeFormatterBuilder;
 import org.joda.time.format.PeriodFormatter;
 import org.joda.time.format.PeriodFormatterBuilder;
+
+import ca.bsolomon.gw2events.worldevent.enums.ServerID;
 
 public class EventStringFormatter {
 
@@ -24,4 +28,17 @@ public class EventStringFormatter {
 			appendHours().appendSeparator(":").
 			appendMinutes().appendSeparator(":").
 			appendSeconds().toFormatter();
+	
+
+	public static void generateEventString(StringBuffer sb, ServerID servId,
+			String outStatus, String color, int fontWeight, DateTime time) {
+		DateTime now = new DateTime(gregorianJuian);
+		Period period = new Period(time, now);
+		
+		String periodStr = HHMMSSFormater.print(period);
+		
+		sb.append(servId.toString()+" - "
+				+"<span style='font-weight:"+fontWeight+";color: #"+color+";'>"
+				+outStatus+"</span> - "+periodStr+"</br>");
+	}
 }

@@ -1,0 +1,84 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>World Events Tracker</title>
+        <style type="text/css">
+			.ui-panel, div.ui-state-hover {
+				margin: 10px;
+			}
+			
+			.ui-dashboard-column {
+				min-width:220px;
+			}
+			.ui-panel-collapsed-h .ui-panel-titlebar {
+				background:#003946;	
+			}
+			
+			.ui-widget, .ui-widget .ui-widget
+			{
+			    font-size: 95% !important;
+			}
+			
+			.ui-layout-north {
+                z-index:20 !important;
+                overflow:visible !important;;
+            }
+
+            .ui-layout-north .ui-layout-unit-content {
+                overflow:visible !important;
+            }
+			
+		</style>
+    </h:head>
+    <h:body>
+    	<p:layout fullPage="true">
+    	<p:layoutUnit id="top" position="north" size="50">
+
+            <p:menubar>
+                <p:submenu label="Display Type" icon="ui-icon-document">
+                    <p:menuitem value="By Event" url="indexAR.jsf" />
+                    <p:menuitem value="By Server" url="#" />
+                </p:submenu>
+            </p:menubar>
+        </p:layoutUnit>
+    	<p:layoutUnit position="center" header="Events" resizable="true" closable="false" collapsible="false">       
+        <h:form id="form">
+        	<p:poll interval="30"   
+            	update="sorPanel, fcPanel, etPanel" 
+            	widgetVar="poll" autoStart="true"/>
+            	
+        	<p:dashboard id="board" model="#{serverDashboardBean.model}">
+        		 <p:panel id="sorPanel" header="Sanctum of Rall (Home)" toggleable="true" collapsed="#{serverDashboardBean.sorCollapsed}">
+        		 	<p:ajax event="toggle" listener="#{serverDashboardBean.handleSorToggle}"/>
+        		 	<h:outputText escape="false" value="#{dragonBean.sorStatus}"></h:outputText>
+        		 </p:panel>
+        		 
+        		 <p:panel id="fcPanel" header="Ferguson's Crossing" toggleable="true" collapsed="#{serverDashboardBean.fcCollapsed}">
+        		 	<p:ajax event="toggle" listener="#{serverDashboardBean.handleFcToggle}"/>
+        		 	<h:outputText escape="false" value="#{dragonBean.fcStatus}"></h:outputText>
+        		 </p:panel>
+        		 
+        		 <p:panel id="etPanel" header="Eredon Terrace" toggleable="true" collapsed="#{serverDashboardBean.etCollapsed}">
+        		 	<p:ajax event="toggle" listener="#{serverDashboardBean.handleEtToggle}"/>
+        		 	<h:outputText escape="false" value="#{dragonBean.etStatus}"></h:outputText>
+        		 </p:panel>
+        	</p:dashboard>
+        </h:form>
+        </p:layoutUnit>
+        <p:layoutUnit position="east" header="Checkboxes" size="200" resizable="true" closable="false" collapsible="true">
+        	<h:form id="checkboxes">
+        		<p:selectManyCheckbox value="#{checkboxBean.selectedEvents}"  
+		            layout="pageDirection" id="smcb">  
+		            <f:selectItems value="#{checkboxBean.events}" />
+		            <p:ajax listener="#{checkboxBean.handleCheckbox}"/> 
+		        </p:selectManyCheckbox>
+		        <p:commandButton value="Clear All" update="smcb" id="ajax"  
+             			actionListener="#{checkboxBean.clearAll}">
+		        </p:commandButton>
+        	</h:form>
+        </p:layoutUnit>
+        </p:layout>  
+    </h:body>
+</html>

@@ -11,13 +11,16 @@ import org.quartz.JobExecutionException;
 import ca.bsolomon.gw2events.worldevent.enums.DragonEvent;
 import ca.bsolomon.gw2events.worldevent.enums.DredgeEvent;
 import ca.bsolomon.gw2events.worldevent.enums.FireEleEvent;
+import ca.bsolomon.gw2events.worldevent.enums.FireShamanEnum;
 import ca.bsolomon.gw2events.worldevent.enums.FoulBearEvent;
 import ca.bsolomon.gw2events.worldevent.enums.GolemEvent;
 import ca.bsolomon.gw2events.worldevent.enums.HarathiChestEvent;
+import ca.bsolomon.gw2events.worldevent.enums.HydraQueenEvent;
 import ca.bsolomon.gw2events.worldevent.enums.JungleWurmEvent;
 import ca.bsolomon.gw2events.worldevent.enums.MawEvent;
 import ca.bsolomon.gw2events.worldevent.enums.ServerID;
 import ca.bsolomon.gw2events.worldevent.enums.ShadowBehemothEvent;
+import ca.bsolomon.gw2events.worldevent.util.EventData;
 import ca.bsolomon.gw2events.worldevent.util.GW2EventsAPI;
 import ca.bsolomon.gw2events.worldevent.util.DragonData;
 import ca.bsolomon.gw2events.worldevent.util.LowLevelEventData;
@@ -26,7 +29,7 @@ import ca.bsolomon.gw2events.worldevent.util.LowPriorityEventData;
 public class DataRetrieveJob implements Job {
 	
 	private DragonData dragonData = new DragonData();
-	private LowLevelEventData lowLevelEventData = new LowLevelEventData();
+	private EventData lowLevelEventData = new LowLevelEventData();
 	private LowPriorityEventData lowPriorityEventData = new LowPriorityEventData();
 	
 	public void execute(JobExecutionContext context)
@@ -49,7 +52,7 @@ public class DataRetrieveJob implements Job {
 				
 		for (ServerID servId:ServerID.values()) {
 			String teqStatus = GW2EventsAPI.queryServer(servId.uid(), DragonEvent.TEQUATL.uid());
-			if (dragonData.addDragonStatus(servId.uid()+"-"+DragonEvent.TEQUATL.uid(), teqStatus, time)) {
+			if (dragonData.addEventStatus(servId.uid()+"-"+DragonEvent.TEQUATL.uid(), teqStatus, time)) {
 				teqChanged = true;
 			}
 		}
@@ -59,15 +62,15 @@ public class DataRetrieveJob implements Job {
 			String shatSiegeStatus = GW2EventsAPI.queryServer(servId.uid(), DragonEvent.SHATTERER_SIEGE.uid());
 			String shatStatus = GW2EventsAPI.queryServer(servId.uid(), DragonEvent.SHATTERER_UP.uid());
 			
-			if (dragonData.addDragonStatus(servId.uid()+"-"+DragonEvent.SHATTERER_ESCORT.uid(), shatEscStatus, time)) {
+			if (dragonData.addEventStatus(servId.uid()+"-"+DragonEvent.SHATTERER_ESCORT.uid(), shatEscStatus, time)) {
 				shatChanged = true;
 			} 
 			
-			if (dragonData.addDragonStatus(servId.uid()+"-"+DragonEvent.SHATTERER_SIEGE.uid(), shatSiegeStatus, time)) {
+			if (dragonData.addEventStatus(servId.uid()+"-"+DragonEvent.SHATTERER_SIEGE.uid(), shatSiegeStatus, time)) {
 				shatChanged = true;
 			}
 			
-			if (dragonData.addDragonStatus(servId.uid()+"-"+DragonEvent.SHATTERER_UP.uid(), shatStatus, time)) {
+			if (dragonData.addEventStatus(servId.uid()+"-"+DragonEvent.SHATTERER_UP.uid(), shatStatus, time)) {
 				shatChanged = true;
 			}
 		}
@@ -80,27 +83,27 @@ public class DataRetrieveJob implements Job {
 			String jorCrystalF = GW2EventsAPI.queryServer(servId.uid(), DragonEvent.JORMAG_CRYSTALF.uid());
 			String jorUp = GW2EventsAPI.queryServer(servId.uid(), DragonEvent.JORMAG_UP.uid());
 			
-			if (dragonData.addDragonStatus(servId.uid()+"-"+DragonEvent.JORMAG_CRYSTAL1.uid(), jorCrystal1, time)) {
+			if (dragonData.addEventStatus(servId.uid()+"-"+DragonEvent.JORMAG_CRYSTAL1.uid(), jorCrystal1, time)) {
 				jorChanged = true;
 			} 
 
-			if (dragonData.addDragonStatus(servId.uid()+"-"+DragonEvent.JORMAG_CRYSTAL2.uid(), jorCrystal2, time)) {
+			if (dragonData.addEventStatus(servId.uid()+"-"+DragonEvent.JORMAG_CRYSTAL2.uid(), jorCrystal2, time)) {
 				jorChanged = true;
 			} 
 			
-			if (dragonData.addDragonStatus(servId.uid()+"-"+DragonEvent.JORMAG_CRYSTAL3.uid(), jorCrystal3, time)) {
+			if (dragonData.addEventStatus(servId.uid()+"-"+DragonEvent.JORMAG_CRYSTAL3.uid(), jorCrystal3, time)) {
 				jorChanged = true;
 			} 
 			
-			if (dragonData.addDragonStatus(servId.uid()+"-"+DragonEvent.JORMAG_CRYSTAL4.uid(), jorCrystal4, time)) {
+			if (dragonData.addEventStatus(servId.uid()+"-"+DragonEvent.JORMAG_CRYSTAL4.uid(), jorCrystal4, time)) {
 				jorChanged = true;
 			} 
 			
-			if (dragonData.addDragonStatus(servId.uid()+"-"+DragonEvent.JORMAG_CRYSTALF.uid(), jorCrystalF, time)) {
+			if (dragonData.addEventStatus(servId.uid()+"-"+DragonEvent.JORMAG_CRYSTALF.uid(), jorCrystalF, time)) {
 				jorChanged = true;
 			} 
 			
-			if (dragonData.addDragonStatus(servId.uid()+"-"+DragonEvent.JORMAG_UP.uid(), jorUp, time)) {
+			if (dragonData.addEventStatus(servId.uid()+"-"+DragonEvent.JORMAG_UP.uid(), jorUp, time)) {
 				jorChanged = true;
 			}
 		}
@@ -165,6 +168,22 @@ public class DataRetrieveJob implements Job {
 			}
 			
 			for (FoulBearEvent eventId:FoulBearEvent.values()) {
+				String status = GW2EventsAPI.queryServer(servId.uid(), eventId.uid());
+				
+				if (lowPriorityEventData.addEventStatus(servId.uid()+"-"+eventId.uid(), status, time)) {
+					mawChanged = true;
+				} 
+			}
+			
+			for (HydraQueenEvent eventId:HydraQueenEvent.values()) {
+				String status = GW2EventsAPI.queryServer(servId.uid(), eventId.uid());
+				
+				if (lowPriorityEventData.addEventStatus(servId.uid()+"-"+eventId.uid(), status, time)) {
+					mawChanged = true;
+				} 
+			}
+			
+			for (FireShamanEnum eventId:FireShamanEnum.values()) {
 				String status = GW2EventsAPI.queryServer(servId.uid(), eventId.uid());
 				
 				if (lowPriorityEventData.addEventStatus(servId.uid()+"-"+eventId.uid(), status, time)) {

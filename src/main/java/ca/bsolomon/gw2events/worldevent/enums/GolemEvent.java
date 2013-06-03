@@ -1,10 +1,9 @@
 package ca.bsolomon.gw2events.worldevent.enums;
 
 import org.joda.time.DateTime;
-import org.joda.time.Period;
 
 import ca.bsolomon.gw2events.worldevent.util.EventStringFormatter;
-import ca.bsolomon.gw2events.worldevent.util.LowPriorityEventData;
+import ca.bsolomon.gw2events.worldevent.util.EventData;
 
 public enum GolemEvent {
 
@@ -23,63 +22,67 @@ public enum GolemEvent {
 	public String uid() {return uid;}
 	public String toString() {return prettyName;}
 	
-	public static String formatGolemString(LowPriorityEventData lowLevelEventData) {
+	public static String formatGolemString(EventData lowLevelEventData) {
 		StringBuffer sb = new StringBuffer();
 		
 		for (ServerID servId:ServerID.values()) {
-			String outStatus = "";
-			String color = "";
-			DateTime time = null;
-		
-			String kelpEventId = servId.uid()+"-"+KELP.uid();
-			String containerEventId = servId.uid()+"-"+CONTAINER.uid();
-			String golemEventId = servId.uid()+"-"+GOLEM.uid();
-			
-			String kelpStatus = lowLevelEventData.getEventStatus(kelpEventId);
-			String containerStatus = lowLevelEventData.getEventStatus(containerEventId);
-			String golemStatus = lowLevelEventData.getEventStatus(golemEventId);
-			
-			if ((kelpStatus != null) &&
-					(kelpStatus.equals("Active"))) {
-				time = lowLevelEventData.getEventTime(kelpEventId);
-				
-				outStatus = KELP.toString();
-				color = "<span style='color: #"+EventStateColor.PREPARATION.color()+";'>";
-			} else if ((containerStatus != null) &&
-					(containerStatus.equals("Active"))) {
-				time = lowLevelEventData.getEventTime(containerEventId);
-				
-				outStatus = CONTAINER.toString();
-				color = "<span style='color: #"+EventStateColor.PREPARATION.color()+";'>";
-			} else if ((golemStatus != null) &&
-					(golemStatus.equals("Warmup") || golemStatus.equals("Preparation"))) {
-				time = lowLevelEventData.getEventTime(golemEventId);
-				
-				outStatus = "Arrival imminent";
-				color = "<span style='color: #"+EventStateColor.PREPARATION.color()+";'>";
-			} else if ((golemStatus != null) &&
-					(golemStatus.equals("Active"))) {
-				time = lowLevelEventData.getEventTime(golemEventId);
-				
-				outStatus = "Active";
-				color = "<span style='color: #"+EventStateColor.ACTIVE.color()+";'>";
-			}  else {
-				time = lowLevelEventData.getEventTime(golemEventId);
-				
-				outStatus = "Not up";
-				color = "<span style='color: #"+EventStateColor.FAIL.color()+";'>";
-			}
-			
-			String timeStr = EventStringFormatter.format.print(time);
-			
-			DateTime now = new DateTime(EventStringFormatter.gregorianJuian);
-			Period period = new Period(time, now);
-			
-			String periodStr = EventStringFormatter.HHMMSSFormater.print(period);
-			
-			sb.append(timeStr+" - "+ servId.toString()+" - "+color+outStatus+"</span> - "+periodStr+"</br>");
+			formatGolemString(lowLevelEventData, sb, servId);
 		}
 		
 		return sb.toString();
+	}
+
+	public static void formatGolemString(
+			EventData lowLevelEventData, StringBuffer sb,
+			ServerID servId) {
+		String outStatus = "";
+		String color = "";
+		DateTime time = null;
+		int fontWeight = 400;
+
+		String kelpEventId = servId.uid()+"-"+KELP.uid();
+		String containerEventId = servId.uid()+"-"+CONTAINER.uid();
+		String golemEventId = servId.uid()+"-"+GOLEM.uid();
+		
+		String kelpStatus = lowLevelEventData.getEventStatus(kelpEventId);
+		String containerStatus = lowLevelEventData.getEventStatus(containerEventId);
+		String golemStatus = lowLevelEventData.getEventStatus(golemEventId);
+		
+		if ((kelpStatus != null) &&
+				(kelpStatus.equals("Active"))) {
+			time = lowLevelEventData.getEventTime(kelpEventId);
+			
+			outStatus = KELP.toString();
+			color = EventStateColor.PREPARATION.color();
+			fontWeight = 600;
+		} else if ((containerStatus != null) &&
+				(containerStatus.equals("Active"))) {
+			time = lowLevelEventData.getEventTime(containerEventId);
+			
+			outStatus = CONTAINER.toString();
+			color = EventStateColor.PREPARATION.color();
+			fontWeight = 600;
+		} else if ((golemStatus != null) &&
+				(golemStatus.equals("Warmup") || golemStatus.equals("Preparation"))) {
+			time = lowLevelEventData.getEventTime(golemEventId);
+			
+			outStatus = "Arrival imminent";
+			color = EventStateColor.PREPARATION.color();
+			fontWeight = 600;
+		} else if ((golemStatus != null) &&
+				(golemStatus.equals("Active"))) {
+			time = lowLevelEventData.getEventTime(golemEventId);
+			
+			outStatus = "Active";
+			color = EventStateColor.ACTIVE.color();
+			fontWeight = 900;
+		}  else {
+			time = lowLevelEventData.getEventTime(golemEventId);
+			
+			outStatus = "Not up";
+			color = EventStateColor.FAIL.color();
+		}
+		
+		EventStringFormatter.generateEventString(sb, servId, outStatus, color, fontWeight, time);
 	}
 }

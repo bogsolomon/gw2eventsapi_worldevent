@@ -5,7 +5,7 @@ import java.util.concurrent.ConcurrentMap;
 
 import org.joda.time.DateTime;
 
-public class LowPriorityEventData {
+public class LowPriorityEventData  implements EventData {
 
 	private static ConcurrentMap<String, String> eventStatus = new ConcurrentHashMap<String, String>(16, 0.9f, 1);
 	private static ConcurrentMap<String, DateTime> eventTime = new ConcurrentHashMap<String, DateTime>(16, 0.9f, 1);

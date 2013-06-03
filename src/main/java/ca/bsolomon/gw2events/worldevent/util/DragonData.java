@@ -5,12 +5,12 @@ import java.util.concurrent.ConcurrentMap;
 
 import org.joda.time.DateTime;
 
-public class DragonData {
+public class DragonData implements EventData{
 
 	private static ConcurrentMap<String, String> dragonStatus = new ConcurrentHashMap<String, String>(16, 0.9f, 1);
 	private static ConcurrentMap<String, DateTime> dragonTime = new ConcurrentHashMap<String, DateTime>(16, 0.9f, 1);
 
-	public boolean addDragonStatus(String eventId, String status, DateTime time) {
+	public boolean addEventStatus(String eventId, String status, DateTime time) {
 		if (dragonStatus.containsKey(eventId)) {
 			if (!dragonStatus.get(eventId).equals(status)) {
 				dragonStatus.put(eventId, status);
@@ -33,11 +33,11 @@ public class DragonData {
 		dragonTime.put(eventId, time);
 	}
 	
-	public String getDragonStatus(String eventId) {
+	public String getEventStatus(String eventId) {
 		return dragonStatus.get(eventId);
 	}
 	
-	public DateTime getDragonTime(String eventId) {
+	public DateTime getEventTime(String eventId) {
 		return dragonTime.get(eventId);
 	}
 }
