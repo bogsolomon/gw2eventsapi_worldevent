@@ -7,15 +7,23 @@ import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import org.primefaces.component.layout.LayoutUnit;
+import org.primefaces.event.ResizeEvent;
+import org.primefaces.event.ToggleEvent;
+import org.primefaces.model.Visibility;
+
 @ManagedBean(name="checkboxBean")
 @SessionScoped
 public class CheckboxBean {
 
-	 private List<String> selectedEvents;
+	private List<String> selectedEvents;
   
     private Map<String,String> events;  
   
-    public CheckboxBean() {  
+    private int eastSize;
+    private boolean eastCollapsed;
+	
+	public CheckboxBean() {  
     	events = new HashMap<String, String>();  
     	events.put("Tequatl", "Tequatl");  
     	events.put("Shatterer", "Shatterer");  
@@ -33,7 +41,28 @@ public class CheckboxBean {
     	events.put("Hydra Queen", "Hydra Queen");
     	events.put("Fire Shaman", "Fire Shaman");
     }
+	
+	public void handleToggle(ToggleEvent event) {
+		if (((LayoutUnit)event.getComponent()).getPosition().equals("east")) {
+			eastCollapsed = (event.getVisibility() == Visibility.HIDDEN);
+		}
+	}
+	
+    public void handleResize(ResizeEvent event) {
+    	int newWidth = event.getWidth();
+    	if (((LayoutUnit)event.getComponent()).getPosition().equals("east")) {
+    		eastSize = newWidth;
+    	}
+    }
+    
+    public int getEastSize() {
+		return eastSize;
+	}
 
+	public void setEastSize(int eastSize) {
+		this.eastSize = eastSize;
+	}
+    
 	public List<String> getSelectedEvents() {
 		return selectedEvents;
 	}
@@ -56,6 +85,14 @@ public class CheckboxBean {
 	
 	public void clearAll() {  
 		selectedEvents.clear();
+	}
+
+	public boolean isEastCollapsed() {
+		return eastCollapsed;
+	}
+
+	public void setEastCollapsed(boolean eastCollapsed) {
+		this.eastCollapsed = eastCollapsed;
 	}
 	
 }

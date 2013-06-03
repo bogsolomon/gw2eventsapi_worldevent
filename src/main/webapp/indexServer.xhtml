@@ -34,6 +34,8 @@
     </h:head>
     <h:body>
     	<p:layout fullPage="true">
+    	<p:ajax event="resize" listener="#{checkboxBean.handleResize}"/>
+    	<p:ajax event="toggle" listener="#{checkboxBean.handleToggle}"/>
     	<p:layoutUnit id="top" position="north" size="50">
 
             <p:menubar>
@@ -50,6 +52,7 @@
             	widgetVar="poll" autoStart="true"/>
             	
         	<p:dashboard id="board" model="#{serverDashboardBean.model}">
+        		 <p:ajax event="reorder"/>
         		 <p:panel id="sorPanel" header="Sanctum of Rall (Home)" toggleable="true" collapsed="#{serverDashboardBean.sorCollapsed}">
         		 	<p:ajax event="toggle" listener="#{serverDashboardBean.handleSorToggle}"/>
         		 	<h:outputText escape="false" value="#{dragonBean.sorStatus}"></h:outputText>
@@ -67,7 +70,8 @@
         	</p:dashboard>
         </h:form>
         </p:layoutUnit>
-        <p:layoutUnit position="east" header="Checkboxes" size="200" resizable="true" closable="false" collapsible="true">
+        <p:layoutUnit id="east" position="east" header="Checkboxes" size="#{checkboxBean.eastSize}" collapsed="#{checkboxBean.eastCollapsed}" 
+        	closable="false" collapsible="true" resizable="true">
         	<h:form id="checkboxes">
         		<p:selectManyCheckbox value="#{checkboxBean.selectedEvents}"  
 		            layout="pageDirection" id="smcb">  

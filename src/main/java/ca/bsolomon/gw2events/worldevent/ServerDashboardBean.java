@@ -8,6 +8,8 @@ import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.Days;
 import org.joda.time.chrono.GJChronology;
+import org.primefaces.event.DashboardReorderEvent;
+import org.primefaces.event.ResizeEvent;
 import org.primefaces.event.ToggleEvent;
 import org.primefaces.model.DashboardColumn;
 import org.primefaces.model.DashboardModel;
@@ -48,8 +50,8 @@ public class ServerDashboardBean {
     public DashboardModel getModel() {  
         return model;  
     }
-    
-    public void handleSorToggle(ToggleEvent event) {
+
+	public void handleSorToggle(ToggleEvent event) {
     	lastChange = new DateTime(gregorianJuian);
     	sorCollapsed = (event.getVisibility() == Visibility.HIDDEN);
     }

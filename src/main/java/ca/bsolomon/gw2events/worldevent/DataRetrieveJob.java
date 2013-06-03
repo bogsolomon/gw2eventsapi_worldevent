@@ -8,6 +8,7 @@ import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
+import ca.bsolomon.gw2event.api.GW2EventsAPI;
 import ca.bsolomon.gw2events.worldevent.enums.DragonEvent;
 import ca.bsolomon.gw2events.worldevent.enums.DredgeEvent;
 import ca.bsolomon.gw2events.worldevent.enums.FireEleEvent;
@@ -21,7 +22,6 @@ import ca.bsolomon.gw2events.worldevent.enums.MawEvent;
 import ca.bsolomon.gw2events.worldevent.enums.ServerID;
 import ca.bsolomon.gw2events.worldevent.enums.ShadowBehemothEvent;
 import ca.bsolomon.gw2events.worldevent.util.EventData;
-import ca.bsolomon.gw2events.worldevent.util.GW2EventsAPI;
 import ca.bsolomon.gw2events.worldevent.util.DragonData;
 import ca.bsolomon.gw2events.worldevent.util.LowLevelEventData;
 import ca.bsolomon.gw2events.worldevent.util.LowPriorityEventData;

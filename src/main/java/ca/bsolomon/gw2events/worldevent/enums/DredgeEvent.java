@@ -55,7 +55,7 @@ public enum DredgeEvent {
 			outStatus = "Active";
 			color = EventStateColor.ACTIVE.color();
 			fontWeight = 900;
-		}else if ((molekCStatus != null) &&
+		} else if ((molekCStatus != null) &&
 				(molekCStatus.equals("Active"))) {
 			time = lowLevelEventData.getEventTime(molekCEventId);
 			
@@ -69,14 +69,7 @@ public enum DredgeEvent {
 			outStatus = MOLEKDEFENSE.toString();
 			color = EventStateColor.PREPARATION.color();
 			fontWeight = 600;
-		} if ((dredgeStatus != null) &&
-				(dredgeStatus.equals("Active"))) {
-			time = lowLevelEventData.getEventTime(dredgeEventId);
-			
-			outStatus = "Active";
-			color = EventStateColor.ACTIVE.color();
-			fontWeight = 900;
-		}  else {
+		} else {
 			time = lowLevelEventData.getEventTime(dredgeEventId);
 			
 			outStatus = "Not up";
