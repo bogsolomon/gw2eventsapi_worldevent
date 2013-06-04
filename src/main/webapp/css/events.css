@@ -1,0 +1,28 @@
+.ui-panel {
+	margin: 10px;
+}
+
+.ui-dashboard-column {
+	min-width:220px;
+}
+.ui-panel-collapsed-h .ui-panel-titlebar {
+	background:#003946;	
+}
+
+.ui-widget, .ui-widget .ui-widget
+{
+    font-size: 95% !important;
+}
+
+.ui-layout-north {
+    z-index:20 !important;
+    overflow:visible !important;;
+}
+
+.ui-layout-north .ui-layout-unit-content {
+    overflow:visible !important;
+}
+
+.hide-column-names table thead tr {
+    display: none;
+}
