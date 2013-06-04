@@ -1,8 +1,12 @@
 package ca.bsolomon.gw2events.worldevent.enums;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.joda.time.DateTime;
 
 import ca.bsolomon.gw2events.worldevent.util.EventData;
+import ca.bsolomon.gw2events.worldevent.util.EventStatus;
 import ca.bsolomon.gw2events.worldevent.util.EventStringFormatter;
 
 public enum FireEleEvent {
@@ -24,18 +28,18 @@ public enum FireEleEvent {
 	public String uid() {return uid;}
 	public String toString() {return prettyName;}
 	
-	public static String formatFireEleString(EventData lowLevelEventData) {
-		StringBuffer sb = new StringBuffer();
+	public static List<EventStatus> formatFireEleString(EventData lowLevelEventData) {
+		List<EventStatus> status = new ArrayList<EventStatus>();
 		
 		for (ServerID servId:ServerID.values()) {
-			formatFireEleString(lowLevelEventData, sb, servId);
+			formatFireEleString(lowLevelEventData, status, servId);
 		}
 		
-		return sb.toString();
+		return status;
 	}
 
 	public static void formatFireEleString(EventData lowLevelEventData,
-			StringBuffer sb, ServerID servId) {
+			List<EventStatus> statusList, ServerID servId) {
 		String outStatus = "";
 		String color = "";
 		DateTime time = null;
@@ -89,6 +93,6 @@ public enum FireEleEvent {
 			color = EventStateColor.FAIL.color();
 		}
 		
-		EventStringFormatter.generateEventString(sb, servId, outStatus, color, fontWeight, time);
+		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time);
 	}
 }

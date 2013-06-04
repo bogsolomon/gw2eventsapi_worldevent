@@ -69,7 +69,7 @@ public class ServerDashboardBean {
     public boolean isSorCollapsed() {
     	DateTime now = new DateTime(gregorianJuian);
     	
-    	if (Days.daysBetween(lastChange, now) == Days.ONE) {
+    	if (Days.daysBetween(lastChange.toDateMidnight(), now.toDateMidnight()) == Days.ONE) {
     		lastChange = now;
     		sorCollapsed = false;
     	}
@@ -80,7 +80,7 @@ public class ServerDashboardBean {
     public boolean isEtCollapsed() {
     	DateTime now = new DateTime(gregorianJuian);
     	
-    	if (Days.daysBetween(lastChange, now) == Days.ONE) {
+    	if (Days.daysBetween(lastChange.toDateMidnight(), now.toDateMidnight()) == Days.ONE) {
     		lastChange = now;
     		etCollapsed = false;
     	}
@@ -91,7 +91,7 @@ public class ServerDashboardBean {
     public boolean isFcCollapsed() {
     	DateTime now = new DateTime(gregorianJuian);
     	
-    	if (Days.daysBetween(lastChange, now) == Days.ONE) {
+    	if (Days.daysBetween(lastChange.toDateMidnight(), now.toDateMidnight()) == Days.ONE) {
     		lastChange = now;
     		fcCollapsed = false;
     	}

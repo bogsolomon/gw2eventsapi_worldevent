@@ -1,8 +1,12 @@
 package ca.bsolomon.gw2events.worldevent.enums;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.joda.time.DateTime;
 
 import ca.bsolomon.gw2events.worldevent.util.EventData;
+import ca.bsolomon.gw2events.worldevent.util.EventStatus;
 import ca.bsolomon.gw2events.worldevent.util.EventStringFormatter;
 
 public enum DragonEvent {
@@ -55,17 +59,17 @@ public enum DragonEvent {
 		 throw new IllegalArgumentException("Incorrect Event UID");
 	}
 	
-	public static String formatTequatlString(EventData data) {
-		StringBuffer sb = new StringBuffer();
+	public static List<EventStatus> formatTequatlString(EventData data) {
+		List<EventStatus> status = new ArrayList<EventStatus>();
 		
 		for (ServerID servId:ServerID.values()) {
-			formatTequatlString(data, sb, servId);
+			formatTequatlString(data, status, servId);
 		}
 		
-		return sb.toString();
+		return status;
 	}
 
-	public static void formatTequatlString(EventData data, StringBuffer sb,
+	public static void formatTequatlString(EventData data, List<EventStatus> statusList,
 			ServerID servId) {
 		String composedEventId = servId.uid()+"-"+DragonEvent.TEQUATL.uid();
 		
@@ -92,21 +96,21 @@ public enum DragonEvent {
 			outStatus = "Not up";
 		}
 		
-		EventStringFormatter.generateEventString(sb, servId, outStatus, color, fontWeight, time);
+		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time);
 	}
 
-	public static String formatShattererString(EventData dragonData) {
-		StringBuffer sb = new StringBuffer();
+	public static List<EventStatus> formatShattererString(EventData dragonData) {
+		List<EventStatus> status = new ArrayList<EventStatus>();
 		
 		for (ServerID servId:ServerID.values()) {
-			formatShattererString(dragonData, sb, servId);
+			formatShattererString(dragonData, status, servId);
 		}
 		
-		return sb.toString();
+		return status;
 	}
 
 	public static void formatShattererString(EventData dragonData,
-			StringBuffer sb, ServerID servId) {
+			List<EventStatus> statusList, ServerID servId) {
 		String outStatus = "";
 		String color = "";
 		DateTime time = null;
@@ -156,21 +160,21 @@ public enum DragonEvent {
 			color = EventStateColor.FAIL.color();
 		}
 		
-		EventStringFormatter.generateEventString(sb, servId, outStatus, color, fontWeight, time);
+		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time);
 	}
 
-	public static String formatJormagString(EventData dragonData) {
-		StringBuffer sb = new StringBuffer();
+	public static List<EventStatus> formatJormagString(EventData dragonData) {
+		List<EventStatus> status = new ArrayList<EventStatus>();
 		
 		for (ServerID servId:ServerID.values()) {
-			formatJormagString(dragonData, sb, servId);
+			formatJormagString(dragonData, status, servId);
 		}
 		
-		return sb.toString();
+		return status;
 	}
 
 	public static void formatJormagString(EventData dragonData,
-			StringBuffer sb, ServerID servId) {
+			List<EventStatus> statusList, ServerID servId) {
 		String outStatus = "";
 		String color = "";
 		DateTime time = null;
@@ -225,6 +229,6 @@ public enum DragonEvent {
 			color = EventStateColor.FAIL.color();	
 		}
 		
-		EventStringFormatter.generateEventString(sb, servId, outStatus, color, fontWeight, time);
+		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time);
 	}
 }

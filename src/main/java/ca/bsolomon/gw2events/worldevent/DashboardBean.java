@@ -40,6 +40,7 @@ public class DashboardBean implements Serializable {
 	private boolean ogreCollapsed = false;
 	private boolean hydraCollapsed = false;
 	private boolean fireShamCollapsed = false;
+	private boolean karkaCollapsed = false;
 	
 	private DateTime lastChange = new DateTime(gregorianJuian);;
       
@@ -52,6 +53,7 @@ public class DashboardBean implements Serializable {
         column1.addWidget("teqPanel");
         column1.addWidget("shatPanel");
         column1.addWidget("jorPanel");
+        column1.addWidget("karkaPanel");
         
         column2.addWidget("mawPanel");
         column2.addWidget("fireElePanel");
@@ -64,6 +66,7 @@ public class DashboardBean implements Serializable {
         column3.addWidget("ogrePanel");
         column3.addWidget("hydraPanel");
         column3.addWidget("fireShamPanel");
+        
   
         model.addColumn(column1);  
         model.addColumn(column2);  
@@ -72,6 +75,11 @@ public class DashboardBean implements Serializable {
       
     public DashboardModel getModel() {  
         return model;  
+    }
+    
+    public void handleKarkaToggle(ToggleEvent event) {
+    	lastChange = new DateTime(gregorianJuian);
+    	karkaCollapsed = (event.getVisibility() == Visibility.HIDDEN);
     }
     
     public void handleTeqToggle(ToggleEvent event) {
@@ -139,10 +147,21 @@ public class DashboardBean implements Serializable {
     	fireShamCollapsed = (event.getVisibility() == Visibility.HIDDEN);
     }
     
+    public boolean isKarkaCollapsed() {
+    	DateTime now = new DateTime(gregorianJuian);
+    	
+    	if (Days.daysBetween(lastChange.toDateMidnight(), now.toDateMidnight()) == Days.ONE) {
+    		lastChange = now;
+    		karkaCollapsed = false;
+    	}
+    	
+		return karkaCollapsed;
+	}
+    
     public boolean isTeqCollapsed() {
     	DateTime now = new DateTime(gregorianJuian);
     	
-    	if (Days.daysBetween(lastChange, now) == Days.ONE) {
+    	if (Days.daysBetween(lastChange.toDateMidnight(), now.toDateMidnight()) == Days.ONE) {
     		lastChange = now;
     		teqCollapsed = false;
     	}
@@ -153,7 +172,7 @@ public class DashboardBean implements Serializable {
 	public boolean isShatCollapsed() {
     	DateTime now = new DateTime(gregorianJuian);
     	
-    	if (Days.daysBetween(lastChange, now) == Days.ONE) {
+    	if (Days.daysBetween(lastChange.toDateMidnight(), now.toDateMidnight()) == Days.ONE) {
     		lastChange = now;
     		shatCollapsed = false;
     	}
@@ -164,7 +183,7 @@ public class DashboardBean implements Serializable {
 	public boolean isJormagCollapsed() {
     	DateTime now = new DateTime(gregorianJuian);
     	
-    	if (Days.daysBetween(lastChange, now) == Days.ONE) {
+    	if (Days.daysBetween(lastChange.toDateMidnight(), now.toDateMidnight()) == Days.ONE) {
     		lastChange = now;
     		jormagCollapsed = false;
     	}
@@ -175,7 +194,7 @@ public class DashboardBean implements Serializable {
 	public boolean isMawCollapsed() {
     	DateTime now = new DateTime(gregorianJuian);
     	
-    	if (Days.daysBetween(lastChange, now) == Days.ONE) {
+    	if (Days.daysBetween(lastChange.toDateMidnight(), now.toDateMidnight()) == Days.ONE) {
     		lastChange = now;
     		mawCollapsed = false;
     	}
@@ -186,7 +205,7 @@ public class DashboardBean implements Serializable {
 	public boolean isFireEleCollapsed() {
     	DateTime now = new DateTime(gregorianJuian);
     	
-    	if (Days.daysBetween(lastChange, now) == Days.ONE) {
+    	if (Days.daysBetween(lastChange.toDateMidnight(), now.toDateMidnight()) == Days.ONE) {
     		lastChange = now;
     		fireEleCollapsed = false;
     	}
@@ -197,7 +216,7 @@ public class DashboardBean implements Serializable {
 	public boolean isWurmCollapsed() {
     	DateTime now = new DateTime(gregorianJuian);
     	
-    	if (Days.daysBetween(lastChange, now) == Days.ONE) {
+    	if (Days.daysBetween(lastChange.toDateMidnight(), now.toDateMidnight()) == Days.ONE) {
     		lastChange = now;
     		wurmCollapsed = false;
     	}
@@ -208,7 +227,7 @@ public class DashboardBean implements Serializable {
 	public boolean isSbCollapsed() {
     	DateTime now = new DateTime(gregorianJuian);
     	
-    	if (Days.daysBetween(lastChange, now) == Days.ONE) {
+    	if (Days.daysBetween(lastChange.toDateMidnight(), now.toDateMidnight()) == Days.ONE) {
     		lastChange = now;
     		sbCollapsed = false;
     	}
@@ -219,7 +238,7 @@ public class DashboardBean implements Serializable {
 	public boolean isGolemCollapsed() {
     	DateTime now = new DateTime(gregorianJuian);
     	
-    	if (Days.daysBetween(lastChange, now) == Days.ONE) {
+    	if (Days.daysBetween(lastChange.toDateMidnight(), now.toDateMidnight()) == Days.ONE) {
     		lastChange = now;
     		golemCollapsed = false;
     	}
@@ -230,7 +249,7 @@ public class DashboardBean implements Serializable {
 	public boolean isDredgeCollapsed() {
     	DateTime now = new DateTime(gregorianJuian);
     	
-    	if (Days.daysBetween(lastChange, now) == Days.ONE) {
+    	if (Days.daysBetween(lastChange.toDateMidnight(), now.toDateMidnight()) == Days.ONE) {
     		lastChange = now;
     		dredgeCollapsed = false;
     	}
@@ -241,7 +260,7 @@ public class DashboardBean implements Serializable {
 	public boolean isHarathiCollapsed() {
     	DateTime now = new DateTime(gregorianJuian);
     	
-    	if (Days.daysBetween(lastChange, now) == Days.ONE) {
+    	if (Days.daysBetween(lastChange.toDateMidnight(), now.toDateMidnight()) == Days.ONE) {
     		lastChange = now;
     		harathiCollapsed = false;
     	}
@@ -252,7 +271,7 @@ public class DashboardBean implements Serializable {
 	public boolean isOgreCollapsed() {
     	DateTime now = new DateTime(gregorianJuian);
     	
-    	if (Days.daysBetween(lastChange, now) == Days.ONE) {
+    	if (Days.daysBetween(lastChange.toDateMidnight(), now.toDateMidnight()) == Days.ONE) {
     		lastChange = now;
     		ogreCollapsed = false;
     	}
@@ -263,7 +282,7 @@ public class DashboardBean implements Serializable {
 	public boolean isHydraCollapsed() {
     	DateTime now = new DateTime(gregorianJuian);
     	
-    	if (Days.daysBetween(lastChange, now) == Days.ONE) {
+    	if (Days.daysBetween(lastChange.toDateMidnight(), now.toDateMidnight()) == Days.ONE) {
     		lastChange = now;
     		hydraCollapsed = false;
     	}
@@ -274,7 +293,7 @@ public class DashboardBean implements Serializable {
 	public boolean isFireShamCollapsed() {
     	DateTime now = new DateTime(gregorianJuian);
     	
-    	if (Days.daysBetween(lastChange, now) == Days.ONE) {
+    	if (Days.daysBetween(lastChange.toDateMidnight(), now.toDateMidnight()) == Days.ONE) {
     		lastChange = now;
     		fireShamCollapsed = false;
     	}

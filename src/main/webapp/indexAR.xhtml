@@ -4,32 +4,7 @@
       xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <title>World Events Tracker</title>
-        <style type="text/css">
-			.ui-panel, div.ui-state-hover {
-				margin: 10px;
-			}
-			
-			.ui-dashboard-column {
-				min-width:220px;
-			}
-			.ui-panel-collapsed-h .ui-panel-titlebar {
-				background:#003946;	
-			}
-			
-			.ui-widget, .ui-widget .ui-widget
-			{
-			    font-size: 95% !important;
-			}
-			
-			.ui-layout-north {
-                z-index:20 !important;
-                overflow:visible !important;;
-            }
-
-            .ui-layout-north .ui-layout-unit-content {
-                overflow:visible !important;
-            }
-		</style>
+        <link rel="stylesheet" type="text/css" href="css/events.css"/>
     </h:head>
     <h:body>
     	<p:layout fullPage="true">
@@ -48,7 +23,7 @@
     	<p:layoutUnit position="center" header="Events" resizable="true" closable="false" collapsible="false">       
         <h:form id="form">
         	<p:poll interval="30"   
-            	update="mawPanel, fireElePanel, wurmPanel, sbPanel" 
+            	update="mawPanel, fireElePanel, wurmPanel, sbPanel, karkaPanel" 
             	widgetVar="poll" autoStart="true"/>
             	
             <p:poll interval="60"   
@@ -59,67 +34,212 @@
         		 <p:ajax event="reorder"/>
         		 <p:panel id="teqPanel" header="Tequatl" toggleable="true" collapsed="#{dashboardBean.teqCollapsed}">
         		 	<p:ajax event="toggle" listener="#{dashboardBean.handleTeqToggle}"/>
-        		 	<h:outputText escape="false" value="#{dragonBean.tequatlStatus}"></h:outputText>
+        		 	<p:dataTable var="status" value="#{dragonBean.tequatlStatus}" styleClass="hide-column-names">
+        		 		<p:column>  
+				            <h:outputText value="#{status.server}" />  
+				        </p:column>  
+				        <p:column>  
+				            <h:outputText value="#{status.status}" escape="false"/>  
+				        </p:column>
+				        <p:column>  
+				            <h:outputText value="#{status.date}" />  
+				        </p:column>
+        		 	</p:dataTable>
         		 </p:panel>
         		 
         		 <p:panel id="shatPanel" header="Shatterer" toggleable="true" collapsed="#{dashboardBean.shatCollapsed}">
         		 	<p:ajax event="toggle" listener="#{dashboardBean.handleShatToggle}"/>
-        		 	<h:outputText escape="false" value="#{dragonBean.shattererStatus}"></h:outputText>
+        		 	<p:dataTable var="status" value="#{dragonBean.shattererStatus}" styleClass="hide-column-names">
+        		 		<p:column>  
+				            <h:outputText value="#{status.server}" />  
+				        </p:column>  
+				        <p:column>  
+				            <h:outputText value="#{status.status}" escape="false"/>  
+				        </p:column>
+				        <p:column>  
+				            <h:outputText value="#{status.date}" />  
+				        </p:column>
+        		 	</p:dataTable>
         		 </p:panel>
         		 
         		 <p:panel id="jorPanel" header="Jormag" toggleable="true" collapsed="#{dashboardBean.jormagCollapsed}">
         		 	<p:ajax event="toggle" listener="#{dashboardBean.handleJormagToggle}"/>
-        		 	<h:outputText escape="false" value="#{dragonBean.jormagStatus}"></h:outputText>
+        		 	<p:dataTable var="status" value="#{dragonBean.jormagStatus}" styleClass="hide-column-names">
+        		 		<p:column>  
+				            <h:outputText value="#{status.server}" />  
+				        </p:column>  
+				        <p:column>  
+				            <h:outputText value="#{status.status}" escape="false"/>  
+				        </p:column>
+				        <p:column>  
+				            <h:outputText value="#{status.date}" />  
+				        </p:column>
+        		 	</p:dataTable>
+        		 </p:panel>
+        		 
+        		 <p:panel id="karkaPanel" header="Karka Queen" toggleable="true" collapsed="#{dashboardBean.karkaCollapsed}">
+        		 	<p:ajax event="toggle" listener="#{dashboardBean.handleKarkaToggle}"/>
+        		 	<p:dataTable var="status" value="#{dragonBean.karkaStatus}" styleClass="hide-column-names">
+        		 		<p:column>  
+				            <h:outputText value="#{status.server}" />  
+				        </p:column>  
+				        <p:column>  
+				            <h:outputText value="#{status.status}" escape="false"/>  
+				        </p:column>
+				        <p:column>  
+				            <h:outputText value="#{status.date}" />  
+				        </p:column>
+        		 	</p:dataTable>
         		 </p:panel>
         		 
         		 <p:panel id="mawPanel" header="Maw" toggleable="true" collapsed="#{dashboardBean.mawCollapsed}">
         		 	<p:ajax event="toggle" listener="#{dashboardBean.handleMawToggle}"/>
-        		 	<h:outputText escape="false" value="#{dragonBean.mawStatus}"></h:outputText>
+        		 	<p:dataTable var="status" value="#{dragonBean.mawStatus}" styleClass="hide-column-names">
+        		 		<p:column>  
+				            <h:outputText value="#{status.server}" />  
+				        </p:column>  
+				        <p:column>  
+				            <h:outputText value="#{status.status}" escape="false"/>  
+				        </p:column>
+				        <p:column>  
+				            <h:outputText value="#{status.date}" />  
+				        </p:column>
+        		 	</p:dataTable>
         		 </p:panel>
         		 
         		 <p:panel id="fireElePanel" header="Fire Elemental" toggleable="true" collapsed="#{dashboardBean.fireEleCollapsed}">
         		 	<p:ajax event="toggle" listener="#{dashboardBean.handleFireEleToggle}"/>
-        		 	<h:outputText escape="false" value="#{dragonBean.fireEleStatus}"></h:outputText>
+        		 	<p:dataTable var="status" value="#{dragonBean.fireEleStatus}" styleClass="hide-column-names">
+        		 		<p:column>  
+				            <h:outputText value="#{status.server}" />  
+				        </p:column>  
+				        <p:column>  
+				            <h:outputText value="#{status.status}" escape="false"/>  
+				        </p:column>
+				        <p:column>  
+				            <h:outputText value="#{status.date}" />  
+				        </p:column>
+        		 	</p:dataTable>
         		 </p:panel>
         		 
         		 <p:panel id="wurmPanel" header="Jungle Wurm" toggleable="true" collapsed="#{dashboardBean.wurmCollapsed}">
         		 	<p:ajax event="toggle" listener="#{dashboardBean.handleWurmToggle}"/>
-        		 	<h:outputText escape="false" value="#{dragonBean.wurmStatus}"></h:outputText>
+        		 	<p:dataTable var="status" value="#{dragonBean.wurmStatus}" styleClass="hide-column-names">
+        		 		<p:column>  
+				            <h:outputText value="#{status.server}" />  
+				        </p:column>  
+				        <p:column>  
+				            <h:outputText value="#{status.status}" escape="false"/>  
+				        </p:column>
+				        <p:column>  
+				            <h:outputText value="#{status.date}" />  
+				        </p:column>
+        		 	</p:dataTable>
         		 </p:panel>
         		 
         		 <p:panel id="sbPanel" header="Shadow Behemoth" toggleable="true" collapsed="#{dashboardBean.sbCollapsed}">
         		 	<p:ajax event="toggle" listener="#{dashboardBean.handleSBToggle}"/>
-        		 	<h:outputText escape="false" value="#{dragonBean.sbStatus}"></h:outputText>
+        		 	<p:dataTable var="status" value="#{dragonBean.sbStatus}" styleClass="hide-column-names">
+        		 		<p:column>  
+				            <h:outputText value="#{status.server}" />  
+				        </p:column>  
+				        <p:column>  
+				            <h:outputText value="#{status.status}" escape="false"/>  
+				        </p:column>
+				        <p:column>  
+				            <h:outputText value="#{status.date}" />  
+				        </p:column>
+        		 	</p:dataTable>
         		 </p:panel>
         		 
         		 <p:panel id="golemPanel" header="Golem" toggleable="true" collapsed="#{dashboardBean.golemCollapsed}">
         		 	<p:ajax event="toggle" listener="#{dashboardBean.handleGolemToggle}"/>
-        		 	<h:outputText escape="false" value="#{dragonBean.golemStatus}"></h:outputText>
+        		 	<p:dataTable var="status" value="#{dragonBean.golemStatus}" styleClass="hide-column-names">
+        		 		<p:column>  
+				            <h:outputText value="#{status.server}" />  
+				        </p:column>  
+				        <p:column>  
+				            <h:outputText value="#{status.status}" escape="false"/>  
+				        </p:column>
+				        <p:column>  
+				            <h:outputText value="#{status.date}" />  
+				        </p:column>
+        		 	</p:dataTable>
         		 </p:panel>
         		 
         		 <p:panel id="dredgePanel" header="Dredge" toggleable="true" collapsed="#{dashboardBean.dredgeCollapsed}">
         		 	<p:ajax event="toggle" listener="#{dashboardBean.handleDredgeToggle}"/>
-        		 	<h:outputText escape="false" value="#{dragonBean.dredgeStatus}"></h:outputText>
+        		 	<p:dataTable var="status" value="#{dragonBean.dredgeStatus}" styleClass="hide-column-names">
+        		 		<p:column>  
+				            <h:outputText value="#{status.server}" />  
+				        </p:column>  
+				        <p:column>  
+				            <h:outputText value="#{status.status}" escape="false"/>  
+				        </p:column>
+				        <p:column>  
+				            <h:outputText value="#{status.date}" />  
+				        </p:column>
+        		 	</p:dataTable>
         		 </p:panel>
         		 
         		 <p:panel id="harathiPanel" header="Kilava Chest" toggleable="true" collapsed="#{dashboardBean.harathiCollapsed}">
         		 	<p:ajax event="toggle" listener="#{dashboardBean.handleHarathiToggle}"/>
-        		 	<h:outputText escape="false" value="#{dragonBean.harathiStatus}"></h:outputText>
+        		 	<p:dataTable var="status" value="#{dragonBean.harathiStatus}" styleClass="hide-column-names">
+        		 		<p:column>  
+				            <h:outputText value="#{status.server}" />  
+				        </p:column>  
+				        <p:column>  
+				            <h:outputText value="#{status.status}" escape="false"/>  
+				        </p:column>
+				        <p:column>  
+				            <h:outputText value="#{status.date}" />  
+				        </p:column>
+        		 	</p:dataTable>
         		 </p:panel>
         		 
         		 <p:panel id="ogrePanel" header="Foulbear Kraal" toggleable="true" collapsed="#{dashboardBean.ogreCollapsed}">
         		 	<p:ajax event="toggle" listener="#{dashboardBean.handleOgreToggle}"/>
-        		 	<h:outputText escape="false" value="#{dragonBean.ogreStatus}"></h:outputText>
+        		 	<p:dataTable var="status" value="#{dragonBean.ogreStatus}" styleClass="hide-column-names">
+        		 		<p:column>  
+				            <h:outputText value="#{status.server}" />  
+				        </p:column>  
+				        <p:column>  
+				            <h:outputText value="#{status.status}" escape="false"/>  
+				        </p:column>
+				        <p:column>  
+				            <h:outputText value="#{status.date}" />  
+				        </p:column>
+        		 	</p:dataTable>
         		 </p:panel>
         		 
         		 <p:panel id="hydraPanel" header="Hydra Queen" toggleable="true" collapsed="#{dashboardBean.hydraCollapsed}">
         		 	<p:ajax event="toggle" listener="#{dashboardBean.handleHydraToggle}"/>
-        		 	<h:outputText escape="false" value="#{dragonBean.hydraStatus}"></h:outputText>
+        		 	<p:dataTable var="status" value="#{dragonBean.hydraStatus}" styleClass="hide-column-names">
+        		 		<p:column>  
+				            <h:outputText value="#{status.server}" />  
+				        </p:column>  
+				        <p:column>  
+				            <h:outputText value="#{status.status}" escape="false"/>  
+				        </p:column>
+				        <p:column>  
+				            <h:outputText value="#{status.date}" />  
+				        </p:column>
+        		 	</p:dataTable>
         		 </p:panel>
         		 
         		 <p:panel id="fireShamPanel" header="Fire Shaman" toggleable="true" collapsed="#{dashboardBean.fireShamCollapsed}">
         		 	<p:ajax event="toggle" listener="#{dashboardBean.handleFireShamToggle}"/>
-        		 	<h:outputText escape="false" value="#{dragonBean.fireShamStatus}"></h:outputText>
+        		 	<p:dataTable var="status" value="#{dragonBean.fireShamStatus}" styleClass="hide-column-names">
+        		 		<p:column>  
+				            <h:outputText value="#{status.server}" />  
+				        </p:column>  
+				        <p:column>  
+				            <h:outputText value="#{status.status}" escape="false"/>  
+				        </p:column>
+				        <p:column>  
+				            <h:outputText value="#{status.date}" />  
+				        </p:column>
+        		 	</p:dataTable>
         		 </p:panel>
         	</p:dashboard>
         </h:form>

@@ -18,6 +18,7 @@ import ca.bsolomon.gw2events.worldevent.enums.GolemEvent;
 import ca.bsolomon.gw2events.worldevent.enums.HarathiChestEvent;
 import ca.bsolomon.gw2events.worldevent.enums.HydraQueenEvent;
 import ca.bsolomon.gw2events.worldevent.enums.JungleWurmEvent;
+import ca.bsolomon.gw2events.worldevent.enums.KarkaEnum;
 import ca.bsolomon.gw2events.worldevent.enums.MawEvent;
 import ca.bsolomon.gw2events.worldevent.enums.ServerID;
 import ca.bsolomon.gw2events.worldevent.enums.ShadowBehemothEvent;
@@ -184,6 +185,14 @@ public class DataRetrieveJob implements Job {
 			}
 			
 			for (FireShamanEnum eventId:FireShamanEnum.values()) {
+				String status = GW2EventsAPI.queryServer(servId.uid(), eventId.uid());
+				
+				if (lowPriorityEventData.addEventStatus(servId.uid()+"-"+eventId.uid(), status, time)) {
+					mawChanged = true;
+				} 
+			}
+			
+			for (KarkaEnum eventId:KarkaEnum.values()) {
 				String status = GW2EventsAPI.queryServer(servId.uid(), eventId.uid());
 				
 				if (lowPriorityEventData.addEventStatus(servId.uid()+"-"+eventId.uid(), status, time)) {

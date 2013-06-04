@@ -4,33 +4,7 @@
       xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <title>World Events Tracker</title>
-        <style type="text/css">
-			.ui-panel, div.ui-state-hover {
-				margin: 10px;
-			}
-			
-			.ui-dashboard-column {
-				min-width:220px;
-			}
-			.ui-panel-collapsed-h .ui-panel-titlebar {
-				background:#003946;	
-			}
-			
-			.ui-widget, .ui-widget .ui-widget
-			{
-			    font-size: 95% !important;
-			}
-			
-			.ui-layout-north {
-                z-index:20 !important;
-                overflow:visible !important;;
-            }
-
-            .ui-layout-north .ui-layout-unit-content {
-                overflow:visible !important;
-            }
-			
-		</style>
+        <link rel="stylesheet" type="text/css" href="css/events.css"/>
     </h:head>
     <h:body>
     	<p:layout fullPage="true">
@@ -55,17 +29,47 @@
         		 <p:ajax event="reorder"/>
         		 <p:panel id="sorPanel" header="Sanctum of Rall (Home)" toggleable="true" collapsed="#{serverDashboardBean.sorCollapsed}">
         		 	<p:ajax event="toggle" listener="#{serverDashboardBean.handleSorToggle}"/>
-        		 	<h:outputText escape="false" value="#{dragonBean.sorStatus}"></h:outputText>
+        		 	<p:dataTable var="status" value="#{dragonBean.sorStatus}" styleClass="hide-column-names">
+        		 		<p:column>  
+				            <h:outputText value="#{status.server}" />  
+				        </p:column>  
+				        <p:column>  
+				            <h:outputText value="#{status.status}" escape="false"/>  
+				        </p:column>
+				        <p:column>  
+				            <h:outputText value="#{status.date}" />  
+				        </p:column>
+        		 	</p:dataTable>
         		 </p:panel>
         		 
         		 <p:panel id="fcPanel" header="Ferguson's Crossing" toggleable="true" collapsed="#{serverDashboardBean.fcCollapsed}">
         		 	<p:ajax event="toggle" listener="#{serverDashboardBean.handleFcToggle}"/>
-        		 	<h:outputText escape="false" value="#{dragonBean.fcStatus}"></h:outputText>
+        		 	<p:dataTable var="status" value="#{dragonBean.fcStatus}" styleClass="hide-column-names">
+        		 		<p:column>  
+				            <h:outputText value="#{status.server}" />  
+				        </p:column>  
+				        <p:column>  
+				            <h:outputText value="#{status.status}" escape="false"/>  
+				        </p:column>
+				        <p:column>  
+				            <h:outputText value="#{status.date}" />  
+				        </p:column>
+        		 	</p:dataTable>
         		 </p:panel>
         		 
         		 <p:panel id="etPanel" header="Eredon Terrace" toggleable="true" collapsed="#{serverDashboardBean.etCollapsed}">
         		 	<p:ajax event="toggle" listener="#{serverDashboardBean.handleEtToggle}"/>
-        		 	<h:outputText escape="false" value="#{dragonBean.etStatus}"></h:outputText>
+        		 	<p:dataTable var="status" value="#{dragonBean.etStatus}" styleClass="hide-column-names">
+        		 		<p:column>  
+				            <h:outputText value="#{status.server}" />  
+				        </p:column>  
+				        <p:column>  
+				            <h:outputText value="#{status.status}" escape="false"/>  
+				        </p:column>
+				        <p:column>  
+				            <h:outputText value="#{status.date}" />  
+				        </p:column>
+        		 	</p:dataTable>
         		 </p:panel>
         	</p:dashboard>
         </h:form>

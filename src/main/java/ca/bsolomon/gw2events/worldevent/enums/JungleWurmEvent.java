@@ -1,8 +1,12 @@
 package ca.bsolomon.gw2events.worldevent.enums;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.joda.time.DateTime;
 
 import ca.bsolomon.gw2events.worldevent.util.EventData;
+import ca.bsolomon.gw2events.worldevent.util.EventStatus;
 import ca.bsolomon.gw2events.worldevent.util.EventStringFormatter;
 
 public enum JungleWurmEvent {
@@ -25,18 +29,18 @@ public enum JungleWurmEvent {
 	public String uid() {return uid;}
 	public String toString() {return prettyName;}
 	
-	public static String formatJungleWurmString(EventData lowLevelEventData) {
-		StringBuffer sb = new StringBuffer();
+	public static List<EventStatus> formatJungleWurmString(EventData lowLevelEventData) {
+		List<EventStatus> status = new ArrayList<EventStatus>();
 		
 		for (ServerID servId:ServerID.values()) {
-			formatJungleWurmString(lowLevelEventData, sb, servId);
+			formatJungleWurmString(lowLevelEventData, status, servId);
 		}
 		
-		return sb.toString();
+		return status;
 	}
 
 	public static void formatJungleWurmString(EventData lowLevelEventData,
-			StringBuffer sb, ServerID servId) {
+			List<EventStatus> statusList, ServerID servId) {
 		String outStatus = "";
 		String color = "";
 		DateTime time = null;
@@ -89,6 +93,6 @@ public enum JungleWurmEvent {
 			color = EventStateColor.FAIL.color();
 		}
 		
-		EventStringFormatter.generateEventString(sb, servId, outStatus, color, fontWeight, time);
+		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time);
 	}
 }

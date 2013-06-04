@@ -1,8 +1,12 @@
 package ca.bsolomon.gw2events.worldevent.enums;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.joda.time.DateTime;
 
 import ca.bsolomon.gw2events.worldevent.util.EventData;
+import ca.bsolomon.gw2events.worldevent.util.EventStatus;
 import ca.bsolomon.gw2events.worldevent.util.EventStringFormatter;
 
 public enum ShadowBehemothEvent {
@@ -26,18 +30,18 @@ public enum ShadowBehemothEvent {
 	
 	private static boolean swampPortalsDestroyed = false;
 	
-	public static String formatShadowBehemothString(EventData lowLevelEventData) {
-		StringBuffer sb = new StringBuffer();
+	public static List<EventStatus> formatShadowBehemothString(EventData lowLevelEventData) {
+		List<EventStatus> status = new ArrayList<EventStatus>();
 		
 		for (ServerID servId:ServerID.values()) {
-			formatShadowBehemothString(lowLevelEventData, sb, servId);
+			formatShadowBehemothString(lowLevelEventData, status, servId);
 		}
 		
-		return sb.toString();
+		return status;
 	}
 
 	public static void formatShadowBehemothString(EventData lowLevelEventData,
-			StringBuffer sb, ServerID servId) {
+			List<EventStatus> statusList, ServerID servId) {
 		String outStatus = "";
 		String color = "";
 		DateTime time = null;
@@ -88,6 +92,6 @@ public enum ShadowBehemothEvent {
 			swampPortalsDestroyed = false;
 		}
 		
-		EventStringFormatter.generateEventString(sb, servId, outStatus, color, fontWeight, time);
+		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time);
 	}
 }
