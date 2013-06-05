@@ -1,6 +1,6 @@
 package ca.bsolomon.gw2events.worldevent;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,7 +24,7 @@ public class CheckboxBean {
     private boolean eastCollapsed;
 	
 	public CheckboxBean() {  
-    	events = new HashMap<String, String>();  
+    	events = new LinkedHashMap<String, String>();  
     	events.put("Tequatl", "Tequatl");  
     	events.put("Shatterer", "Shatterer");  
     	events.put("Jormag", "Jormag");  
@@ -40,6 +40,7 @@ public class CheckboxBean {
     	events.put("Foulbear", "Foulbear");
     	events.put("Hydra Queen", "Hydra Queen");
     	events.put("Fire Shaman", "Fire Shaman");
+    	events.put("Karka", "Karka");
     }
 	
 	public void handleToggle(ToggleEvent event) {

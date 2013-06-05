@@ -26,3 +26,19 @@
 .hide-column-names table thead tr {
     display: none;
 }
+
+.red {
+	color: #FFFFFF;
+	background: #660000;
+	font-weight:bold;
+}
+.yellow {
+	color: #FFFFFF;
+	background: #CCCC33;
+	font-weight:bold;
+}
+.green {
+	color: #FFFFFF;
+	background: #009933;
+	font-weight:bold;
+}

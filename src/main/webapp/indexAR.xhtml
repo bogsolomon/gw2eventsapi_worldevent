@@ -34,7 +34,7 @@
         		 <p:ajax event="reorder"/>
         		 <p:panel id="teqPanel" header="Tequatl" toggleable="true" collapsed="#{dashboardBean.teqCollapsed}">
         		 	<p:ajax event="toggle" listener="#{dashboardBean.handleTeqToggle}"/>
-        		 	<p:dataTable var="status" value="#{dragonBean.tequatlStatus}" styleClass="hide-column-names">
+        		 	<p:dataTable var="status" value="#{dragonBean.tequatlStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
         		 		<p:column>  
 				            <h:outputText value="#{status.server}" />  
 				        </p:column>  
@@ -49,7 +49,7 @@
         		 
         		 <p:panel id="shatPanel" header="Shatterer" toggleable="true" collapsed="#{dashboardBean.shatCollapsed}">
         		 	<p:ajax event="toggle" listener="#{dashboardBean.handleShatToggle}"/>
-        		 	<p:dataTable var="status" value="#{dragonBean.shattererStatus}" styleClass="hide-column-names">
+        		 	<p:dataTable var="status" value="#{dragonBean.shattererStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
         		 		<p:column>  
 				            <h:outputText value="#{status.server}" />  
 				        </p:column>  
@@ -64,7 +64,7 @@
         		 
         		 <p:panel id="jorPanel" header="Jormag" toggleable="true" collapsed="#{dashboardBean.jormagCollapsed}">
         		 	<p:ajax event="toggle" listener="#{dashboardBean.handleJormagToggle}"/>
-        		 	<p:dataTable var="status" value="#{dragonBean.jormagStatus}" styleClass="hide-column-names">
+        		 	<p:dataTable var="status" value="#{dragonBean.jormagStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
         		 		<p:column>  
 				            <h:outputText value="#{status.server}" />  
 				        </p:column>  
@@ -79,7 +79,7 @@
         		 
         		 <p:panel id="karkaPanel" header="Karka Queen" toggleable="true" collapsed="#{dashboardBean.karkaCollapsed}">
         		 	<p:ajax event="toggle" listener="#{dashboardBean.handleKarkaToggle}"/>
-        		 	<p:dataTable var="status" value="#{dragonBean.karkaStatus}" styleClass="hide-column-names">
+        		 	<p:dataTable var="status" value="#{dragonBean.karkaStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
         		 		<p:column>  
 				            <h:outputText value="#{status.server}" />  
 				        </p:column>  
@@ -94,7 +94,7 @@
         		 
         		 <p:panel id="mawPanel" header="Maw" toggleable="true" collapsed="#{dashboardBean.mawCollapsed}">
         		 	<p:ajax event="toggle" listener="#{dashboardBean.handleMawToggle}"/>
-        		 	<p:dataTable var="status" value="#{dragonBean.mawStatus}" styleClass="hide-column-names">
+        		 	<p:dataTable var="status" value="#{dragonBean.mawStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
         		 		<p:column>  
 				            <h:outputText value="#{status.server}" />  
 				        </p:column>  
@@ -109,7 +109,7 @@
         		 
         		 <p:panel id="fireElePanel" header="Fire Elemental" toggleable="true" collapsed="#{dashboardBean.fireEleCollapsed}">
         		 	<p:ajax event="toggle" listener="#{dashboardBean.handleFireEleToggle}"/>
-        		 	<p:dataTable var="status" value="#{dragonBean.fireEleStatus}" styleClass="hide-column-names">
+        		 	<p:dataTable var="status" value="#{dragonBean.fireEleStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
         		 		<p:column>  
 				            <h:outputText value="#{status.server}" />  
 				        </p:column>  
@@ -124,7 +124,7 @@
         		 
         		 <p:panel id="wurmPanel" header="Jungle Wurm" toggleable="true" collapsed="#{dashboardBean.wurmCollapsed}">
         		 	<p:ajax event="toggle" listener="#{dashboardBean.handleWurmToggle}"/>
-        		 	<p:dataTable var="status" value="#{dragonBean.wurmStatus}" styleClass="hide-column-names">
+        		 	<p:dataTable var="status" value="#{dragonBean.wurmStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
         		 		<p:column>  
 				            <h:outputText value="#{status.server}" />  
 				        </p:column>  
@@ -139,7 +139,7 @@
         		 
         		 <p:panel id="sbPanel" header="Shadow Behemoth" toggleable="true" collapsed="#{dashboardBean.sbCollapsed}">
         		 	<p:ajax event="toggle" listener="#{dashboardBean.handleSBToggle}"/>
-        		 	<p:dataTable var="status" value="#{dragonBean.sbStatus}" styleClass="hide-column-names">
+        		 	<p:dataTable var="status" value="#{dragonBean.sbStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
         		 		<p:column>  
 				            <h:outputText value="#{status.server}" />  
 				        </p:column>  
@@ -154,7 +154,7 @@
         		 
         		 <p:panel id="golemPanel" header="Golem" toggleable="true" collapsed="#{dashboardBean.golemCollapsed}">
         		 	<p:ajax event="toggle" listener="#{dashboardBean.handleGolemToggle}"/>
-        		 	<p:dataTable var="status" value="#{dragonBean.golemStatus}" styleClass="hide-column-names">
+        		 	<p:dataTable var="status" value="#{dragonBean.golemStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
         		 		<p:column>  
 				            <h:outputText value="#{status.server}" />  
 				        </p:column>  
@@ -169,7 +169,7 @@
         		 
         		 <p:panel id="dredgePanel" header="Dredge" toggleable="true" collapsed="#{dashboardBean.dredgeCollapsed}">
         		 	<p:ajax event="toggle" listener="#{dashboardBean.handleDredgeToggle}"/>
-        		 	<p:dataTable var="status" value="#{dragonBean.dredgeStatus}" styleClass="hide-column-names">
+        		 	<p:dataTable var="status" value="#{dragonBean.dredgeStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
         		 		<p:column>  
 				            <h:outputText value="#{status.server}" />  
 				        </p:column>  
@@ -184,7 +184,7 @@
         		 
         		 <p:panel id="harathiPanel" header="Kilava Chest" toggleable="true" collapsed="#{dashboardBean.harathiCollapsed}">
         		 	<p:ajax event="toggle" listener="#{dashboardBean.handleHarathiToggle}"/>
-        		 	<p:dataTable var="status" value="#{dragonBean.harathiStatus}" styleClass="hide-column-names">
+        		 	<p:dataTable var="status" value="#{dragonBean.harathiStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
         		 		<p:column>  
 				            <h:outputText value="#{status.server}" />  
 				        </p:column>  
@@ -199,7 +199,7 @@
         		 
         		 <p:panel id="ogrePanel" header="Foulbear Kraal" toggleable="true" collapsed="#{dashboardBean.ogreCollapsed}">
         		 	<p:ajax event="toggle" listener="#{dashboardBean.handleOgreToggle}"/>
-        		 	<p:dataTable var="status" value="#{dragonBean.ogreStatus}" styleClass="hide-column-names">
+        		 	<p:dataTable var="status" value="#{dragonBean.ogreStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
         		 		<p:column>  
 				            <h:outputText value="#{status.server}" />  
 				        </p:column>  
@@ -214,7 +214,7 @@
         		 
         		 <p:panel id="hydraPanel" header="Hydra Queen" toggleable="true" collapsed="#{dashboardBean.hydraCollapsed}">
         		 	<p:ajax event="toggle" listener="#{dashboardBean.handleHydraToggle}"/>
-        		 	<p:dataTable var="status" value="#{dragonBean.hydraStatus}" styleClass="hide-column-names">
+        		 	<p:dataTable var="status" value="#{dragonBean.hydraStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
         		 		<p:column>  
 				            <h:outputText value="#{status.server}" />  
 				        </p:column>  
@@ -229,7 +229,7 @@
         		 
         		 <p:panel id="fireShamPanel" header="Fire Shaman" toggleable="true" collapsed="#{dashboardBean.fireShamCollapsed}">
         		 	<p:ajax event="toggle" listener="#{dashboardBean.handleFireShamToggle}"/>
-        		 	<p:dataTable var="status" value="#{dragonBean.fireShamStatus}" styleClass="hide-column-names">
+        		 	<p:dataTable var="status" value="#{dragonBean.fireShamStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
         		 		<p:column>  
 				            <h:outputText value="#{status.server}" />  
 				        </p:column>  

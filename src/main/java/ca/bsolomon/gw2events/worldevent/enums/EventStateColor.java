@@ -4,11 +4,11 @@ import java.security.InvalidParameterException;
 
 public enum EventStateColor {
 
-	ACTIVE("009933"),
-	SUCCESS("660000"),
-	WARMUP("CCCC33"),
-	FAIL("660000"),
-	PREPARATION("CCCC33");
+	ACTIVE("green"),
+	SUCCESS("red"),
+	WARMUP("yellow"),
+	FAIL("red"),
+	PREPARATION("yellow");
 	
 	private String color;
 	

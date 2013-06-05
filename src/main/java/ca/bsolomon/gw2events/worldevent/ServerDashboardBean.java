@@ -1,5 +1,7 @@
 package ca.bsolomon.gw2events.worldevent;
 
+import java.io.Serializable;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -8,8 +10,6 @@ import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.Days;
 import org.joda.time.chrono.GJChronology;
-import org.primefaces.event.DashboardReorderEvent;
-import org.primefaces.event.ResizeEvent;
 import org.primefaces.event.ToggleEvent;
 import org.primefaces.model.DashboardColumn;
 import org.primefaces.model.DashboardModel;
@@ -19,7 +19,7 @@ import org.primefaces.model.Visibility;
 
 @ManagedBean(name="serverDashboardBean")
 @SessionScoped
-public class ServerDashboardBean {
+public class ServerDashboardBean implements Serializable {
 
 	Chronology gregorianJuian = GJChronology.getInstance(DateTimeZone.UTC);
 	

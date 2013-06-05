@@ -31,6 +31,8 @@ public enum MawEvent {
 	public String uid() {return uid;}
 	public String toString() {return prettyName;}
 	
+	private static boolean inProgress = false;
+	
 	public static List<EventStatus> formatMawString(EventData lowLevelEventData) {
 		List<EventStatus> status = new ArrayList<EventStatus>();
 		
@@ -66,12 +68,19 @@ public enum MawEvent {
 		String shamaStatus = lowLevelEventData.getEventStatus(shamanEventId);
 		String chiefStatus = lowLevelEventData.getEventStatus(chiefEventId);
 		
+		if ((chiefStatus != null) &&
+				(chiefStatus.equals("Success")) && inProgress) {
+			inProgress = false;
+		} 
+		
 		if (protectStatus != null && protectStatus.equals("Active")) {
 			time = lowLevelEventData.getEventTime(protectEventId);
 			
 			outStatus = MawEvent.PROTECT.toString();
 			color = EventStateColor.PREPARATION.color();
 			fontWeight = 600;
+			
+			inProgress = true;
 		} else if (escortStatus != null && (escortStatus.equals("Active") || escortStatus.equals("Preparation"))) {
 			time = lowLevelEventData.getEventTime(protectEventId);
 			
@@ -97,7 +106,27 @@ public enum MawEvent {
 			outStatus = MawEvent.CHIEF.toString();
 			color = EventStateColor.ACTIVE.color();
 			fontWeight = 900;
-		}  else {
+			
+			inProgress = false;
+		} else if ((protectStatus != null) &&
+				(protectStatus.equals("Success")) && inProgress) {
+			time = lowLevelEventData.getEventTime(protectEventId);
+			
+			outStatus = "Waiting for escort";
+			color = EventStateColor.PREPARATION.color();
+		} else if ((escortStatus != null) &&
+				(escortStatus.equals("Success")) && inProgress) {
+			time = lowLevelEventData.getEventTime(protectEventId);
+			
+			outStatus = "Waiting to destroy totem";
+			color = EventStateColor.PREPARATION.color();
+		} else if ((totemStatus != null) &&
+				(totemStatus.equals("Success")) && inProgress) {
+			time = lowLevelEventData.getEventTime(protectEventId);
+			
+			outStatus = "Shaman Chief spawning";
+			color = EventStateColor.PREPARATION.color();
+		} else {
 			time = lowLevelEventData.getEventTime(chiefEventId);
 			
 			outStatus = "Not up";

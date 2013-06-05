@@ -151,7 +151,7 @@ public enum DragonEvent {
 			time = dragonData.getEventTime(shatEventId);
 			
 			outStatus = "Ominous Winds";
-			color = EventStateColor.ACTIVE.color();
+			color = EventStateColor.PREPARATION.color();
 			fontWeight = 900;
 		} else {
 			time = dragonData.getEventTime(shatEventId);
@@ -204,7 +204,7 @@ public enum DragonEvent {
 			outStatus = "Four Crystals Pre";
 			color = EventStateColor.PREPARATION.color();
 			fontWeight = 600;
-		} else if (crystalFStatus != null && crystalFStatus.equals("Active")) {
+		} else if (crystalFStatus != null && (crystalFStatus.equals("Active") || crystalFStatus.equals("Preparation"))) {
 			time = dragonData.getEventTime(crystalFEventId);
 			
 			outStatus = "Final Crystal Pre";

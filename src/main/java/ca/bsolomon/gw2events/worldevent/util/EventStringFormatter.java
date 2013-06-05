@@ -32,7 +32,7 @@ public class EventStringFormatter {
 			appendSeconds().toFormatter();
 	
 
-	private static void generateEventString(StringBuffer sb, ServerID servId,
+	/*private static void generateEventString(StringBuffer sb, ServerID servId,
 			String outStatus, String color, int fontWeight, DateTime time) {
 		DateTime now = new DateTime(gregorianJuian);
 		Period period = new Period(time, now);
@@ -42,7 +42,7 @@ public class EventStringFormatter {
 		sb.append(servId.toString()+" - "
 				+"<span style='font-weight:"+fontWeight+";color: #"+color+";'>"
 				+outStatus+"</span> - "+periodStr+"</br>");
-	}
+	}*/
 
 
 	public static void generateEventString(List<EventStatus> statusList,
@@ -55,8 +55,9 @@ public class EventStringFormatter {
 		
 		EventStatus newStatus = new EventStatus();
 		newStatus.setServer(servId.toString());
-		newStatus.setStatus("<span style='font-weight:"+fontWeight+";color: #"+color+";'>"+outStatus+"</span>");
+		newStatus.setStatus(outStatus);
 		newStatus.setDate(periodStr);
+		newStatus.setColor(color);
 		
 		statusList.add(newStatus);
 	}

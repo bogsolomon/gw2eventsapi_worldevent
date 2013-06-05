@@ -30,6 +30,8 @@ public enum FoulBearEvent {
 	public String uid() {return uid;}
 	public String toString() {return prettyName;}
 	
+	private static boolean inProgress = false;
+	
 	public static List<EventStatus> formatOgreString(EventData lowLevelEventData) {
 		List<EventStatus> status = new ArrayList<EventStatus>();
 		
@@ -63,14 +65,16 @@ public enum FoulBearEvent {
 		
 		
 		if ((chiefStatus != null) &&
-				(chiefStatus.equals("Active") || chiefStatus.equals("Preparation"))) {
+				(chiefStatus.equals("Active") || chiefStatus.equals("Preparation") || chiefStatus.equals("Warmup"))) {
 			time = lowLevelEventData.getEventTime(chiefEventId);
 			
 			outStatus = "Active";
 			color = EventStateColor.ACTIVE.color();
 			fontWeight = 900;
+			
+			inProgress = false;
 		} else if ((destroyStatus != null) &&
-				(destroyStatus.equals("Active") || destroyStatus.equals("Preparation"))) {
+				(destroyStatus.equals("Active") || destroyStatus.equals("Preparation") || destroyStatus.equals("Warmup"))) {
 			time = lowLevelEventData.getEventTime(destroyEventId);
 			
 			outStatus = DESTROY.toString();
@@ -90,14 +94,20 @@ public enum FoulBearEvent {
 			outStatus = BLOODGORGE.toString();
 			color = EventStateColor.PREPARATION.color();
 			fontWeight = 600;
-		} else if ((sapperStatus != null && sapperDefStatus != null) &&
-				(sapperStatus.equals("Active")  || sapperStatus.equals("Preparation")
-						|| sapperDefStatus.equals("Active")  || sapperDefStatus.equals("Preparation"))) {
-			time = lowLevelEventData.getEventTime(sapperEventId);
 			
-			outStatus = "Sapper Delve";
+			inProgress = true;
+		} else if ((assaultStatus != null) &&
+				(assaultStatus.equals("Success")) && inProgress) {
+			time = lowLevelEventData.getEventTime(assaultEventId);
+			
+			outStatus = "Waiting to destroy houses";
 			color = EventStateColor.PREPARATION.color();
-			fontWeight = 600;
+		} else if ((bloodStatus != null) &&
+				(bloodStatus.equals("Success")) && inProgress) {
+			time = lowLevelEventData.getEventTime(bloodEventId);
+			
+			outStatus = "Waiting to attack trainers";
+			color = EventStateColor.PREPARATION.color();
 		} else {
 			time = lowLevelEventData.getEventTime(chiefEventId);
 			

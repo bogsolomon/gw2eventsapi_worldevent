@@ -29,7 +29,7 @@
         		 <p:ajax event="reorder"/>
         		 <p:panel id="sorPanel" header="Sanctum of Rall (Home)" toggleable="true" collapsed="#{serverDashboardBean.sorCollapsed}">
         		 	<p:ajax event="toggle" listener="#{serverDashboardBean.handleSorToggle}"/>
-        		 	<p:dataTable var="status" value="#{dragonBean.sorStatus}" styleClass="hide-column-names">
+        		 	<p:dataTable var="status" value="#{dragonBean.sorStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
         		 		<p:column>  
 				            <h:outputText value="#{status.server}" />  
 				        </p:column>  
@@ -44,7 +44,7 @@
         		 
         		 <p:panel id="fcPanel" header="Ferguson's Crossing" toggleable="true" collapsed="#{serverDashboardBean.fcCollapsed}">
         		 	<p:ajax event="toggle" listener="#{serverDashboardBean.handleFcToggle}"/>
-        		 	<p:dataTable var="status" value="#{dragonBean.fcStatus}" styleClass="hide-column-names">
+        		 	<p:dataTable var="status" value="#{dragonBean.fcStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
         		 		<p:column>  
 				            <h:outputText value="#{status.server}" />  
 				        </p:column>  
@@ -59,7 +59,7 @@
         		 
         		 <p:panel id="etPanel" header="Eredon Terrace" toggleable="true" collapsed="#{serverDashboardBean.etCollapsed}">
         		 	<p:ajax event="toggle" listener="#{serverDashboardBean.handleEtToggle}"/>
-        		 	<p:dataTable var="status" value="#{dragonBean.etStatus}" styleClass="hide-column-names">
+        		 	<p:dataTable var="status" value="#{dragonBean.etStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
         		 		<p:column>  
 				            <h:outputText value="#{status.server}" />  
 				        </p:column>  
