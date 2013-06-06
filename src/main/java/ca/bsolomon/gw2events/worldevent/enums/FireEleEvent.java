@@ -28,14 +28,20 @@ public enum FireEleEvent {
 	public String uid() {return uid;}
 	public String toString() {return prettyName;}
 	
-	public static List<EventStatus> formatFireEleString(EventData lowLevelEventData) {
+	private static List<EventStatus> feStatus = new ArrayList<>();
+	
+	public static List<EventStatus> getStatus() {
+		return feStatus;
+	}
+	
+	public static void formatFireEleString(EventData lowLevelEventData) {
 		List<EventStatus> status = new ArrayList<EventStatus>();
 		
 		for (ServerID servId:ServerID.values()) {
 			formatFireEleString(lowLevelEventData, status, servId);
 		}
 		
-		return status;
+		feStatus = status;
 	}
 
 	public static void formatFireEleString(EventData lowLevelEventData,

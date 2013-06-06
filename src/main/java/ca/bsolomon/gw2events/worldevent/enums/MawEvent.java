@@ -33,14 +33,20 @@ public enum MawEvent {
 	
 	private static boolean inProgress = false;
 	
-	public static List<EventStatus> formatMawString(EventData lowLevelEventData) {
+	private static List<EventStatus> eventStatus = new ArrayList<>();
+	
+	public static List<EventStatus> getStatus() {
+		return eventStatus;
+	}
+	
+	public static void formatMawString(EventData lowLevelEventData) {
 		List<EventStatus> status = new ArrayList<EventStatus>();
 		
 		for (ServerID servId:ServerID.values()) {
 			formatMawString(lowLevelEventData, status, servId);
 		}
 		
-		return status;
+		eventStatus = status;
 	}
 
 	public static void formatMawString(EventData lowLevelEventData,
@@ -67,11 +73,6 @@ public enum MawEvent {
 		String guardsStatus = lowLevelEventData.getEventStatus(guardsEventId);
 		String shamaStatus = lowLevelEventData.getEventStatus(shamanEventId);
 		String chiefStatus = lowLevelEventData.getEventStatus(chiefEventId);
-		
-		if ((chiefStatus != null) &&
-				(chiefStatus.equals("Success")) && inProgress) {
-			inProgress = false;
-		} 
 		
 		if (protectStatus != null && protectStatus.equals("Active")) {
 			time = lowLevelEventData.getEventTime(protectEventId);

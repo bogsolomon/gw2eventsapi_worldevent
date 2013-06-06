@@ -34,59 +34,59 @@ public class DragonBean {
 	private LowPriorityEventData lowPriorityData = new LowPriorityEventData();
 	
 	public List<EventStatus> getKarkaStatus() {
-		return KarkaEnum.formatKarkaString(lowPriorityData);
+		return KarkaEnum.getStatus();
 	}
 	
 	public List<EventStatus> getTequatlStatus() {
-		return DragonEvent.formatTequatlString(dragonData);
+		return DragonEvent.getTeqStatus();
 	}
 	
 	public List<EventStatus> getShattererStatus() {
-		return DragonEvent.formatShattererString(dragonData);
+		return DragonEvent.getShatStatus();
 	}
 	
 	public List<EventStatus> getJormagStatus() {
-		return DragonEvent.formatJormagString(dragonData);
+		return DragonEvent.getJorStatus();
 	}
 	
 	public List<EventStatus> getMawStatus() {
-		return MawEvent.formatMawString(lowLevelData);
+		return MawEvent.getStatus();
 	}
 	
 	public List<EventStatus> getFireEleStatus() {
-		return FireEleEvent.formatFireEleString(lowLevelData);
+		return FireEleEvent.getStatus();
 	}
 	
 	public List<EventStatus> getWurmStatus() {
-		return JungleWurmEvent.formatJungleWurmString(lowLevelData);
+		return JungleWurmEvent.getStatus();
 	}
 	
 	public List<EventStatus> getSbStatus() {
-		return ShadowBehemothEvent.formatShadowBehemothString(lowLevelData);
+		return ShadowBehemothEvent.getStatus();
 	}
 	
 	public List<EventStatus> getGolemStatus() {
-		return GolemEvent.formatGolemString(lowPriorityData);
+		return GolemEvent.getStatus();
 	}
 	
 	public List<EventStatus> getDredgeStatus() {
-		return DredgeEvent.formatDredgeString(lowPriorityData);
+		return DredgeEvent.getStatus();
 	}
 	
 	public List<EventStatus> getHarathiStatus() {
-		return HarathiChestEvent.formatHarathiString(lowPriorityData);
+		return HarathiChestEvent.getStatus();
 	}
 	
 	public List<EventStatus> getOgreStatus() {
-		return FoulBearEvent.formatOgreString(lowPriorityData);
+		return FoulBearEvent.getStatus();
 	}
 	
 	public List<EventStatus> getHydraStatus() {
-		return HydraQueenEvent.formatHydraString(lowPriorityData);
+		return HydraQueenEvent.getStatus();
 	}
 	
 	public List<EventStatus> getFireShamStatus() {
-		return FireShamanEnum.formatShamanString(lowPriorityData);
+		return FireShamanEnum.getStatus();
 	}
 	
 	public List<EventStatus> getSorStatus() {
@@ -120,35 +120,32 @@ public class DragonBean {
 	}
 	
 	public void formatServer(ServerID servId, List<EventStatus> status) {
-		DragonEvent.formatTequatlString(dragonData, status, servId);
-		status.get(status.size()-1).setServer("Tequatl");
-		DragonEvent.formatShattererString(dragonData, status, servId);
-		status.get(status.size()-1).setServer("Shaterrer");
-		DragonEvent.formatJormagString(dragonData, status, servId);
-		status.get(status.size()-1).setServer("Jormag");
+		formatServerEvent(servId, status, "Tequatl", DragonEvent.getTeqStatus());
+		formatServerEvent(servId, status, "Shaterrer", DragonEvent.getShatStatus());
+		formatServerEvent(servId, status, "Jormag", DragonEvent.getJorStatus());
+
+		formatServerEvent(servId, status, "Maw", MawEvent.getStatus());
+		formatServerEvent(servId, status, "Fire Ele", FireEleEvent.getStatus());
+		formatServerEvent(servId, status, "Fire Ele", FireEleEvent.getStatus());
+		formatServerEvent(servId, status, "Jungle Wurm", JungleWurmEvent.getStatus());
+		formatServerEvent(servId, status, "SB", ShadowBehemothEvent.getStatus());
 		
-		MawEvent.formatMawString(lowLevelData, status, servId);
-		status.get(status.size()-1).setServer("Maw");
-		FireEleEvent.formatFireEleString(lowLevelData, status, servId);
-		status.get(status.size()-1).setServer("Fire Ele");
-		JungleWurmEvent.formatJungleWurmString(lowLevelData, status, servId);
-		status.get(status.size()-1).setServer("Jungle Wurm");
-		ShadowBehemothEvent.formatShadowBehemothString(lowLevelData, status, servId);
-		status.get(status.size()-1).setServer("SB");
-		
-		GolemEvent.formatGolemString(lowPriorityData, status, servId);
-		status.get(status.size()-1).setServer("Golem MKII");
-		DredgeEvent.formatDredgeString(lowPriorityData, status, servId);
-		status.get(status.size()-1).setServer("Dredge");
-		HarathiChestEvent.formatHarathiString(lowPriorityData, status, servId);
-		status.get(status.size()-1).setServer("Kilava Chest");
-		FoulBearEvent.formatOgreString(lowPriorityData, status, servId);
-		status.get(status.size()-1).setServer("Foulbear");
-		HydraQueenEvent.formatHydraString(lowPriorityData, status, servId);
-		status.get(status.size()-1).setServer("Hydra Queen");
-		FireShamanEnum.formatShamanString(lowPriorityData, status, servId);
-		status.get(status.size()-1).setServer("Fire Shaman");
-		KarkaEnum.formatKarkaString(lowPriorityData, status, servId);
-		status.get(status.size()-1).setServer("Karka Queen");
+		formatServerEvent(servId, status, "Golem MKII", GolemEvent.getStatus());
+		formatServerEvent(servId, status, "Dredge", DredgeEvent.getStatus());
+		formatServerEvent(servId, status, "Kilava Chest", HarathiChestEvent.getStatus());
+		formatServerEvent(servId, status, "Foulbear", FoulBearEvent.getStatus());
+		formatServerEvent(servId, status, "Hydra Queen", HydraQueenEvent.getStatus());
+		formatServerEvent(servId, status, "Fire Shaman", FireShamanEnum.getStatus());
+		formatServerEvent(servId, status, "Karka Queen", KarkaEnum.getStatus());
+	}
+
+	private void formatServerEvent(ServerID servId, List<EventStatus> status, 
+			String name, List<EventStatus> statusIn) {
+		for (EventStatus st:statusIn) {
+			if (st.getServer().equals(servId.toString())) {
+				status.add(st);
+				st.setServer(name);
+			}
+		}
 	}
 }

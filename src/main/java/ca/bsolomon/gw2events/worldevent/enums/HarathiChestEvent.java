@@ -22,18 +22,24 @@ public enum HarathiChestEvent {
 		this.uid = uid;
 		this.prettyName = prettyName;
 	}
+
+	private static List<EventStatus> eventStatus = new ArrayList<>();
+	
+	public static List<EventStatus> getStatus() {
+		return eventStatus;
+	}
 	
 	public String uid() {return uid;}
 	public String toString() {return prettyName;}
 	
-	public static List<EventStatus> formatHarathiString(EventData lowPriorityEventData) {
+	public static void formatHarathiString(EventData lowPriorityEventData) {
 		List<EventStatus> status = new ArrayList<EventStatus>();
 		
 		for (ServerID servId:ServerID.values()) {
 			formatHarathiString(lowPriorityEventData, status, servId);
 		}
 		
-		return status;
+		eventStatus = status;
 	}
 
 	public static void formatHarathiString(

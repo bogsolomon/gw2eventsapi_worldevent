@@ -32,6 +32,12 @@
 	    <version>1.7.1</version>
 	</dependency>
 	
+	<dependency>
+	    <groupId>org.omnifaces</groupId>
+	    <artifactId>omnifaces</artifactId>
+	    <version>1.4.1</version> <!-- Or 1.5-SNAPSHOT -->
+	</dependency>
+	
 	<dependency>  
         <groupId>org.primefaces</groupId>  
         <artifactId>primefaces</artifactId>  
@@ -70,6 +76,17 @@
   </dependencies>
   <build>
     <finalName>worldevent</finalName>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.1</version>
+        <configuration>
+        	<source>1.7</source>
+          	<target>1.7</target>
+        </configuration>
+      </plugin>
+    </plugins>
   </build>
   
   <repositories>

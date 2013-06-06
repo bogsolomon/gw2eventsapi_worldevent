@@ -59,14 +59,30 @@ public enum DragonEvent {
 		 throw new IllegalArgumentException("Incorrect Event UID");
 	}
 	
-	public static List<EventStatus> formatTequatlString(EventData data) {
+	private static List<EventStatus> teqStatus = new ArrayList<>();
+	private static List<EventStatus> shatStatus = new ArrayList<>();
+	private static List<EventStatus> jorStatus = new ArrayList<>();
+	
+	public static List<EventStatus> getTeqStatus() {
+		return teqStatus;
+	}
+	
+	public static List<EventStatus> getShatStatus() {
+		return shatStatus;
+	}
+	
+	public static List<EventStatus> getJorStatus() {
+		return jorStatus;
+	}
+	
+	public static void formatTequatlString(EventData data) {
 		List<EventStatus> status = new ArrayList<EventStatus>();
 		
 		for (ServerID servId:ServerID.values()) {
 			formatTequatlString(data, status, servId);
 		}
 		
-		return status;
+		teqStatus = status;
 	}
 
 	public static void formatTequatlString(EventData data, List<EventStatus> statusList,
@@ -99,14 +115,14 @@ public enum DragonEvent {
 		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time);
 	}
 
-	public static List<EventStatus> formatShattererString(EventData dragonData) {
+	public static void formatShattererString(EventData dragonData) {
 		List<EventStatus> status = new ArrayList<EventStatus>();
 		
 		for (ServerID servId:ServerID.values()) {
 			formatShattererString(dragonData, status, servId);
 		}
 		
-		return status;
+		shatStatus = status;
 	}
 
 	public static void formatShattererString(EventData dragonData,
@@ -163,14 +179,14 @@ public enum DragonEvent {
 		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time);
 	}
 
-	public static List<EventStatus> formatJormagString(EventData dragonData) {
+	public static void formatJormagString(EventData dragonData) {
 		List<EventStatus> status = new ArrayList<EventStatus>();
 		
 		for (ServerID servId:ServerID.values()) {
 			formatJormagString(dragonData, status, servId);
 		}
 		
-		return status;
+		jorStatus = status;
 	}
 
 	public static void formatJormagString(EventData dragonData,

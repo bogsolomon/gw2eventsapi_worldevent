@@ -25,15 +25,21 @@ public enum DredgeEvent {
 	
 	public String uid() {return uid;}
 	public String toString() {return prettyName;}
+
+	private static List<EventStatus> eventStatus = new ArrayList<>();
 	
-	public static List<EventStatus> formatDredgeString(EventData lowLevelEventData) {
+	public static List<EventStatus> getStatus() {
+		return eventStatus;
+	}	
+	
+	public static void formatDredgeString(EventData lowLevelEventData) {
 		List<EventStatus> status = new ArrayList<EventStatus>();
 		
 		for (ServerID servId:ServerID.values()) {
 			formatDredgeString(lowLevelEventData, status, servId);
 		}
 		
-		return status;
+		eventStatus = status;
 	}
 
 	public static void formatDredgeString(

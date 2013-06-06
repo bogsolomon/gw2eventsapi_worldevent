@@ -30,14 +30,20 @@ public enum ShadowBehemothEvent {
 	
 	private static boolean swampPortalsDestroyed = false;
 	
-	public static List<EventStatus> formatShadowBehemothString(EventData lowLevelEventData) {
+	private static List<EventStatus> eventStatus = new ArrayList<>();
+	
+	public static List<EventStatus> getStatus() {
+		return eventStatus;
+	}
+	
+	public static void formatShadowBehemothString(EventData lowLevelEventData) {
 		List<EventStatus> status = new ArrayList<EventStatus>();
 		
 		for (ServerID servId:ServerID.values()) {
 			formatShadowBehemothString(lowLevelEventData, status, servId);
 		}
 		
-		return status;
+		eventStatus = status;
 	}
 
 	public static void formatShadowBehemothString(EventData lowLevelEventData,

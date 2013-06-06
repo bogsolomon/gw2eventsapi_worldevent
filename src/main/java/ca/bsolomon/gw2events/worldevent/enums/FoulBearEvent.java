@@ -31,15 +31,21 @@ public enum FoulBearEvent {
 	public String toString() {return prettyName;}
 	
 	private static boolean inProgress = false;
+
+	private static List<EventStatus> eventStatus = new ArrayList<>();
 	
-	public static List<EventStatus> formatOgreString(EventData lowLevelEventData) {
+	public static List<EventStatus> getStatus() {
+		return eventStatus;
+	}
+	
+	public static void formatOgreString(EventData lowLevelEventData) {
 		List<EventStatus> status = new ArrayList<EventStatus>();
 		
 		for (ServerID servId:ServerID.values()) {
 			formatOgreString(lowLevelEventData, status, servId);
 		}
 		
-		return status;
+		eventStatus = status;
 	}
 
 	public static void formatOgreString(EventData lowLevelEventData,

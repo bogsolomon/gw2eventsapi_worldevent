@@ -5,8 +5,16 @@
     <h:head>
         <title>World Events Tracker</title>
         <link rel="stylesheet" type="text/css" href="css/events.css"/>
+        <script src="script/datetime.js"></script>
+        <script>
+		function startTime()
+		{
+			updateTimes();
+			t=setTimeout(function(){startTime()},1000);
+		}
+		</script>
     </h:head>
-    <h:body>
+    <h:body onload="startTime()">
     	<p:layout fullPage="true">
     	<p:ajax event="resize" listener="#{checkboxBean.handleResize}"/>
         <p:ajax event="toggle" listener="#{checkboxBean.handleToggle}"/>
@@ -22,17 +30,23 @@
         </p:layoutUnit>
     	<p:layoutUnit position="center" header="Events" resizable="true" closable="false" collapsible="false">       
         <h:form id="form">
-        	<p:poll interval="30"   
-            	update="mawPanel, fireElePanel, wurmPanel, sbPanel, karkaPanel" 
-            	widgetVar="poll" autoStart="true"/>
+        	<!--  >p:poll interval="30"   
+            	update="mawPanel, wurmPanel, sbPanel, karkaPanel" 
+            	widgetVar="poll" autoStart="true"/-->
             	
-            <p:poll interval="60"   
+            <p:poll interval="15"   
+            	listener="#{ajaxPollBean.updateEvents(fireElePanel, teqPanel, shatPanel, jorPanel, karkaPanel,
+            		mawPanel, wurmPanel, sbPanel, golemPanel, dredgePanel, harathiPanel, ogrePanel, 
+            		hydraPanel, fireShamPanel)}"
+            	widgetVar="pollFEAjax" autoStart="true"/>
+            	
+            <!--  >p:poll interval="60"   
             	update="teqPanel, shatPanel, jorPanel, golemPanel, dredgePanel, harathiPanel, ogrePanel, hydraPanel, fireShamPanel" 
-            	widgetVar="pollLong" autoStart="true"/>    
+            	widgetVar="pollLong" autoStart="true"/-->    
         
         	<p:dashboard id="board" model="#{dashboardBean.model}">
         		 <p:ajax event="reorder"/>
-        		 <p:panel id="teqPanel" header="Tequatl" toggleable="true" collapsed="#{dashboardBean.teqCollapsed}">
+        		 <p:panel binding="#{teqPanel}" id="teqPanel" header="Tequatl" toggleable="true" collapsed="#{dashboardBean.teqCollapsed}">
         		 	<p:ajax event="toggle" listener="#{dashboardBean.handleTeqToggle}"/>
         		 	<p:dataTable var="status" value="#{dragonBean.tequatlStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
         		 		<p:column>  
@@ -41,13 +55,13 @@
 				        <p:column>  
 				            <h:outputText value="#{status.status}" escape="false"/>  
 				        </p:column>
-				        <p:column>  
+				        <p:column styleClass="dateColumn">  
 				            <h:outputText value="#{status.date}" />  
 				        </p:column>
         		 	</p:dataTable>
         		 </p:panel>
         		 
-        		 <p:panel id="shatPanel" header="Shatterer" toggleable="true" collapsed="#{dashboardBean.shatCollapsed}">
+        		 <p:panel binding="#{shatPanel}" id="shatPanel" header="Shatterer" toggleable="true" collapsed="#{dashboardBean.shatCollapsed}">
         		 	<p:ajax event="toggle" listener="#{dashboardBean.handleShatToggle}"/>
         		 	<p:dataTable var="status" value="#{dragonBean.shattererStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
         		 		<p:column>  
@@ -56,13 +70,13 @@
 				        <p:column>  
 				            <h:outputText value="#{status.status}" escape="false"/>  
 				        </p:column>
-				        <p:column>  
+				        <p:column styleClass="dateColumn">  
 				            <h:outputText value="#{status.date}" />  
 				        </p:column>
         		 	</p:dataTable>
         		 </p:panel>
         		 
-        		 <p:panel id="jorPanel" header="Jormag" toggleable="true" collapsed="#{dashboardBean.jormagCollapsed}">
+        		 <p:panel binding="#{jorPanel}" id="jorPanel" header="Jormag" toggleable="true" collapsed="#{dashboardBean.jormagCollapsed}">
         		 	<p:ajax event="toggle" listener="#{dashboardBean.handleJormagToggle}"/>
         		 	<p:dataTable var="status" value="#{dragonBean.jormagStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
         		 		<p:column>  
@@ -71,13 +85,13 @@
 				        <p:column>  
 				            <h:outputText value="#{status.status}" escape="false"/>  
 				        </p:column>
-				        <p:column>  
+				        <p:column styleClass="dateColumn">  
 				            <h:outputText value="#{status.date}" />  
 				        </p:column>
         		 	</p:dataTable>
         		 </p:panel>
         		 
-        		 <p:panel id="karkaPanel" header="Karka Queen" toggleable="true" collapsed="#{dashboardBean.karkaCollapsed}">
+        		 <p:panel binding="#{karkaPanel}" id="karkaPanel" header="Karka Queen" toggleable="true" collapsed="#{dashboardBean.karkaCollapsed}">
         		 	<p:ajax event="toggle" listener="#{dashboardBean.handleKarkaToggle}"/>
         		 	<p:dataTable var="status" value="#{dragonBean.karkaStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
         		 		<p:column>  
@@ -86,13 +100,13 @@
 				        <p:column>  
 				            <h:outputText value="#{status.status}" escape="false"/>  
 				        </p:column>
-				        <p:column>  
+				        <p:column styleClass="dateColumn">  
 				            <h:outputText value="#{status.date}" />  
 				        </p:column>
         		 	</p:dataTable>
         		 </p:panel>
         		 
-        		 <p:panel id="mawPanel" header="Maw" toggleable="true" collapsed="#{dashboardBean.mawCollapsed}">
+        		 <p:panel binding="#{mawPanel}" id="mawPanel" header="Maw" toggleable="true" collapsed="#{dashboardBean.mawCollapsed}">
         		 	<p:ajax event="toggle" listener="#{dashboardBean.handleMawToggle}"/>
         		 	<p:dataTable var="status" value="#{dragonBean.mawStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
         		 		<p:column>  
@@ -101,13 +115,13 @@
 				        <p:column>  
 				            <h:outputText value="#{status.status}" escape="false"/>  
 				        </p:column>
-				        <p:column>  
+				        <p:column styleClass="dateColumn">  
 				            <h:outputText value="#{status.date}" />  
 				        </p:column>
         		 	</p:dataTable>
         		 </p:panel>
         		 
-        		 <p:panel id="fireElePanel" header="Fire Elemental" toggleable="true" collapsed="#{dashboardBean.fireEleCollapsed}">
+        		 <p:panel binding="#{fireElePanel}" id="fireElePanel" header="Fire Elemental" toggleable="true" collapsed="#{dashboardBean.fireEleCollapsed}">
         		 	<p:ajax event="toggle" listener="#{dashboardBean.handleFireEleToggle}"/>
         		 	<p:dataTable var="status" value="#{dragonBean.fireEleStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
         		 		<p:column>  
@@ -116,13 +130,13 @@
 				        <p:column>  
 				            <h:outputText value="#{status.status}" escape="false"/>  
 				        </p:column>
-				        <p:column>  
+				        <p:column styleClass="dateColumn">  
 				            <h:outputText value="#{status.date}" />  
 				        </p:column>
         		 	</p:dataTable>
         		 </p:panel>
         		 
-        		 <p:panel id="wurmPanel" header="Jungle Wurm" toggleable="true" collapsed="#{dashboardBean.wurmCollapsed}">
+        		 <p:panel binding="#{wurmPanel}" id="wurmPanel" header="Jungle Wurm" toggleable="true" collapsed="#{dashboardBean.wurmCollapsed}">
         		 	<p:ajax event="toggle" listener="#{dashboardBean.handleWurmToggle}"/>
         		 	<p:dataTable var="status" value="#{dragonBean.wurmStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
         		 		<p:column>  
@@ -131,13 +145,13 @@
 				        <p:column>  
 				            <h:outputText value="#{status.status}" escape="false"/>  
 				        </p:column>
-				        <p:column>  
+				        <p:column styleClass="dateColumn">  
 				            <h:outputText value="#{status.date}" />  
 				        </p:column>
         		 	</p:dataTable>
         		 </p:panel>
         		 
-        		 <p:panel id="sbPanel" header="Shadow Behemoth" toggleable="true" collapsed="#{dashboardBean.sbCollapsed}">
+        		 <p:panel binding="#{sbPanel}" id="sbPanel" header="Shadow Behemoth" toggleable="true" collapsed="#{dashboardBean.sbCollapsed}">
         		 	<p:ajax event="toggle" listener="#{dashboardBean.handleSBToggle}"/>
         		 	<p:dataTable var="status" value="#{dragonBean.sbStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
         		 		<p:column>  
@@ -146,13 +160,13 @@
 				        <p:column>  
 				            <h:outputText value="#{status.status}" escape="false"/>  
 				        </p:column>
-				        <p:column>  
+				        <p:column styleClass="dateColumn">  
 				            <h:outputText value="#{status.date}" />  
 				        </p:column>
         		 	</p:dataTable>
         		 </p:panel>
         		 
-        		 <p:panel id="golemPanel" header="Golem" toggleable="true" collapsed="#{dashboardBean.golemCollapsed}">
+        		 <p:panel binding="#{golemPanel}" id="golemPanel" header="Golem" toggleable="true" collapsed="#{dashboardBean.golemCollapsed}">
         		 	<p:ajax event="toggle" listener="#{dashboardBean.handleGolemToggle}"/>
         		 	<p:dataTable var="status" value="#{dragonBean.golemStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
         		 		<p:column>  
@@ -161,13 +175,13 @@
 				        <p:column>  
 				            <h:outputText value="#{status.status}" escape="false"/>  
 				        </p:column>
-				        <p:column>  
+				        <p:column styleClass="dateColumn">  
 				            <h:outputText value="#{status.date}" />  
 				        </p:column>
         		 	</p:dataTable>
         		 </p:panel>
         		 
-        		 <p:panel id="dredgePanel" header="Dredge" toggleable="true" collapsed="#{dashboardBean.dredgeCollapsed}">
+        		 <p:panel binding="#{dredgePanel}" id="dredgePanel" header="Dredge" toggleable="true" collapsed="#{dashboardBean.dredgeCollapsed}">
         		 	<p:ajax event="toggle" listener="#{dashboardBean.handleDredgeToggle}"/>
         		 	<p:dataTable var="status" value="#{dragonBean.dredgeStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
         		 		<p:column>  
@@ -176,13 +190,13 @@
 				        <p:column>  
 				            <h:outputText value="#{status.status}" escape="false"/>  
 				        </p:column>
-				        <p:column>  
+				        <p:column styleClass="dateColumn">  
 				            <h:outputText value="#{status.date}" />  
 				        </p:column>
         		 	</p:dataTable>
         		 </p:panel>
         		 
-        		 <p:panel id="harathiPanel" header="Kilava Chest" toggleable="true" collapsed="#{dashboardBean.harathiCollapsed}">
+        		 <p:panel binding="#{harathiPanel}" id="harathiPanel" header="Kilava Chest" toggleable="true" collapsed="#{dashboardBean.harathiCollapsed}">
         		 	<p:ajax event="toggle" listener="#{dashboardBean.handleHarathiToggle}"/>
         		 	<p:dataTable var="status" value="#{dragonBean.harathiStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
         		 		<p:column>  
@@ -191,13 +205,13 @@
 				        <p:column>  
 				            <h:outputText value="#{status.status}" escape="false"/>  
 				        </p:column>
-				        <p:column>  
+				        <p:column styleClass="dateColumn">  
 				            <h:outputText value="#{status.date}" />  
 				        </p:column>
         		 	</p:dataTable>
         		 </p:panel>
         		 
-        		 <p:panel id="ogrePanel" header="Foulbear Kraal" toggleable="true" collapsed="#{dashboardBean.ogreCollapsed}">
+        		 <p:panel binding="#{ogrePanel}" id="ogrePanel" header="Foulbear Kraal" toggleable="true" collapsed="#{dashboardBean.ogreCollapsed}">
         		 	<p:ajax event="toggle" listener="#{dashboardBean.handleOgreToggle}"/>
         		 	<p:dataTable var="status" value="#{dragonBean.ogreStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
         		 		<p:column>  
@@ -206,13 +220,13 @@
 				        <p:column>  
 				            <h:outputText value="#{status.status}" escape="false"/>  
 				        </p:column>
-				        <p:column>  
+				        <p:column styleClass="dateColumn">  
 				            <h:outputText value="#{status.date}" />  
 				        </p:column>
         		 	</p:dataTable>
         		 </p:panel>
         		 
-        		 <p:panel id="hydraPanel" header="Hydra Queen" toggleable="true" collapsed="#{dashboardBean.hydraCollapsed}">
+        		 <p:panel binding="#{hydraPanel}" id="hydraPanel" header="Hydra Queen" toggleable="true" collapsed="#{dashboardBean.hydraCollapsed}">
         		 	<p:ajax event="toggle" listener="#{dashboardBean.handleHydraToggle}"/>
         		 	<p:dataTable var="status" value="#{dragonBean.hydraStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
         		 		<p:column>  
@@ -221,13 +235,13 @@
 				        <p:column>  
 				            <h:outputText value="#{status.status}" escape="false"/>  
 				        </p:column>
-				        <p:column>  
+				        <p:column styleClass="dateColumn">  
 				            <h:outputText value="#{status.date}" />  
 				        </p:column>
         		 	</p:dataTable>
         		 </p:panel>
         		 
-        		 <p:panel id="fireShamPanel" header="Fire Shaman" toggleable="true" collapsed="#{dashboardBean.fireShamCollapsed}">
+        		 <p:panel binding="#{fireShamPanel}" id="fireShamPanel" header="Fire Shaman" toggleable="true" collapsed="#{dashboardBean.fireShamCollapsed}">
         		 	<p:ajax event="toggle" listener="#{dashboardBean.handleFireShamToggle}"/>
         		 	<p:dataTable var="status" value="#{dragonBean.fireShamStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
         		 		<p:column>  
@@ -236,7 +250,7 @@
 				        <p:column>  
 				            <h:outputText value="#{status.status}" escape="false"/>  
 				        </p:column>
-				        <p:column>  
+				        <p:column styleClass="dateColumn">  
 				            <h:outputText value="#{status.date}" />  
 				        </p:column>
         		 	</p:dataTable>
