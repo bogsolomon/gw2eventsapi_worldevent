@@ -1,5 +1,11 @@
 package ca.bsolomon.gw2events.worldevent;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
 import org.joda.time.Chronology;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -59,15 +65,32 @@ public class DataRetrieveJob implements Job {
 		boolean dredgeChanged = false;
 		
 		boolean karkaChanged = false;
-	
-		System.out.println("Starting Thread retrieve"+this.toString()+" at "+new DateTime(gregorianJuian));
+		
+		List<String> serverIds = new ArrayList<>();
 		
 		for (ServerID servId:ServerID.values()) {
-			String teqStatus = GW2EventsAPI.queryServer(servId.uid(), DragonEvent.TEQUATL.uid());
-			if (dragonData.addEventStatus(servId.uid()+"-"+DragonEvent.TEQUATL.uid(), teqStatus, new DateTime(gregorianJuian))) {
-				teqChanged = true;
+			serverIds.add(servId.uid()+"");
+		}
+	
+		System.out.println("Starting Thread retrieve "+this.toString()+" at "+new DateTime(gregorianJuian));
+		
+		JSONArray data = GW2EventsAPI.queryServer(DragonEvent.TEQUATL.uid());
+		
+		//String teqStatus = GW2EventsAPI.queryServer(servId.uid(), DragonEvent.TEQUATL.uid());
+		for (int i=0; i<data.size(); i++) {
+			JSONObject obj = data.getJSONObject(i);
+			
+			String serverId = obj.getString("world_id");
+			
+			if (serverIds.contains(serverId)) {
+				String status = obj.getString("state");
+				if (dragonData.addEventStatus(serverId+"-"+DragonEvent.TEQUATL.uid(), status, new DateTime(gregorianJuian))) {
+					teqChanged = true;
+				}
 			}
 		}
+		
+		System.out.println("Teq retrieved retrieve "+this.toString()+" at "+new DateTime(gregorianJuian));
 		
 		for (ServerID servId:ServerID.values()) {
 			String shatEscStatus = GW2EventsAPI.queryServer(servId.uid(), DragonEvent.SHATTERER_ESCORT.uid());
