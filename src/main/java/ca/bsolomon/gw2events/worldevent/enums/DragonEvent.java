@@ -112,7 +112,7 @@ public enum DragonEvent {
 			outStatus = "Not up";
 		}
 		
-		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time);
+		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Tequatl");
 	}
 
 	public static void formatShattererString(EventData dragonData) {
@@ -176,7 +176,7 @@ public enum DragonEvent {
 			color = EventStateColor.FAIL.color();
 		}
 		
-		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time);
+		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Shaterrer");
 	}
 
 	public static void formatJormagString(EventData dragonData) {
@@ -245,6 +245,6 @@ public enum DragonEvent {
 			color = EventStateColor.FAIL.color();	
 		}
 		
-		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time);
+		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Jormag");
 	}
 }

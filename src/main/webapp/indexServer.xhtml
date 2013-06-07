@@ -5,8 +5,16 @@
     <h:head>
         <title>World Events Tracker</title>
         <link rel="stylesheet" type="text/css" href="css/events.css"/>
+        <script src="script/datetime.js"></script>
+        <script>
+		function startTime()
+		{
+			updateServerTimes();
+			t=setTimeout(function(){startTime()},1000);
+		}
+		</script>
     </h:head>
-    <h:body>
+    <h:body onload="startTime()">
     	<p:layout fullPage="true">
     	<p:ajax event="resize" listener="#{checkboxBean.handleResize}"/>
     	<p:ajax event="toggle" listener="#{checkboxBean.handleToggle}"/>
@@ -21,53 +29,53 @@
         </p:layoutUnit>
     	<p:layoutUnit position="center" header="Events" resizable="true" closable="false" collapsible="false">       
         <h:form id="form">
-        	<p:poll interval="30"   
-            	update="sorPanel, fcPanel, etPanel" 
+        	<p:poll interval="15"   
+            	listener="#{ajaxPollBean.updateEventServer(serv1Table, serv2Table, serv3Table)}" 
             	widgetVar="poll" autoStart="true"/>
             	
         	<p:dashboard id="board" model="#{serverDashboardBean.model}">
         		 <p:ajax event="reorder"/>
         		 <p:panel id="sorPanel" header="Sanctum of Rall (Home)" toggleable="true" collapsed="#{serverDashboardBean.sorCollapsed}">
         		 	<p:ajax event="toggle" listener="#{serverDashboardBean.handleSorToggle}"/>
-        		 	<p:dataTable var="status" value="#{dragonBean.sorStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
+        		 	<p:dataTable  binding="#{serv1Table}" var="status" value="#{dragonBean.sorStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
         		 		<p:column>  
-				            <h:outputText value="#{status.server}"/>  
+				            <h:panelGroup id="eventCol">#{status.event}</h:panelGroup>  
 				        </p:column>  
 				        <p:column>  
-				            <h:outputText value="#{status.status}"/>  
+				            <h:panelGroup id="statusCol">#{status.status}</h:panelGroup>  
 				        </p:column>
-				        <p:column>  
-				            <h:outputText value="#{status.date}" />  
+				        <p:column styleClass="dateColumn">  
+				            <h:panelGroup id="dateCol">#{status.date}</h:panelGroup>
 				        </p:column>
         		 	</p:dataTable>
         		 </p:panel>
         		 
         		 <p:panel id="fcPanel" header="Ferguson's Crossing" toggleable="true" collapsed="#{serverDashboardBean.fcCollapsed}">
         		 	<p:ajax event="toggle" listener="#{serverDashboardBean.handleFcToggle}"/>
-        		 	<p:dataTable var="status" value="#{dragonBean.fcStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
+        		 	<p:dataTable binding="#{serv2Table}" var="status" value="#{dragonBean.fcStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
         		 		<p:column>  
-				            <h:outputText value="#{status.server}"/>  
+				            <h:panelGroup id="eventCol">#{status.event}</h:panelGroup>  
 				        </p:column>  
 				        <p:column>  
-				            <h:outputText value="#{status.status}"/>  
+				            <h:panelGroup id="statusCol">#{status.status}</h:panelGroup>  
 				        </p:column>
-				        <p:column>  
-				            <h:outputText value="#{status.date}" />  
+				        <p:column styleClass="dateColumn">  
+				            <h:panelGroup  id="dateCol">#{status.date}</h:panelGroup>
 				        </p:column>
         		 	</p:dataTable>
         		 </p:panel>
         		 
         		 <p:panel id="etPanel" header="Eredon Terrace" toggleable="true" collapsed="#{serverDashboardBean.etCollapsed}">
         		 	<p:ajax event="toggle" listener="#{serverDashboardBean.handleEtToggle}"/>
-        		 	<p:dataTable var="status" value="#{dragonBean.etStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
+        		 	<p:dataTable binding="#{serv3Table}" var="status" value="#{dragonBean.etStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
         		 		<p:column>  
-				            <h:outputText value="#{status.server}"/>  
+				            <h:panelGroup id="eventCol">#{status.event}</h:panelGroup>  
 				        </p:column>  
 				        <p:column>  
-				            <h:outputText value="#{status.status}"/>  
+				            <h:panelGroup id="statusCol">#{status.status}</h:panelGroup>  
 				        </p:column>
-				        <p:column>  
-				            <h:outputText value="#{status.date}" />  
+				        <p:column styleClass="dateColumn">  
+				            <h:panelGroup id="dateCol">#{status.date}</h:panelGroup>
 				        </p:column>
         		 	</p:dataTable>
         		 </p:panel>
@@ -80,10 +88,10 @@
         		<p:selectManyCheckbox value="#{checkboxBean.selectedEvents}"  
 		            layout="pageDirection" id="smcb">  
 		            <f:selectItems value="#{checkboxBean.events}" />
-		            <p:ajax listener="#{checkboxBean.handleCheckbox}"/> 
+		            <p:ajax listener="#{checkboxBean.handleCheckbox(serv1Table, serv2Table, serv3Table)}"/> 
 		        </p:selectManyCheckbox>
 		        <p:commandButton value="Clear All" update="smcb" id="ajax"  
-             			actionListener="#{checkboxBean.clearAll}">
+             			actionListener="#{checkboxBean.clearAll(serv1Table, serv2Table, serv3Table)}">
 		        </p:commandButton>
         	</h:form>
         </p:layoutUnit>

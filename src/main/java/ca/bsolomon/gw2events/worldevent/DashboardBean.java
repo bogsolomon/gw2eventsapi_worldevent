@@ -3,6 +3,7 @@ package ca.bsolomon.gw2events.worldevent;
 import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 import org.joda.time.Chronology;
@@ -21,6 +22,9 @@ import org.primefaces.model.Visibility;
 @SessionScoped
 public class DashboardBean implements Serializable {  
 
+	@ManagedProperty(value="#{checkboxBean}")
+	private CheckboxBean checkboxBean;
+	
 	Chronology gregorianJuian = GJChronology.getInstance(DateTimeZone.UTC);
 	
 	private static final long serialVersionUID = 1L;
@@ -154,7 +158,7 @@ public class DashboardBean implements Serializable {
     		karkaCollapsed = false;
     	}
     	
-		return karkaCollapsed;
+		return karkaCollapsed || checkboxBean.getSelectedEvents().contains("Karka Queen");
 	}
     
     public boolean isTeqCollapsed() {
@@ -165,7 +169,7 @@ public class DashboardBean implements Serializable {
     		teqCollapsed = false;
     	}
     	
-		return teqCollapsed;
+		return teqCollapsed || checkboxBean.getSelectedEvents().contains("Tequatl");
 	}
 
 	public boolean isShatCollapsed() {
@@ -176,7 +180,7 @@ public class DashboardBean implements Serializable {
     		shatCollapsed = false;
     	}
 		
-		return shatCollapsed;
+		return shatCollapsed || checkboxBean.getSelectedEvents().contains("Shaterrer");
 	}
 
 	public boolean isJormagCollapsed() {
@@ -187,7 +191,7 @@ public class DashboardBean implements Serializable {
     		jormagCollapsed = false;
     	}
 		
-		return jormagCollapsed;
+		return jormagCollapsed || checkboxBean.getSelectedEvents().contains("Jormag");
 	}
 
 	public boolean isMawCollapsed() {
@@ -198,7 +202,7 @@ public class DashboardBean implements Serializable {
     		mawCollapsed = false;
     	}
 		
-		return mawCollapsed;
+		return mawCollapsed || checkboxBean.getSelectedEvents().contains("Maw");
 	}
 
 	public boolean isFireEleCollapsed() {
@@ -209,7 +213,7 @@ public class DashboardBean implements Serializable {
     		fireEleCollapsed = false;
     	}
 		
-		return fireEleCollapsed;
+		return fireEleCollapsed || checkboxBean.getSelectedEvents().contains("Fire Ele");
 	}
 
 	public boolean isWurmCollapsed() {
@@ -220,7 +224,7 @@ public class DashboardBean implements Serializable {
     		wurmCollapsed = false;
     	}
 		
-		return wurmCollapsed;
+		return wurmCollapsed || checkboxBean.getSelectedEvents().contains("Jungle Wurm");
 	}
 	
 	public boolean isSbCollapsed() {
@@ -231,7 +235,7 @@ public class DashboardBean implements Serializable {
     		sbCollapsed = false;
     	}
 		
-		return sbCollapsed;
+		return sbCollapsed || checkboxBean.getSelectedEvents().contains("SB");
 	}
 	
 	public boolean isGolemCollapsed() {
@@ -242,7 +246,7 @@ public class DashboardBean implements Serializable {
     		golemCollapsed = false;
     	}
 		
-		return golemCollapsed;
+		return golemCollapsed || checkboxBean.getSelectedEvents().contains("Golem MKII");
 	}
 	
 	public boolean isDredgeCollapsed() {
@@ -253,7 +257,7 @@ public class DashboardBean implements Serializable {
     		dredgeCollapsed = false;
     	}
 		
-		return dredgeCollapsed;
+		return dredgeCollapsed || checkboxBean.getSelectedEvents().contains("Dredge");
 	}
 	
 	public boolean isHarathiCollapsed() {
@@ -264,7 +268,7 @@ public class DashboardBean implements Serializable {
     		harathiCollapsed = false;
     	}
 		
-		return harathiCollapsed;
+		return harathiCollapsed || checkboxBean.getSelectedEvents().contains("Kilava Chest");
 	}
 	
 	public boolean isOgreCollapsed() {
@@ -275,7 +279,7 @@ public class DashboardBean implements Serializable {
     		ogreCollapsed = false;
     	}
 		
-		return ogreCollapsed;
+		return ogreCollapsed || checkboxBean.getSelectedEvents().contains("Foulbear");
 	}
 
 	public boolean isHydraCollapsed() {
@@ -286,7 +290,7 @@ public class DashboardBean implements Serializable {
     		hydraCollapsed = false;
     	}
 		
-		return hydraCollapsed;
+		return hydraCollapsed || checkboxBean.getSelectedEvents().contains("Hydra Queen");
 	}
 
 	public boolean isFireShamCollapsed() {
@@ -297,6 +301,10 @@ public class DashboardBean implements Serializable {
     		fireShamCollapsed = false;
     	}
 		
-		return fireShamCollapsed;
+		return fireShamCollapsed || checkboxBean.getSelectedEvents().contains("Fire Shaman");
+	}
+
+	public void setCheckboxBean(CheckboxBean checkboxBean) {
+		this.checkboxBean = checkboxBean;
 	}  
 }  

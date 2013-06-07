@@ -19,7 +19,7 @@
                 <job-name>WorldEventDataRetrieveJob</job-name>
 
                 <job-group>WorldEventDataRetrieveGroup</job-group>
-                <cron-expression>0/30 * * * * ?</cron-expression>
+                <cron-expression>0/15 * * * * ?</cron-expression>
             </cron>
         </trigger>
     </schedule>

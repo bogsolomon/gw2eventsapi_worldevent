@@ -30,21 +30,13 @@
         </p:layoutUnit>
     	<p:layoutUnit position="center" header="Events" resizable="true" closable="false" collapsible="false">       
         <h:form id="form">
-        	<!--  >p:poll interval="30"   
-            	update="mawPanel, wurmPanel, sbPanel, karkaPanel" 
-            	widgetVar="poll" autoStart="true"/-->
-            	
-            <p:poll interval="15"   
+        	<p:poll interval="15"   
             	listener="#{ajaxPollBean.updateEvents(fireElePanel, teqPanel, shatPanel, jorPanel, karkaPanel,
             		mawPanel, wurmPanel, sbPanel, golemPanel, dredgePanel, harathiPanel, ogrePanel, 
             		hydraPanel, fireShamPanel)}"
             	widgetVar="pollFEAjax" autoStart="true"/>
             	
-            <!--  >p:poll interval="60"   
-            	update="teqPanel, shatPanel, jorPanel, golemPanel, dredgePanel, harathiPanel, ogrePanel, hydraPanel, fireShamPanel" 
-            	widgetVar="pollLong" autoStart="true"/-->    
-        
-        	<p:dashboard id="board" model="#{dashboardBean.model}">
+            <p:dashboard id="board" model="#{dashboardBean.model}">
         		 <p:ajax event="reorder"/>
         		 <p:panel binding="#{teqPanel}" id="teqPanel" header="Tequatl" toggleable="true" collapsed="#{dashboardBean.teqCollapsed}">
         		 	<p:ajax event="toggle" listener="#{dashboardBean.handleTeqToggle}"/>
@@ -263,10 +255,14 @@
         		<p:selectManyCheckbox value="#{checkboxBean.selectedEvents}"  
 		            layout="pageDirection" id="smcb">  
 		            <f:selectItems value="#{checkboxBean.events}" />
-		            <p:ajax listener="#{checkboxBean.handleCheckbox}"/> 
+		            <p:ajax listener="#{checkboxBean.handleCheckbox(fireElePanel, teqPanel, shatPanel, jorPanel, karkaPanel,
+            		mawPanel, wurmPanel, sbPanel, golemPanel, dredgePanel, harathiPanel, ogrePanel, 
+            		hydraPanel, fireShamPanel)}"/> 
 		        </p:selectManyCheckbox>
 		        <p:commandButton value="Clear All" update="smcb" id="ajax"  
-             			actionListener="#{checkboxBean.clearAll}">
+             			actionListener="#{checkboxBean.clearAll(fireElePanel, teqPanel, shatPanel, jorPanel, karkaPanel,
+            		mawPanel, wurmPanel, sbPanel, golemPanel, dredgePanel, harathiPanel, ogrePanel, 
+            		hydraPanel, fireShamPanel)}">
 		        </p:commandButton>
         	</h:form>
         </p:layoutUnit>

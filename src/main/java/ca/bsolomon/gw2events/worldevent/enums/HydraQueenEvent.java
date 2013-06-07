@@ -11,10 +11,10 @@ import ca.bsolomon.gw2events.worldevent.util.EventStringFormatter;
 
 public enum HydraQueenEvent {
 
-	LIONGUARD(		"D682ABC2-6B73-4C8E-A246-E9C23ED9915", "Lionguard Pre"),
+	LIONGUARD(	"D682ABC2-6B73-4C8E-A246-E9C23ED99153", "Lionguard Pre"),
 	NORTHCANON(	"B6B7EE2A-AD6E-451B-9FE5-D5B0AD125BB2", "North Canon Pre"),
-	SOUTHTOWER(		"189E7ABE-1413-4F47-858E-4612D40BF711", "South Tower Pre"),
-	GALLEON(		"0E0801AF-28CF-4FF7-8064-BB2F4A816D2", "Galleon Pre"),
+	SOUTHTOWER(	"189E7ABE-1413-4F47-858E-4612D40BF711", "South Tower Pre"),
+	GALLEON(	"0E0801AF-28CF-4FF7-8064-BB2F4A816D23", "Galleon Pre"),
 	TAIDHA(		"242BD241-E360-48F1-A8D9-57180E146789", "Active");
 	
 	private String uid;
@@ -106,6 +106,6 @@ public enum HydraQueenEvent {
 			color = EventStateColor.FAIL.color();
 		}
 		
-		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time);
+		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Hydra Queen");
 	}
 }

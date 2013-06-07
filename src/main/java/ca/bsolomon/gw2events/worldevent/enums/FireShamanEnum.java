@@ -66,6 +66,6 @@ public enum FireShamanEnum {
 			 color = EventStateColor.FAIL.color();
 		 }
 		
-		 EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time);
+		 EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Fire Shaman");
 	}
 }

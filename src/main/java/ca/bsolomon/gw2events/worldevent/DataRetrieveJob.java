@@ -59,7 +59,9 @@ public class DataRetrieveJob implements Job {
 		boolean dredgeChanged = false;
 		
 		boolean karkaChanged = false;
-				
+	
+		System.out.println("Starting Thread retrieve"+this.toString()+" at "+new DateTime(gregorianJuian));
+		
 		for (ServerID servId:ServerID.values()) {
 			String teqStatus = GW2EventsAPI.queryServer(servId.uid(), DragonEvent.TEQUATL.uid());
 			if (dragonData.addEventStatus(servId.uid()+"-"+DragonEvent.TEQUATL.uid(), teqStatus, new DateTime(gregorianJuian))) {
@@ -210,6 +212,8 @@ public class DataRetrieveJob implements Job {
 			}
 		}
 		
+		System.out.println("Ended Thread retrieve"+this.toString()+" at "+new DateTime(gregorianJuian));
+		
 		if (teqChanged) {
 			DragonEvent.formatTequatlString(dragonData);
 		}
@@ -265,7 +269,5 @@ public class DataRetrieveJob implements Job {
 		if (karkaChanged) {
 			KarkaEnum.formatKarkaString(lowPriorityEventData);
 		}
-		
-		
 	}
 }

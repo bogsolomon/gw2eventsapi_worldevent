@@ -98,6 +98,6 @@ public enum ShadowBehemothEvent {
 			swampPortalsDestroyed = false;
 		}
 		
-		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time);
+		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "SB");
 	}
 }

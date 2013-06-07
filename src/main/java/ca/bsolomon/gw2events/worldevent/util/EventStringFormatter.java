@@ -47,17 +47,13 @@ public class EventStringFormatter {
 
 	public static void generateEventString(List<EventStatus> statusList,
 			ServerID servId, String outStatus, String color, int fontWeight,
-			DateTime time) {
+			DateTime time, String eventName) {
 		DateTime now = new DateTime(gregorianJuian);
 		Period period = new Period(time, now);
 		
 		String periodStr = HHMMSSFormater.print(period);
 		
-		EventStatus newStatus = new EventStatus();
-		newStatus.setServer(servId.toString());
-		newStatus.setStatus(outStatus);
-		newStatus.setDate(periodStr);
-		newStatus.setColor(color);
+		EventStatus newStatus = new EventStatus(servId.toString(), outStatus, periodStr, color, eventName);
 		
 		statusList.add(newStatus);
 	}

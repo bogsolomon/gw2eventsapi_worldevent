@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 import ca.bsolomon.gw2events.worldevent.enums.DragonEvent;
@@ -19,74 +20,111 @@ import ca.bsolomon.gw2events.worldevent.enums.KarkaEnum;
 import ca.bsolomon.gw2events.worldevent.enums.MawEvent;
 import ca.bsolomon.gw2events.worldevent.enums.ServerID;
 import ca.bsolomon.gw2events.worldevent.enums.ShadowBehemothEvent;
-import ca.bsolomon.gw2events.worldevent.util.DragonData;
-import ca.bsolomon.gw2events.worldevent.util.EventData;
 import ca.bsolomon.gw2events.worldevent.util.EventStatus;
-import ca.bsolomon.gw2events.worldevent.util.LowLevelEventData;
-import ca.bsolomon.gw2events.worldevent.util.LowPriorityEventData;
 
 @ManagedBean(name="dragonBean")
 @SessionScoped
 public class DragonBean {
-
-	private DragonData dragonData = new DragonData();
-	private EventData lowLevelData = new LowLevelEventData();
-	private LowPriorityEventData lowPriorityData = new LowPriorityEventData();
+	
+	@ManagedProperty(value="#{checkboxBean}")
+	private CheckboxBean checkboxBean;
 	
 	public List<EventStatus> getKarkaStatus() {
-		return KarkaEnum.getStatus();
+		if (!checkboxBean.getSelectedEvents().contains("Karka Queen"))
+			return KarkaEnum.getStatus();
+		else
+			return new ArrayList<>();
 	}
 	
 	public List<EventStatus> getTequatlStatus() {
-		return DragonEvent.getTeqStatus();
+		if (!checkboxBean.getSelectedEvents().contains("Tequatl"))
+			return DragonEvent.getTeqStatus();
+		else
+			return new ArrayList<>();
 	}
 	
 	public List<EventStatus> getShattererStatus() {
-		return DragonEvent.getShatStatus();
+		if (!checkboxBean.getSelectedEvents().contains("Shaterrer"))
+			return DragonEvent.getShatStatus();
+		else
+			return new ArrayList<>();
 	}
 	
 	public List<EventStatus> getJormagStatus() {
-		return DragonEvent.getJorStatus();
+		if (!checkboxBean.getSelectedEvents().contains("Jormag"))
+			return DragonEvent.getJorStatus();
+		else
+			return new ArrayList<>();
 	}
 	
 	public List<EventStatus> getMawStatus() {
-		return MawEvent.getStatus();
+		if (!checkboxBean.getSelectedEvents().contains("Maw"))
+			return MawEvent.getStatus();
+		else
+			return new ArrayList<>();
 	}
 	
 	public List<EventStatus> getFireEleStatus() {
-		return FireEleEvent.getStatus();
+		if (!checkboxBean.getSelectedEvents().contains("Fire Ele"))
+			return FireEleEvent.getStatus();
+		else
+			return new ArrayList<>();
 	}
 	
 	public List<EventStatus> getWurmStatus() {
-		return JungleWurmEvent.getStatus();
+		if (!checkboxBean.getSelectedEvents().contains("Jungle Wurm"))
+			return JungleWurmEvent.getStatus();
+		else
+			return new ArrayList<>();
 	}
 	
 	public List<EventStatus> getSbStatus() {
-		return ShadowBehemothEvent.getStatus();
+		if (!checkboxBean.getSelectedEvents().contains("SB"))
+			return ShadowBehemothEvent.getStatus();
+		else
+			return new ArrayList<>();
 	}
 	
 	public List<EventStatus> getGolemStatus() {
-		return GolemEvent.getStatus();
+		if (!checkboxBean.getSelectedEvents().contains("Golem MKII"))
+			return GolemEvent.getStatus();
+		else
+			return new ArrayList<>();
 	}
 	
 	public List<EventStatus> getDredgeStatus() {
-		return DredgeEvent.getStatus();
+		if (!checkboxBean.getSelectedEvents().contains("Dredge"))
+			return DredgeEvent.getStatus();
+		else
+			return new ArrayList<>();
 	}
 	
 	public List<EventStatus> getHarathiStatus() {
-		return HarathiChestEvent.getStatus();
+		if (!checkboxBean.getSelectedEvents().contains("Kilava Chest"))
+			return HarathiChestEvent.getStatus();
+		else
+			return new ArrayList<>();
 	}
 	
 	public List<EventStatus> getOgreStatus() {
-		return FoulBearEvent.getStatus();
+		if (!checkboxBean.getSelectedEvents().contains("Foulbear"))
+			return FoulBearEvent.getStatus();
+		else
+			return new ArrayList<>();
 	}
 	
 	public List<EventStatus> getHydraStatus() {
-		return HydraQueenEvent.getStatus();
+		if (!checkboxBean.getSelectedEvents().contains("Hydra Queen"))
+			return HydraQueenEvent.getStatus();
+		else
+			return new ArrayList<>();
 	}
 	
 	public List<EventStatus> getFireShamStatus() {
-		return FireShamanEnum.getStatus();
+		if (!checkboxBean.getSelectedEvents().contains("Fire Shaman"))
+			return FireShamanEnum.getStatus();
+		else
+			return new ArrayList<>();
 	}
 	
 	public List<EventStatus> getSorStatus() {
@@ -120,32 +158,48 @@ public class DragonBean {
 	}
 	
 	public void formatServer(ServerID servId, List<EventStatus> status) {
-		formatServerEvent(servId, status, "Tequatl", DragonEvent.getTeqStatus());
-		formatServerEvent(servId, status, "Shaterrer", DragonEvent.getShatStatus());
-		formatServerEvent(servId, status, "Jormag", DragonEvent.getJorStatus());
+		if (!checkboxBean.getSelectedEvents().contains("Tequatl"))
+			formatServerEvent(servId, status, DragonEvent.getTeqStatus());
+		if (!checkboxBean.getSelectedEvents().contains("Shaterrer"))
+			formatServerEvent(servId, status, DragonEvent.getShatStatus());
+		if (!checkboxBean.getSelectedEvents().contains("Jormag"))
+			formatServerEvent(servId, status, DragonEvent.getJorStatus());
 
-		formatServerEvent(servId, status, "Maw", MawEvent.getStatus());
-		formatServerEvent(servId, status, "Fire Ele", FireEleEvent.getStatus());
-		formatServerEvent(servId, status, "Fire Ele", FireEleEvent.getStatus());
-		formatServerEvent(servId, status, "Jungle Wurm", JungleWurmEvent.getStatus());
-		formatServerEvent(servId, status, "SB", ShadowBehemothEvent.getStatus());
+		if (!checkboxBean.getSelectedEvents().contains("Maw"))
+			formatServerEvent(servId, status, MawEvent.getStatus());
+		if (!checkboxBean.getSelectedEvents().contains("Fire Ele"))
+			formatServerEvent(servId, status, FireEleEvent.getStatus());
+		if (!checkboxBean.getSelectedEvents().contains("Jungle Wurm"))
+			formatServerEvent(servId, status, JungleWurmEvent.getStatus());
+		if (!checkboxBean.getSelectedEvents().contains("SB"))
+			formatServerEvent(servId, status, ShadowBehemothEvent.getStatus());
 		
-		formatServerEvent(servId, status, "Golem MKII", GolemEvent.getStatus());
-		formatServerEvent(servId, status, "Dredge", DredgeEvent.getStatus());
-		formatServerEvent(servId, status, "Kilava Chest", HarathiChestEvent.getStatus());
-		formatServerEvent(servId, status, "Foulbear", FoulBearEvent.getStatus());
-		formatServerEvent(servId, status, "Hydra Queen", HydraQueenEvent.getStatus());
-		formatServerEvent(servId, status, "Fire Shaman", FireShamanEnum.getStatus());
-		formatServerEvent(servId, status, "Karka Queen", KarkaEnum.getStatus());
+		if (!checkboxBean.getSelectedEvents().contains("Golem MKII"))
+			formatServerEvent(servId, status, GolemEvent.getStatus());
+		if (!checkboxBean.getSelectedEvents().contains("Dredge"))
+			formatServerEvent(servId, status, DredgeEvent.getStatus());
+		if (!checkboxBean.getSelectedEvents().contains("Kilava Chest"))
+			formatServerEvent(servId, status, HarathiChestEvent.getStatus());
+		if (!checkboxBean.getSelectedEvents().contains("Foulbear"))
+			formatServerEvent(servId, status, FoulBearEvent.getStatus());
+		if (!checkboxBean.getSelectedEvents().contains("Hydra Queen"))
+			formatServerEvent(servId, status, HydraQueenEvent.getStatus());
+		if (!checkboxBean.getSelectedEvents().contains("Fire Shaman"))
+			formatServerEvent(servId, status, FireShamanEnum.getStatus());
+		if (!checkboxBean.getSelectedEvents().contains("Karka Queen"))
+			formatServerEvent(servId, status, KarkaEnum.getStatus());
 	}
 
 	private void formatServerEvent(ServerID servId, List<EventStatus> status, 
-			String name, List<EventStatus> statusIn) {
+			List<EventStatus> statusIn) {
 		for (EventStatus st:statusIn) {
 			if (st.getServer().equals(servId.toString())) {
 				status.add(st);
-				st.setServer(name);
 			}
 		}
+	}
+
+	public void setCheckboxBean(CheckboxBean checkboxBean) {
+		this.checkboxBean = checkboxBean;
 	}
 }
