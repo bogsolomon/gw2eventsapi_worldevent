@@ -164,7 +164,7 @@ public enum DragonEvent {
 			fontWeight = 900;
 		} else if (escortStatus!=null && siegeStatus!=null && 
 				escortStatus.equals("Success") && siegeStatus.equals("Success")) {
-			time = dragonData.getEventTime(shatEventId);
+			time = dragonData.getEventTime(siegeEventId);
 			
 			outStatus = "Ominous Winds";
 			color = EventStateColor.PREPARATION.color();

@@ -72,6 +72,12 @@
 		<artifactId>joda-time</artifactId>
 		<version>2.2</version>
 	</dependency>
+	
+	<dependency>  
+    	<groupId>org.primefaces.themes</groupId>  
+    	<artifactId>sunny</artifactId>  
+    	<version>1.0.9</version>  
+	</dependency>  
 	            
   </dependencies>
   <build>

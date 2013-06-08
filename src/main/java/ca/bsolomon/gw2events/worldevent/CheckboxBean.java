@@ -24,7 +24,7 @@ public class CheckboxBean {
   
     private Map<String,String> events;  
   
-    private int eastSize;
+    private int eastSize = 300;
     private boolean eastCollapsed;
 	
 	public CheckboxBean() {  

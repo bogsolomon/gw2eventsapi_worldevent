@@ -1,7 +1,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:p="http://primefaces.org/ui"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
         <title>World Events Tracker</title>
         <link rel="stylesheet" type="text/css" href="css/events.css"/>
@@ -249,6 +250,9 @@
         		 </p:panel>
         	</p:dashboard>
         </h:form>
+        </p:layoutUnit>
+        <p:layoutUnit id="bottom" position="south" size="200" resizable="true">
+            <ui:include src="eventWindow.xhtml"></ui:include>
         </p:layoutUnit>
         <p:layoutUnit id="east" position="east" header="Checkboxes" size="#{checkboxBean.eastSize}" collapsed="#{checkboxBean.eastCollapsed}" resizable="true" closable="false" collapsible="true">
         	<h:form id="checkboxes">

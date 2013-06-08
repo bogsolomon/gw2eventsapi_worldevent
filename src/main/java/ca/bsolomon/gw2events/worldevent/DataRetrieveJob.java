@@ -39,6 +39,8 @@ public class DataRetrieveJob implements Job {
 	private EventData lowLevelEventData = new LowLevelEventData();
 	private LowPriorityEventData lowPriorityEventData = new LowPriorityEventData();
 	
+	private GW2EventsAPI api = new GW2EventsAPI();
+	
 	public void execute(JobExecutionContext context)
 			throws JobExecutionException {
 		if (GW2EventsAPI.eventIdToName.size() == 0) {
@@ -72,11 +74,90 @@ public class DataRetrieveJob implements Job {
 			serverIds.add(servId.uid()+"");
 		}
 	
-		System.out.println("Starting Thread retrieve "+this.toString()+" at "+new DateTime(gregorianJuian));
+		//System.out.println("Starting Thread retrieve "+this.toString()+" at "+new DateTime(gregorianJuian));
 		
-		JSONArray data = GW2EventsAPI.queryServer(DragonEvent.TEQUATL.uid());
+		teqChanged = queryEvent(gregorianJuian, serverIds, DragonEvent.TEQUATL.uid(), dragonData);
 		
-		//String teqStatus = GW2EventsAPI.queryServer(servId.uid(), DragonEvent.TEQUATL.uid());
+		shatChanged = queryEvent(gregorianJuian, serverIds, DragonEvent.SHATTERER_ESCORT.uid(), dragonData);
+		shatChanged = shatChanged || queryEvent(gregorianJuian, serverIds, DragonEvent.SHATTERER_SIEGE.uid(), dragonData);
+		shatChanged = shatChanged || queryEvent(gregorianJuian, serverIds, DragonEvent.SHATTERER_UP.uid(), dragonData);
+
+		jorChanged = queryEvent(gregorianJuian, serverIds, DragonEvent.JORMAG_CRYSTAL1.uid(), dragonData);
+		jorChanged = jorChanged || queryEvent(gregorianJuian, serverIds, DragonEvent.JORMAG_CRYSTAL2.uid(), dragonData);
+		jorChanged = jorChanged || queryEvent(gregorianJuian, serverIds, DragonEvent.JORMAG_CRYSTAL3.uid(), dragonData);
+		jorChanged = jorChanged || queryEvent(gregorianJuian, serverIds, DragonEvent.JORMAG_CRYSTAL4.uid(), dragonData);
+		jorChanged = jorChanged || queryEvent(gregorianJuian, serverIds, DragonEvent.JORMAG_CRYSTAL4.uid(), dragonData);
+		jorChanged = jorChanged || queryEvent(gregorianJuian, serverIds, DragonEvent.JORMAG_UP.uid(), dragonData);
+		
+		for (MawEvent eventId:MawEvent.values()) {
+			mawChanged = mawChanged || queryEvent(gregorianJuian, serverIds, eventId.uid(), lowLevelEventData); 
+		}
+		
+		for (FireEleEvent eventId:FireEleEvent.values()) {
+			fireeleChanged = fireeleChanged || queryEvent(gregorianJuian, serverIds, eventId.uid(), lowLevelEventData); 
+		}
+		
+		for (JungleWurmEvent eventId:JungleWurmEvent.values()) {
+			wurmChanged = wurmChanged || queryEvent(gregorianJuian, serverIds, eventId.uid(), lowLevelEventData); 
+		}
+		
+		for (ShadowBehemothEvent eventId:ShadowBehemothEvent.values()) {
+			sbChanged = sbChanged || queryEvent(gregorianJuian, serverIds, eventId.uid(), lowLevelEventData); 
+		}
+		
+		for (GolemEvent eventId:GolemEvent.values()) {
+			golemChanged = golemChanged || queryEvent(gregorianJuian, serverIds, eventId.uid(), lowPriorityEventData);  
+		}
+		
+		for (DredgeEvent eventId:DredgeEvent.values()) {
+			dredgeChanged = dredgeChanged || queryEvent(gregorianJuian, serverIds, eventId.uid(), lowPriorityEventData);  
+		}
+		
+		for (HarathiChestEvent eventId:HarathiChestEvent.values()) {
+			harathiChanged = harathiChanged || queryEvent(gregorianJuian, serverIds, eventId.uid(), lowPriorityEventData);  
+		}
+		
+		for (FoulBearEvent eventId:FoulBearEvent.values()) {
+			ogreChanged = ogreChanged || queryEvent(gregorianJuian, serverIds, eventId.uid(), lowPriorityEventData);  
+		}
+		
+		for (HydraQueenEvent eventId:HydraQueenEvent.values()) {
+			hydraChanged = hydraChanged || queryEvent(gregorianJuian, serverIds, eventId.uid(), lowPriorityEventData);  
+		}
+		
+		for (FireShamanEnum eventId:FireShamanEnum.values()) {
+			fireShamChanged = fireShamChanged || queryEvent(gregorianJuian, serverIds, eventId.uid(), lowPriorityEventData);  
+		}
+		
+		for (KarkaEnum eventId:KarkaEnum.values()) {
+			karkaChanged = karkaChanged || queryEvent(gregorianJuian, serverIds, eventId.uid(), lowPriorityEventData);  
+		}
+		
+		//System.out.println("Ended Thread retrieve "+this.toString()+" at "+new DateTime(gregorianJuian));
+		
+		DragonEvent.formatTequatlString(dragonData);
+		DragonEvent.formatShattererString(dragonData);
+		DragonEvent.formatJormagString(dragonData);
+		FireEleEvent.formatFireEleString(lowLevelEventData);
+		MawEvent.formatMawString(lowLevelEventData);
+		JungleWurmEvent.formatJungleWurmString(lowLevelEventData);
+		ShadowBehemothEvent.formatShadowBehemothString(lowLevelEventData);
+		GolemEvent.formatGolemString(lowPriorityEventData);
+		DredgeEvent.formatDredgeString(lowPriorityEventData);
+		FoulBearEvent.formatOgreString(lowPriorityEventData);
+		HarathiChestEvent.formatHarathiString(lowPriorityEventData);
+		HydraQueenEvent.formatHydraString(lowPriorityEventData);
+		FireShamanEnum.formatShamanString(lowPriorityEventData);
+		KarkaEnum.formatKarkaString(lowPriorityEventData);
+		
+		//System.out.println("Ended Thread formating "+this.toString()+" at "+new DateTime(gregorianJuian));
+	}
+
+	private boolean queryEvent(Chronology gregorianJuian,
+			List<String> serverIds, String eventUID, EventData dataStructure) {
+		JSONArray data = api.queryServer(eventUID);
+		boolean changed = false;
+		
 		for (int i=0; i<data.size(); i++) {
 			JSONObject obj = data.getJSONObject(i);
 			
@@ -84,213 +165,11 @@ public class DataRetrieveJob implements Job {
 			
 			if (serverIds.contains(serverId)) {
 				String status = obj.getString("state");
-				if (dragonData.addEventStatus(serverId+"-"+DragonEvent.TEQUATL.uid(), status, new DateTime(gregorianJuian))) {
-					teqChanged = true;
+				if (dataStructure.addEventStatus(serverId+"-"+eventUID, status, new DateTime(gregorianJuian))) {
+					changed = true;
 				}
 			}
 		}
-		
-		System.out.println("Teq retrieved retrieve "+this.toString()+" at "+new DateTime(gregorianJuian));
-		
-		for (ServerID servId:ServerID.values()) {
-			String shatEscStatus = GW2EventsAPI.queryServer(servId.uid(), DragonEvent.SHATTERER_ESCORT.uid());
-			String shatSiegeStatus = GW2EventsAPI.queryServer(servId.uid(), DragonEvent.SHATTERER_SIEGE.uid());
-			String shatStatus = GW2EventsAPI.queryServer(servId.uid(), DragonEvent.SHATTERER_UP.uid());
-			
-			if (dragonData.addEventStatus(servId.uid()+"-"+DragonEvent.SHATTERER_ESCORT.uid(), shatEscStatus, new DateTime(gregorianJuian))) {
-				shatChanged = true;
-			} 
-			
-			if (dragonData.addEventStatus(servId.uid()+"-"+DragonEvent.SHATTERER_SIEGE.uid(), shatSiegeStatus, new DateTime(gregorianJuian))) {
-				shatChanged = true;
-			}
-			
-			if (dragonData.addEventStatus(servId.uid()+"-"+DragonEvent.SHATTERER_UP.uid(), shatStatus, new DateTime(gregorianJuian))) {
-				shatChanged = true;
-			}
-		}
-		
-		for (ServerID servId:ServerID.values()) {
-			String jorCrystal1 = GW2EventsAPI.queryServer(servId.uid(), DragonEvent.JORMAG_CRYSTAL1.uid());
-			String jorCrystal2 = GW2EventsAPI.queryServer(servId.uid(), DragonEvent.JORMAG_CRYSTAL2.uid());
-			String jorCrystal3 = GW2EventsAPI.queryServer(servId.uid(), DragonEvent.JORMAG_CRYSTAL3.uid());
-			String jorCrystal4 = GW2EventsAPI.queryServer(servId.uid(), DragonEvent.JORMAG_CRYSTAL4.uid());
-			String jorCrystalF = GW2EventsAPI.queryServer(servId.uid(), DragonEvent.JORMAG_CRYSTALF.uid());
-			String jorUp = GW2EventsAPI.queryServer(servId.uid(), DragonEvent.JORMAG_UP.uid());
-			
-			if (dragonData.addEventStatus(servId.uid()+"-"+DragonEvent.JORMAG_CRYSTAL1.uid(), jorCrystal1, new DateTime(gregorianJuian))) {
-				jorChanged = true;
-			} 
-
-			if (dragonData.addEventStatus(servId.uid()+"-"+DragonEvent.JORMAG_CRYSTAL2.uid(), jorCrystal2, new DateTime(gregorianJuian))) {
-				jorChanged = true;
-			} 
-			
-			if (dragonData.addEventStatus(servId.uid()+"-"+DragonEvent.JORMAG_CRYSTAL3.uid(), jorCrystal3, new DateTime(gregorianJuian))) {
-				jorChanged = true;
-			} 
-			
-			if (dragonData.addEventStatus(servId.uid()+"-"+DragonEvent.JORMAG_CRYSTAL4.uid(), jorCrystal4, new DateTime(gregorianJuian))) {
-				jorChanged = true;
-			} 
-			
-			if (dragonData.addEventStatus(servId.uid()+"-"+DragonEvent.JORMAG_CRYSTALF.uid(), jorCrystalF, new DateTime(gregorianJuian))) {
-				jorChanged = true;
-			} 
-			
-			if (dragonData.addEventStatus(servId.uid()+"-"+DragonEvent.JORMAG_UP.uid(), jorUp, new DateTime(gregorianJuian))) {
-				jorChanged = true;
-			}
-		}
-		
-		for (ServerID servId:ServerID.values()) {
-			for (MawEvent eventId:MawEvent.values()) {
-				String status = GW2EventsAPI.queryServer(servId.uid(), eventId.uid());
-				
-				if (lowLevelEventData.addEventStatus(servId.uid()+"-"+eventId.uid(), status, new DateTime(gregorianJuian))) {
-					mawChanged = true;
-				} 
-			}
-			
-			for (FireEleEvent eventId:FireEleEvent.values()) {
-				String status = GW2EventsAPI.queryServer(servId.uid(), eventId.uid());
-				
-				if (lowLevelEventData.addEventStatus(servId.uid()+"-"+eventId.uid(), status, new DateTime(gregorianJuian))) {
-					fireeleChanged = true;
-				} 
-			}
-			
-			for (JungleWurmEvent eventId:JungleWurmEvent.values()) {
-				String status = GW2EventsAPI.queryServer(servId.uid(), eventId.uid());
-				
-				if (lowLevelEventData.addEventStatus(servId.uid()+"-"+eventId.uid(), status, new DateTime(gregorianJuian))) {
-					wurmChanged = true;
-				} 
-			}
-			
-			for (ShadowBehemothEvent eventId:ShadowBehemothEvent.values()) {
-				String status = GW2EventsAPI.queryServer(servId.uid(), eventId.uid());
-				
-				if (lowLevelEventData.addEventStatus(servId.uid()+"-"+eventId.uid(), status, new DateTime(gregorianJuian))) {
-					sbChanged = true;
-				} 
-			}
-		}
-		
-		for (ServerID servId:ServerID.values()) {
-			for (GolemEvent eventId:GolemEvent.values()) {
-				String status = GW2EventsAPI.queryServer(servId.uid(), eventId.uid());
-				
-				if (lowPriorityEventData.addEventStatus(servId.uid()+"-"+eventId.uid(), status, new DateTime(gregorianJuian))) {
-					golemChanged = true;
-				} 
-			}
-			
-			for (DredgeEvent eventId:DredgeEvent.values()) {
-				String status = GW2EventsAPI.queryServer(servId.uid(), eventId.uid());
-				
-				if (lowPriorityEventData.addEventStatus(servId.uid()+"-"+eventId.uid(), status, new DateTime(gregorianJuian))) {
-					dredgeChanged = true;
-				} 
-			}
-			
-			for (HarathiChestEvent eventId:HarathiChestEvent.values()) {
-				String status = GW2EventsAPI.queryServer(servId.uid(), eventId.uid());
-				
-				if (lowPriorityEventData.addEventStatus(servId.uid()+"-"+eventId.uid(), status, new DateTime(gregorianJuian))) {
-					harathiChanged = true;
-				} 
-			}
-			
-			for (FoulBearEvent eventId:FoulBearEvent.values()) {
-				String status = GW2EventsAPI.queryServer(servId.uid(), eventId.uid());
-				
-				if (lowPriorityEventData.addEventStatus(servId.uid()+"-"+eventId.uid(), status, new DateTime(gregorianJuian))) {
-					ogreChanged = true;
-				} 
-			}
-			
-			for (HydraQueenEvent eventId:HydraQueenEvent.values()) {
-				String status = GW2EventsAPI.queryServer(servId.uid(), eventId.uid());
-				
-				if (lowPriorityEventData.addEventStatus(servId.uid()+"-"+eventId.uid(), status, new DateTime(gregorianJuian))) {
-					hydraChanged = true;
-				} 
-			}
-			
-			for (FireShamanEnum eventId:FireShamanEnum.values()) {
-				String status = GW2EventsAPI.queryServer(servId.uid(), eventId.uid());
-				
-				if (lowPriorityEventData.addEventStatus(servId.uid()+"-"+eventId.uid(), status, new DateTime(gregorianJuian))) {
-					fireShamChanged = true;
-				} 
-			}
-			
-			for (KarkaEnum eventId:KarkaEnum.values()) {
-				String status = GW2EventsAPI.queryServer(servId.uid(), eventId.uid());
-				
-				if (lowPriorityEventData.addEventStatus(servId.uid()+"-"+eventId.uid(), status, new DateTime(gregorianJuian))) {
-					karkaChanged = true;
-				} 
-			}
-		}
-		
-		System.out.println("Ended Thread retrieve"+this.toString()+" at "+new DateTime(gregorianJuian));
-		
-		if (teqChanged) {
-			DragonEvent.formatTequatlString(dragonData);
-		}
-		
-		if (shatChanged) {
-			DragonEvent.formatShattererString(dragonData);
-		}
-		
-		if (jorChanged) {
-			DragonEvent.formatJormagString(dragonData);
-		}
-		
-		if (fireeleChanged) {
-			FireEleEvent.formatFireEleString(lowLevelEventData);
-		}
-		
-		if (mawChanged) {
-			MawEvent.formatMawString(lowLevelEventData);
-		}
-		
-		if (wurmChanged) {
-			JungleWurmEvent.formatJungleWurmString(lowLevelEventData);
-		}
-		
-		if (sbChanged) {
-			ShadowBehemothEvent.formatShadowBehemothString(lowLevelEventData);
-		}
-		
-		if (golemChanged) {
-			GolemEvent.formatGolemString(lowPriorityEventData);
-		}
-		
-		if (dredgeChanged) {
-			DredgeEvent.formatDredgeString(lowPriorityEventData);
-		}
-		
-		if (ogreChanged) {
-			FoulBearEvent.formatOgreString(lowPriorityEventData);
-		}
-		
-		if (harathiChanged) {
-			HarathiChestEvent.formatHarathiString(lowPriorityEventData);
-		}
-		
-		if (hydraChanged) {
-			HydraQueenEvent.formatHydraString(lowPriorityEventData);
-		}
-		
-		if (fireShamChanged) {
-			FireShamanEnum.formatShamanString(lowPriorityEventData);
-		}
-		
-		if (karkaChanged) {
-			KarkaEnum.formatKarkaString(lowPriorityEventData);
-		}
+		return changed;
 	}
 }

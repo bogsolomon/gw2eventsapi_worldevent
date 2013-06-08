@@ -1,7 +1,9 @@
 package ca.bsolomon.gw2events.worldevent.enums;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.joda.time.DateTime;
 
@@ -31,7 +33,7 @@ public enum MawEvent {
 	public String uid() {return uid;}
 	public String toString() {return prettyName;}
 	
-	private static boolean inProgress = false;
+	private static Map<ServerID, Integer> inProgressStatus = new HashMap<>();
 	
 	private static List<EventStatus> eventStatus = new ArrayList<>();
 	
@@ -74,6 +76,11 @@ public enum MawEvent {
 		String shamaStatus = lowLevelEventData.getEventStatus(shamanEventId);
 		String chiefStatus = lowLevelEventData.getEventStatus(chiefEventId);
 		
+		Integer inProg = 0;
+		
+		if (inProgressStatus.get(servId) != null)
+			inProg = inProgressStatus.get(servId);
+		
 		if (protectStatus != null && protectStatus.equals("Active")) {
 			time = lowLevelEventData.getEventTime(protectEventId);
 			
@@ -81,19 +88,21 @@ public enum MawEvent {
 			color = EventStateColor.PREPARATION.color();
 			fontWeight = 600;
 			
-			inProgress = true;
+			inProgressStatus.put(servId, 1);
 		} else if (escortStatus != null && (escortStatus.equals("Active") || escortStatus.equals("Preparation"))) {
-			time = lowLevelEventData.getEventTime(protectEventId);
+			time = lowLevelEventData.getEventTime(escortEventId);
 			
 			outStatus = MawEvent.ESCORT.toString();
 			color = EventStateColor.PREPARATION.color();
 			fontWeight = 600;
+			inProgressStatus.put(servId, 2);
 		} else if (totemStatus != null && (totemStatus.equals("Active") || totemStatus.equals("Preparation"))) {
-			time = lowLevelEventData.getEventTime(protectEventId);
+			time = lowLevelEventData.getEventTime(totemEventId);
 			
 			outStatus = MawEvent.TOTEM.toString();
 			color = EventStateColor.PREPARATION.color();
 			fontWeight = 600;
+			inProgressStatus.put(servId, 3);
 		} else if ((portalStatus !=null && guardsStatus!=null && shamaStatus!=null) && 
 				(portalStatus.equals("Active") || guardsStatus.equals("Active") || shamaStatus.equals("Active"))) {
 			time = lowLevelEventData.getEventTime(portalEventId);
@@ -101,6 +110,7 @@ public enum MawEvent {
 			outStatus = "Portals/Guards";
 			color = EventStateColor.PREPARATION.color();
 			fontWeight = 600;
+			inProgressStatus.put(servId, 4);
 		} else if (chiefStatus != null && (chiefStatus.equals("Active") || chiefStatus.equals("Preparation"))) {
 			time = lowLevelEventData.getEventTime(chiefEventId);
 			
@@ -108,24 +118,30 @@ public enum MawEvent {
 			color = EventStateColor.ACTIVE.color();
 			fontWeight = 900;
 			
-			inProgress = false;
+			inProgressStatus.put(servId, 0);
 		} else if ((protectStatus != null) &&
-				(protectStatus.equals("Success")) && inProgress) {
+				(protectStatus.equals("Success")) && inProg == 1) {
 			time = lowLevelEventData.getEventTime(protectEventId);
 			
 			outStatus = "Waiting for escort";
 			color = EventStateColor.PREPARATION.color();
 		} else if ((escortStatus != null) &&
-				(escortStatus.equals("Success")) && inProgress) {
-			time = lowLevelEventData.getEventTime(protectEventId);
+				(escortStatus.equals("Success")) && inProg == 2) {
+			time = lowLevelEventData.getEventTime(escortEventId);
 			
 			outStatus = "Waiting to destroy totem";
 			color = EventStateColor.PREPARATION.color();
 		} else if ((totemStatus != null) &&
-				(totemStatus.equals("Success")) && inProgress) {
-			time = lowLevelEventData.getEventTime(protectEventId);
+				(totemStatus.equals("Success")) && inProg == 3) {
+			time = lowLevelEventData.getEventTime(totemEventId);
 			
-			outStatus = "Shaman Chief spawning";
+			outStatus = "Portals spawning";
+			color = EventStateColor.PREPARATION.color();
+		}  else if ((totemStatus != null) &&
+				(totemStatus.equals("Success")) && inProg == 4) {
+			time = lowLevelEventData.getEventTime(portalEventId);
+			
+			outStatus = "Shaman Chief ready";
 			color = EventStateColor.PREPARATION.color();
 		} else {
 			time = lowLevelEventData.getEventTime(chiefEventId);

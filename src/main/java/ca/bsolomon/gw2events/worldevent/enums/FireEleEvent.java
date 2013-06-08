@@ -1,7 +1,9 @@
 package ca.bsolomon.gw2events.worldevent.enums;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.joda.time.DateTime;
 
@@ -27,6 +29,8 @@ public enum FireEleEvent {
 	
 	public String uid() {return uid;}
 	public String toString() {return prettyName;}
+	
+	private static Map<ServerID, Integer> inProgressStatus = new HashMap<>();
 	
 	private static List<EventStatus> feStatus = new ArrayList<>();
 	
@@ -63,6 +67,11 @@ public enum FireEleEvent {
 		String stolenStatus = lowLevelEventData.getEventStatus(stolenEventId);
 		String fireEleStatus = lowLevelEventData.getEventStatus(fireEleEventId);
 		
+		Integer inProg = 0;
+		
+		if (inProgressStatus.get(servId) != null)
+			inProg = inProgressStatus.get(servId);
+		
 		if (chaoticStatus!=null && (chaoticStatus.equals("Active") || chaoticStatus.equals("Preparation"))) {
 			time = lowLevelEventData.getEventTime(chaoticEventId);
 			
@@ -75,22 +84,42 @@ public enum FireEleEvent {
 			outStatus = FireEleEvent.ESCORT.toString();
 			color = EventStateColor.PREPARATION.color();
 			fontWeight = 600;
+			
+			inProgressStatus.put(servId, 1);
 		} else if (defendStatus!=null && defendStatus.equals("Active")) {
 			time = lowLevelEventData.getEventTime(defendEventId);
 			
 			outStatus = FireEleEvent.DEFEND.toString();
 			color = EventStateColor.PREPARATION.color();
 			fontWeight = 600;
+			
+			inProgressStatus.put(servId, 2);
 		} else if (stolenStatus!=null && (stolenStatus.equals("Active") || stolenStatus.equals("Preparation"))) {
 			time = lowLevelEventData.getEventTime(stolenEventId);
 			
 			outStatus = FireEleEvent.STOLEN.toString();
 			color = EventStateColor.FAIL.color();
+			
+			inProgressStatus.put(servId, 0);
 		} else if (fireEleStatus!=null && (fireEleStatus.equals("Active") || fireEleStatus.equals("Preparation"))) {
 			time = lowLevelEventData.getEventTime(fireEleEventId);
 			
 			outStatus = FireEleEvent.FIREELE.toString();
 			color = EventStateColor.ACTIVE.color();
+			fontWeight = 900;
+			
+			inProgressStatus.put(servId, 0);
+		} else if (defendStatus!=null && defendStatus.equals("Success") && inProg == 2) {
+			time = lowLevelEventData.getEventTime(defendEventId);
+			
+			outStatus = "Spawning";
+			color = EventStateColor.ACTIVE.color();
+			fontWeight = 900;
+		} else if (escortStatus!=null && escortStatus.equals("Success") && inProg == 1) {
+			time = lowLevelEventData.getEventTime(escortEventId);
+			
+			outStatus = "Escort Starting";
+			color = EventStateColor.PREPARATION.color();
 			fontWeight = 900;
 		} else {
 			time = lowLevelEventData.getEventTime(fireEleEventId);

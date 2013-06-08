@@ -1,0 +1,23 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+      <h:body>
+      	<h:form id="formEventWindow">
+        	<p:poll interval="3600"   
+            	update="eventWindowPanel"
+            	widgetVar="pollEventWindow" autoStart="true"/>
+            	<p:dataTable id="eventWindowPanel" var="window" value="#{eventWindowBean.eventWindows}">
+       		 		<p:column headerText="Event">  
+			            <h:outputText value="#{window.eventName}" />  
+			        </p:column>  
+			        <p:column headerText="Minimum Window">  
+			            <h:outputText value="#{window.minWindow}"/>  
+			        </p:column>
+			        <p:column headerText="Maximum Window">  
+			            <h:outputText value="#{window.maxWindow}" />  
+			        </p:column>
+       		 	</p:dataTable>
+            </h:form>
+      </h:body>
+</html>

@@ -1,7 +1,9 @@
 package ca.bsolomon.gw2events.worldevent.enums;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.joda.time.DateTime;
 
@@ -30,7 +32,7 @@ public enum FoulBearEvent {
 	public String uid() {return uid;}
 	public String toString() {return prettyName;}
 	
-	private static boolean inProgress = false;
+	private static Map<ServerID, Integer> inProgressStatus = new HashMap<>();
 
 	private static List<EventStatus> eventStatus = new ArrayList<>();
 	
@@ -69,6 +71,10 @@ public enum FoulBearEvent {
 		String destroyStatus = lowLevelEventData.getEventStatus(destroyEventId);
 		String chiefStatus = lowLevelEventData.getEventStatus(chiefEventId);
 		
+		Integer inProg = 0;
+		
+		if (inProgressStatus.get(servId) != null)
+			inProg = inProgressStatus.get(servId);
 		
 		if ((chiefStatus != null) &&
 				(chiefStatus.equals("Active") || chiefStatus.equals("Preparation") || chiefStatus.equals("Warmup"))) {
@@ -78,7 +84,7 @@ public enum FoulBearEvent {
 			color = EventStateColor.ACTIVE.color();
 			fontWeight = 900;
 			
-			inProgress = false;
+			inProgressStatus.put(servId, 0);
 		} else if ((destroyStatus != null) &&
 				(destroyStatus.equals("Active") || destroyStatus.equals("Preparation") || destroyStatus.equals("Warmup"))) {
 			time = lowLevelEventData.getEventTime(destroyEventId);
@@ -86,6 +92,7 @@ public enum FoulBearEvent {
 			outStatus = DESTROY.toString();
 			color = EventStateColor.PREPARATION.color();
 			fontWeight = 600;
+			inProgressStatus.put(servId, 3);
 		} else if ((assaultStatus != null) &&
 				(assaultStatus.equals("Active") || assaultStatus.equals("Preparation"))) {
 			time = lowLevelEventData.getEventTime(assaultEventId);
@@ -93,6 +100,7 @@ public enum FoulBearEvent {
 			outStatus = ASSAULT.toString();
 			color = EventStateColor.PREPARATION.color();
 			fontWeight = 600;
+			inProgressStatus.put(servId, 2);
 		} else if ((bloodStatus != null) &&
 				(bloodStatus.equals("Active")  || bloodStatus.equals("Preparation"))) {
 			time = lowLevelEventData.getEventTime(bloodEventId);
@@ -101,15 +109,21 @@ public enum FoulBearEvent {
 			color = EventStateColor.PREPARATION.color();
 			fontWeight = 600;
 			
-			inProgress = true;
+			inProgressStatus.put(servId, 1);
+		} else if ((destroyStatus != null) &&
+				(destroyStatus.equals("Success"))  && inProg == 3) {
+			time = lowLevelEventData.getEventTime(destroyEventId);
+			
+			outStatus = "Waiting to kill chief";
+			color = EventStateColor.PREPARATION.color();
 		} else if ((assaultStatus != null) &&
-				(assaultStatus.equals("Success")) && inProgress) {
+				(assaultStatus.equals("Success"))  && inProg == 2) {
 			time = lowLevelEventData.getEventTime(assaultEventId);
 			
 			outStatus = "Waiting to destroy houses";
 			color = EventStateColor.PREPARATION.color();
 		} else if ((bloodStatus != null) &&
-				(bloodStatus.equals("Success")) && inProgress) {
+				(bloodStatus.equals("Success"))  && inProg == 1) {
 			time = lowLevelEventData.getEventTime(bloodEventId);
 			
 			outStatus = "Waiting to attack trainers";
