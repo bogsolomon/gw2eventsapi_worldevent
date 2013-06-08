@@ -19,11 +19,13 @@ public class LowLevelEventData implements EventData {
 	/* (non-Javadoc)
 	 * @see ca.bsolomon.gw2events.worldevent.util.EventData#addEventStatus(java.lang.String, java.lang.String, org.joda.time.DateTime)
 	 */
-	public boolean addEventStatus(String eventId, String status, DateTime time) {
-		if (eventStatus.containsKey(eventId)) {
-			if (!eventStatus.get(eventId).equals(status)) {
-				eventStatus.put(eventId, status);
-				eventTime.put(eventId, time);
+	public boolean addEventStatus(String serverId, String eventId, String status, DateTime time) {
+		String composedId = serverId+"-"+eventId;
+		
+		if (eventStatus.containsKey(composedId)) {
+			if (!eventStatus.get(composedId).equals(status)) {
+				eventStatus.put(composedId, status);
+				eventTime.put(composedId, time);
 				
 				if (status.equals("Active")) {
 					EventWindowCalc.computeEventTiming(eventId, time, lastActiveTime, maxEventDiff, minEventDiff, MAXHOURS);
@@ -32,8 +34,8 @@ public class LowLevelEventData implements EventData {
 				return true;
 			}
 		} else {
-			eventStatus.put(eventId, status);
-			eventTime.put(eventId, time);
+			eventStatus.put(composedId, status);
+			eventTime.put(composedId, time);
 			
 			return true;
 		}

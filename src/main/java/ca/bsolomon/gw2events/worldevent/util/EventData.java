@@ -12,7 +12,7 @@ public interface EventData {
 			appendMinutes().appendSeparator(":").
 			appendSeconds().toFormatter();
 
-	public abstract boolean addEventStatus(String eventId, String status,
+	public abstract boolean addEventStatus(String serverId, String eventId, String status,
 			DateTime time);
 
 	public abstract String getEventStatus(String eventId);

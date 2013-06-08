@@ -165,7 +165,7 @@ public class DataRetrieveJob implements Job {
 			
 			if (serverIds.contains(serverId)) {
 				String status = obj.getString("state");
-				if (dataStructure.addEventStatus(serverId+"-"+eventUID, status, new DateTime(gregorianJuian))) {
+				if (dataStructure.addEventStatus(serverId, eventUID, status, new DateTime(gregorianJuian))) {
 					changed = true;
 				}
 			}

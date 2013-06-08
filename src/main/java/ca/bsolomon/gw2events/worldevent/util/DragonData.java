@@ -17,11 +17,13 @@ public class DragonData implements EventData{
 
 	private static Period MAXHOURS = new Period(5,0, 0, 0);
 
-	public boolean addEventStatus(String eventId, String status, DateTime time) {
-		if (dragonStatus.containsKey(eventId)) {
-			if (!dragonStatus.get(eventId).equals(status)) {
-				dragonStatus.put(eventId, status);
-				dragonTime.put(eventId, time);
+	public boolean addEventStatus(String serverId, String eventId, String status, DateTime time) {
+		String composedId = serverId+"-"+eventId;
+		
+		if (dragonStatus.containsKey(composedId)) {
+			if (!dragonStatus.get(composedId).equals(status)) {
+				dragonStatus.put(composedId, status);
+				dragonTime.put(composedId, time);
 				
 				if (status.equals("Active")) {
 					EventWindowCalc.computeEventTiming(eventId, time, lastActiveTime, maxEventDiff, minEventDiff, MAXHOURS);
@@ -30,8 +32,8 @@ public class DragonData implements EventData{
 				return true;
 			}
 		} else {
-			dragonStatus.put(eventId, status);
-			dragonTime.put(eventId, time);
+			dragonStatus.put(composedId, status);
+			dragonTime.put(composedId, time);
 			
 			return true;
 		}
