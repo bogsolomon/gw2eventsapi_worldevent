@@ -87,7 +87,7 @@ public enum DragonEvent {
 
 	public static void formatTequatlString(EventData data, List<EventStatus> statusList,
 			ServerID servId) {
-		String composedEventId = servId.uid()+"-"+DragonEvent.TEQUATL.uid();
+		String composedEventId = servId.getUid()+"-"+DragonEvent.TEQUATL.uid();
 		
 		String status = data.getEventStatus(composedEventId);
 		DateTime time = data.getEventTime(composedEventId);
@@ -112,7 +112,7 @@ public enum DragonEvent {
 			outStatus = "Not up";
 		}
 		
-		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Tequatl");
+		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Tequatl", Waypoint.TEQUATL.toString());
 	}
 
 	public static void formatShattererString(EventData dragonData) {
@@ -132,9 +132,9 @@ public enum DragonEvent {
 		DateTime time = null;
 		int fontWeight = 400;
 		
-		String escortEventId = servId.uid()+"-"+DragonEvent.SHATTERER_ESCORT.uid();
-		String siegeEventId = servId.uid()+"-"+DragonEvent.SHATTERER_SIEGE.uid();
-		String shatEventId = servId.uid()+"-"+DragonEvent.SHATTERER_UP.uid();
+		String escortEventId = servId.getUid()+"-"+DragonEvent.SHATTERER_ESCORT.uid();
+		String siegeEventId = servId.getUid()+"-"+DragonEvent.SHATTERER_SIEGE.uid();
+		String shatEventId = servId.getUid()+"-"+DragonEvent.SHATTERER_UP.uid();
 		
 		String escortStatus = dragonData.getEventStatus(escortEventId);
 		String siegeStatus = dragonData.getEventStatus(siegeEventId);
@@ -176,7 +176,7 @@ public enum DragonEvent {
 			color = EventStateColor.FAIL.color();
 		}
 		
-		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Shaterrer");
+		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Shaterrer", Waypoint.SHATERRER.toString());
 	}
 
 	public static void formatJormagString(EventData dragonData) {
@@ -196,12 +196,12 @@ public enum DragonEvent {
 		DateTime time = null;
 		int fontWeight = 400;
 		
-		String crystal1EventId = servId.uid()+"-"+DragonEvent.JORMAG_CRYSTAL1.uid();
-		String crystal2EventId = servId.uid()+"-"+DragonEvent.JORMAG_CRYSTAL2.uid();
-		String crystal3EventId = servId.uid()+"-"+DragonEvent.JORMAG_CRYSTAL3.uid();
-		String crystal4EventId = servId.uid()+"-"+DragonEvent.JORMAG_CRYSTAL4.uid();
-		String crystalFEventId = servId.uid()+"-"+DragonEvent.JORMAG_CRYSTALF.uid();
-		String jormagEventId = servId.uid()+"-"+DragonEvent.JORMAG_UP.uid();
+		String crystal1EventId = servId.getUid()+"-"+DragonEvent.JORMAG_CRYSTAL1.uid();
+		String crystal2EventId = servId.getUid()+"-"+DragonEvent.JORMAG_CRYSTAL2.uid();
+		String crystal3EventId = servId.getUid()+"-"+DragonEvent.JORMAG_CRYSTAL3.uid();
+		String crystal4EventId = servId.getUid()+"-"+DragonEvent.JORMAG_CRYSTAL4.uid();
+		String crystalFEventId = servId.getUid()+"-"+DragonEvent.JORMAG_CRYSTALF.uid();
+		String jormagEventId = servId.getUid()+"-"+DragonEvent.JORMAG_UP.uid();
 		
 		String crystal1Status = dragonData.getEventStatus(crystal1EventId);
 		String crystal2Status = dragonData.getEventStatus(crystal2EventId);
@@ -245,6 +245,6 @@ public enum DragonEvent {
 			color = EventStateColor.FAIL.color();	
 		}
 		
-		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Jormag");
+		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Jormag", Waypoint.JORMAG.toString());
 	}
 }

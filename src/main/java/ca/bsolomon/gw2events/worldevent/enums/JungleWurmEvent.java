@@ -52,12 +52,12 @@ public enum JungleWurmEvent {
 		DateTime time = null;
 		int fontWeight = 400;
 
-		String escortEventId = servId.uid()+"-"+JungleWurmEvent.ESCORT.uid();
-		String growth1EventId = servId.uid()+"-"+JungleWurmEvent.GROWTH1.uid();
-		String growth2EventId = servId.uid()+"-"+JungleWurmEvent.GROWTH2.uid();
-		String grubEventId = servId.uid()+"-"+JungleWurmEvent.GRUB.uid();
-		String avatarsEventId = servId.uid()+"-"+JungleWurmEvent.AVATARS.uid();
-		String wurmEventId = servId.uid()+"-"+JungleWurmEvent.WURM.uid();
+		String escortEventId = servId.getUid()+"-"+JungleWurmEvent.ESCORT.uid();
+		String growth1EventId = servId.getUid()+"-"+JungleWurmEvent.GROWTH1.uid();
+		String growth2EventId = servId.getUid()+"-"+JungleWurmEvent.GROWTH2.uid();
+		String grubEventId = servId.getUid()+"-"+JungleWurmEvent.GRUB.uid();
+		String avatarsEventId = servId.getUid()+"-"+JungleWurmEvent.AVATARS.uid();
+		String wurmEventId = servId.getUid()+"-"+JungleWurmEvent.WURM.uid();
 		
 		String escortStatus = lowLevelEventData.getEventStatus(escortEventId);
 		String growth1Status = lowLevelEventData.getEventStatus(growth1EventId);
@@ -99,6 +99,6 @@ public enum JungleWurmEvent {
 			color = EventStateColor.FAIL.color();
 		}
 		
-		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Jungle Wurm");
+		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Jungle Wurm", Waypoint.JUNGLEWURM.toString());
 	}
 }

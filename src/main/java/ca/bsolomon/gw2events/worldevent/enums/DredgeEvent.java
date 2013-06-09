@@ -50,9 +50,9 @@ public enum DredgeEvent {
 		DateTime time = null;
 		int fontWeight = 400; 
 
-		String molekCEventId = servId.uid()+"-"+MOLEKCAPTURE.uid();
-		String molekDEventId = servId.uid()+"-"+MOLEKDEFENSE.uid();
-		String dredgeEventId = servId.uid()+"-"+DREDGE.uid();
+		String molekCEventId = servId.getUid()+"-"+MOLEKCAPTURE.uid();
+		String molekDEventId = servId.getUid()+"-"+MOLEKDEFENSE.uid();
+		String dredgeEventId = servId.getUid()+"-"+DREDGE.uid();
 		
 		String molekCStatus = lowLevelEventData.getEventStatus(molekCEventId);
 		String molekDStatus = lowLevelEventData.getEventStatus(molekDEventId);
@@ -86,6 +86,6 @@ public enum DredgeEvent {
 			color = EventStateColor.FAIL.color();
 		}
 		
-		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Dredge");
+		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Dredge", Waypoint.DREDGE.toString());
 	}
 }

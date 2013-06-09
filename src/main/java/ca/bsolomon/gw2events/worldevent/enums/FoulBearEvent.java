@@ -57,12 +57,12 @@ public enum FoulBearEvent {
 		DateTime time = null;
 		int fontWeight = 400;
 
-		String sapperEventId = servId.uid()+"-"+SAPPER.uid();
-		String sapperDefEventId = servId.uid()+"-"+SAPPERDEF.uid();
-		String bloodEventId = servId.uid()+"-"+BLOODGORGE.uid();
-		String assaultEventId = servId.uid()+"-"+ASSAULT.uid();
-		String destroyEventId = servId.uid()+"-"+DESTROY.uid();
-		String chiefEventId = servId.uid()+"-"+CHIEF.uid();
+		String sapperEventId = servId.getUid()+"-"+SAPPER.uid();
+		String sapperDefEventId = servId.getUid()+"-"+SAPPERDEF.uid();
+		String bloodEventId = servId.getUid()+"-"+BLOODGORGE.uid();
+		String assaultEventId = servId.getUid()+"-"+ASSAULT.uid();
+		String destroyEventId = servId.getUid()+"-"+DESTROY.uid();
+		String chiefEventId = servId.getUid()+"-"+CHIEF.uid();
 		
 		String sapperStatus = lowLevelEventData.getEventStatus(sapperEventId);
 		String sapperDefStatus = lowLevelEventData.getEventStatus(sapperDefEventId);
@@ -135,6 +135,6 @@ public enum FoulBearEvent {
 			color = EventStateColor.FAIL.color();
 		}
 		
-		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Foulbear");
+		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Foulbear", Waypoint.FOULBEAR.toString());
 	}
 }

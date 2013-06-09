@@ -1,5 +1,6 @@
 package ca.bsolomon.gw2events.worldevent.util;
 
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 import org.joda.time.DateTime;
@@ -8,42 +9,49 @@ import org.joda.time.Period;
 
 public class EventWindowCalc {
 
-	public static void computeEventTiming(String eventId, DateTime time, ConcurrentMap<String, DateTime> lastActiveTime,
-			ConcurrentMap<String, Period> maxEventDiff, ConcurrentMap<String, Period> minEventDiff,  Period MAXHOURS) {
+	public static void computeEventTiming(String serverId, String eventId, DateTime time, ConcurrentMap<String, ConcurrentMap<String, DateTime>> lastActiveTime,
+			ConcurrentMap<String, ConcurrentMap<String, Period>>  maxEventDiff, ConcurrentMap<String, ConcurrentMap<String, Period>>  minEventDiff,  Period MAXHOURS) {
 		if (lastActiveTime.containsKey(eventId)) {
-			DateTime startEvent = lastActiveTime.get(eventId);
+			ConcurrentMap<String, DateTime> servTimes = lastActiveTime.get(eventId);
+			DateTime startEvent = servTimes.get(serverId); 
 			
-			Period p = new Period(startEvent, time);
+			if (startEvent != null) {
+				Period p = new Period(startEvent, time);
+							
+				if (maxEventDiff.containsKey(eventId) && maxEventDiff.get(eventId) != null) {
+					if (maxEventDiff.get(eventId).get(serverId) != null) {
+						Duration maxD = maxEventDiff.get(eventId).get(serverId).toDurationFrom(time);
+						Duration currD = p.toDurationFrom(time);
+						Duration threeHoursD = MAXHOURS.toDurationFrom(time);
 						
-			if (maxEventDiff.containsKey(eventId)) {
-				if (maxEventDiff.get(eventId) != null) {
-					Duration maxD = maxEventDiff.get(eventId).toDurationFrom(time);
-					Duration currD = p.toDurationFrom(time);
-					Duration threeHoursD = MAXHOURS.toDurationFrom(time);
-					
-					if (currD.isLongerThan(maxD) && currD.isShorterThan(threeHoursD)) {
-						maxEventDiff.put(eventId, p);
+						if (currD.isLongerThan(maxD) && currD.isShorterThan(threeHoursD)) {
+							maxEventDiff.get(eventId).put(serverId, p);
+						}
+					} else {
+						maxEventDiff.get(eventId).put(serverId, p);
 					}
+				} else {
+					maxEventDiff.put(eventId, new ConcurrentHashMap<String, Period>(10, 0.9f, 1));
+					maxEventDiff.get(eventId).put(serverId, p);
 				}
-			} else {
-				maxEventDiff.put(eventId, p);
-			}
-			
-			if (minEventDiff.containsKey(eventId)) {
-				if (minEventDiff.get(eventId) != null) {
-					Duration minD = minEventDiff.get(eventId).toDurationFrom(time);
-					Duration currD = p.toDurationFrom(time);
-					
-					if (currD.isShorterThan(minD)) {
-						minEventDiff.put(eventId, p);
+				
+				if (minEventDiff.containsKey(eventId) && minEventDiff.get(eventId) != null) {
+					if (minEventDiff.get(eventId).get(serverId) != null) {
+						Duration minD = minEventDiff.get(eventId).get(serverId).toDurationFrom(time);
+						Duration currD = p.toDurationFrom(time);
+						
+						if (currD.isShorterThan(minD)) {
+							minEventDiff.get(eventId).put(serverId, p);
+						}
+					} else {
+						minEventDiff.get(eventId).put(serverId, p);
 					}
+				} else {
+					minEventDiff.put(eventId, new ConcurrentHashMap<String, Period>(10, 0.9f, 1));
+					minEventDiff.get(eventId).put(serverId, p);
 				}
-			} else {
-				minEventDiff.put(eventId, p);
 			}
 		}
-		
-		lastActiveTime.put(eventId, time);
 	}
 	
 }

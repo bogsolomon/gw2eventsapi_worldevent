@@ -53,11 +53,11 @@ public enum ShadowBehemothEvent {
 		DateTime time = null;
 		int fontWeight = 400;
 
-		String hillEventId = servId.uid()+"-"+PORTAL_HILL.uid();
-		String monEventId = servId.uid()+"-"+PORTAL_MON.uid();
-		String woodEventId = servId.uid()+"-"+PORTAL_WOOD.uid();
-		String swampEventId = servId.uid()+"-"+PORTAL_SWAMP.uid();
-		String sbEventId = servId.uid()+"-"+SB.uid();
+		String hillEventId = servId.getUid()+"-"+PORTAL_HILL.uid();
+		String monEventId = servId.getUid()+"-"+PORTAL_MON.uid();
+		String woodEventId = servId.getUid()+"-"+PORTAL_WOOD.uid();
+		String swampEventId = servId.getUid()+"-"+PORTAL_SWAMP.uid();
+		String sbEventId = servId.getUid()+"-"+SB.uid();
 		
 		String hillStatus = lowLevelEventData.getEventStatus(hillEventId);
 		String monStatus = lowLevelEventData.getEventStatus(monEventId);
@@ -98,6 +98,6 @@ public enum ShadowBehemothEvent {
 			swampPortalsDestroyed = false;
 		}
 		
-		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "SB");
+		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "SB", Waypoint.SB.toString());
 	}
 }

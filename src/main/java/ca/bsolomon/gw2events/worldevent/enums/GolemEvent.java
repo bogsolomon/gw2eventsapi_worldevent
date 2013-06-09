@@ -50,9 +50,9 @@ public enum GolemEvent {
 		DateTime time = null;
 		int fontWeight = 400;
 
-		String kelpEventId = servId.uid()+"-"+KELP.uid();
-		String containerEventId = servId.uid()+"-"+CONTAINER.uid();
-		String golemEventId = servId.uid()+"-"+GOLEM.uid();
+		String kelpEventId = servId.getUid()+"-"+KELP.uid();
+		String containerEventId = servId.getUid()+"-"+CONTAINER.uid();
+		String golemEventId = servId.getUid()+"-"+GOLEM.uid();
 		
 		String kelpStatus = lowLevelEventData.getEventStatus(kelpEventId);
 		String containerStatus = lowLevelEventData.getEventStatus(containerEventId);
@@ -93,6 +93,6 @@ public enum GolemEvent {
 			color = EventStateColor.FAIL.color();
 		}
 		
-		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Golem MKII");
+		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Golem MKII", Waypoint.GOLEM.toString());
 	}
 }

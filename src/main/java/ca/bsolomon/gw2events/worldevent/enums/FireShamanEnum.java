@@ -48,7 +48,7 @@ public enum FireShamanEnum {
 		DateTime time = null;
 		int fontWeight = 400; 
 
-		String eventId = servId.uid()+"-"+SHAMAN.uid();
+		String eventId = servId.getUid()+"-"+SHAMAN.uid();
 		
 		String status = lowLevelEventData.getEventStatus(eventId);
 		
@@ -66,6 +66,6 @@ public enum FireShamanEnum {
 			 color = EventStateColor.FAIL.color();
 		 }
 		
-		 EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Fire Shaman");
+		 EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Fire Shaman", Waypoint.FIRESHAM.toString());
 	}
 }

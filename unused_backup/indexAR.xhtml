@@ -7,15 +7,18 @@
         <title>World Events Tracker</title>
         <link rel="stylesheet" type="text/css" href="css/events.css"/>
         <script src="script/datetime.js"></script>
+        <script src="script/clipboard.js"></script>
+        <script src="script/ZeroClipboard.js"></script>
         <script>
 		function startTime()
 		{
 			updateTimes();
+			updatePositions();
 			t=setTimeout(function(){startTime()},1000);
 		}
 		</script>
     </h:head>
-    <h:body onload="startTime()">
+    <h:body onload="startTime(); createClipboards();">
     	<p:layout fullPage="true">
     	<p:ajax event="resize" listener="#{checkboxBean.handleResize}"/>
         <p:ajax event="toggle" listener="#{checkboxBean.handleToggle}"/>
@@ -51,6 +54,9 @@
 				        <p:column styleClass="dateColumn">  
 				            <h:outputText value="#{status.date}" />  
 				        </p:column>
+				        <p:column styleClass="clipboard">
+				        	<button data-clipboard-text="#{status.waypoint}" class="clipbutton"></button>
+				        </p:column>
         		 	</p:dataTable>
         		 </p:panel>
         		 
@@ -65,6 +71,9 @@
 				        </p:column>
 				        <p:column styleClass="dateColumn">  
 				            <h:outputText value="#{status.date}" />  
+				        </p:column>
+				        <p:column styleClass="clipboard">
+				        	<button data-clipboard-text="#{status.waypoint}" class="clipbutton"></button>
 				        </p:column>
         		 	</p:dataTable>
         		 </p:panel>
@@ -81,6 +90,9 @@
 				        <p:column styleClass="dateColumn">  
 				            <h:outputText value="#{status.date}" />  
 				        </p:column>
+				        <p:column styleClass="clipboard">
+				        	<button data-clipboard-text="#{status.waypoint}" class="clipbutton"></button>
+				        </p:column>
         		 	</p:dataTable>
         		 </p:panel>
         		 
@@ -95,6 +107,9 @@
 				        </p:column>
 				        <p:column styleClass="dateColumn">  
 				            <h:outputText value="#{status.date}" />  
+				        </p:column>
+				        <p:column styleClass="clipboard">
+				        	<button data-clipboard-text="#{status.waypoint}" class="clipbutton"></button>
 				        </p:column>
         		 	</p:dataTable>
         		 </p:panel>
@@ -111,6 +126,9 @@
 				        <p:column styleClass="dateColumn">  
 				            <h:outputText value="#{status.date}" />  
 				        </p:column>
+				        <p:column styleClass="clipboard">
+				        	<button data-clipboard-text="#{status.waypoint}" class="clipbutton"></button>
+				        </p:column>
         		 	</p:dataTable>
         		 </p:panel>
         		 
@@ -125,6 +143,9 @@
 				        </p:column>
 				        <p:column styleClass="dateColumn">  
 				            <h:outputText value="#{status.date}" />  
+				        </p:column>
+				        <p:column styleClass="clipboard">
+				        	<button data-clipboard-text="#{status.waypoint}" class="clipbutton"></button>
 				        </p:column>
         		 	</p:dataTable>
         		 </p:panel>
@@ -141,6 +162,9 @@
 				        <p:column styleClass="dateColumn">  
 				            <h:outputText value="#{status.date}" />  
 				        </p:column>
+				        <p:column styleClass="clipboard">
+				        	<button data-clipboard-text="#{status.waypoint}" class="clipbutton"></button>
+				        </p:column>
         		 	</p:dataTable>
         		 </p:panel>
         		 
@@ -155,6 +179,9 @@
 				        </p:column>
 				        <p:column styleClass="dateColumn">  
 				            <h:outputText value="#{status.date}" />  
+				        </p:column>
+				        <p:column styleClass="clipboard">
+				        	<button data-clipboard-text="#{status.waypoint}" class="clipbutton"></button>
 				        </p:column>
         		 	</p:dataTable>
         		 </p:panel>
@@ -171,6 +198,9 @@
 				        <p:column styleClass="dateColumn">  
 				            <h:outputText value="#{status.date}" />  
 				        </p:column>
+				        <p:column styleClass="clipboard">
+				        	<button data-clipboard-text="#{status.waypoint}" class="clipbutton"></button>
+				        </p:column>
         		 	</p:dataTable>
         		 </p:panel>
         		 
@@ -185,6 +215,9 @@
 				        </p:column>
 				        <p:column styleClass="dateColumn">  
 				            <h:outputText value="#{status.date}" />  
+				        </p:column>
+				        <p:column styleClass="clipboard">
+				        	<button data-clipboard-text="#{status.waypoint}" class="clipbutton"></button>
 				        </p:column>
         		 	</p:dataTable>
         		 </p:panel>
@@ -201,6 +234,9 @@
 				        <p:column styleClass="dateColumn">  
 				            <h:outputText value="#{status.date}" />  
 				        </p:column>
+				        <p:column styleClass="clipboard">
+				        	<button data-clipboard-text="#{status.waypoint}" class="clipbutton"></button>
+				        </p:column>
         		 	</p:dataTable>
         		 </p:panel>
         		 
@@ -215,6 +251,9 @@
 				        </p:column>
 				        <p:column styleClass="dateColumn">  
 				            <h:outputText value="#{status.date}" />  
+				        </p:column>
+				        <p:column styleClass="clipboard">
+				        	<button data-clipboard-text="#{status.waypoint}" class="clipbutton"></button>
 				        </p:column>
         		 	</p:dataTable>
         		 </p:panel>
@@ -231,6 +270,9 @@
 				        <p:column styleClass="dateColumn">  
 				            <h:outputText value="#{status.date}" />  
 				        </p:column>
+				        <p:column styleClass="clipboard">
+				        	<button data-clipboard-text="#{status.waypoint}" class="clipbutton"></button>
+				        </p:column>
         		 	</p:dataTable>
         		 </p:panel>
         		 
@@ -245,6 +287,9 @@
 				        </p:column>
 				        <p:column styleClass="dateColumn">  
 				            <h:outputText value="#{status.date}" />  
+				        </p:column>
+				        <p:column styleClass="clipboard">
+				        	<button data-clipboard-text="#{status.waypoint}" class="clipbutton"></button>
 				        </p:column>
         		 	</p:dataTable>
         		 </p:panel>

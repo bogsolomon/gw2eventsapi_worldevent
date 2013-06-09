@@ -55,11 +55,11 @@ public enum FireEleEvent {
 		DateTime time = null;
 		int fontWeight = 400; 
 
-		String chaoticEventId = servId.uid()+"-"+FireEleEvent.CHAOTIC.uid();
-		String defendEventId = servId.uid()+"-"+FireEleEvent.DEFEND.uid();
-		String escortEventId = servId.uid()+"-"+FireEleEvent.ESCORT.uid();
-		String stolenEventId = servId.uid()+"-"+FireEleEvent.STOLEN.uid();
-		String fireEleEventId = servId.uid()+"-"+FireEleEvent.FIREELE.uid();
+		String chaoticEventId = servId.getUid()+"-"+FireEleEvent.CHAOTIC.uid();
+		String defendEventId = servId.getUid()+"-"+FireEleEvent.DEFEND.uid();
+		String escortEventId = servId.getUid()+"-"+FireEleEvent.ESCORT.uid();
+		String stolenEventId = servId.getUid()+"-"+FireEleEvent.STOLEN.uid();
+		String fireEleEventId = servId.getUid()+"-"+FireEleEvent.FIREELE.uid();
 		
 		String chaoticStatus = lowLevelEventData.getEventStatus(chaoticEventId);
 		String defendStatus = lowLevelEventData.getEventStatus(defendEventId);
@@ -128,6 +128,6 @@ public enum FireEleEvent {
 			color = EventStateColor.FAIL.color();
 		}
 		
-		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Fire Elemental");
+		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Fire Elemental", Waypoint.FIREELE.toString());
 	}
 }

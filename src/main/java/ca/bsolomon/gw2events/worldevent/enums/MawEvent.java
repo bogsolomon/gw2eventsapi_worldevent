@@ -58,15 +58,15 @@ public enum MawEvent {
 		DateTime time = null;
 		int fontWeight = 400;
 
-		String protectEventId = servId.uid()+"-"+MawEvent.PROTECT.uid();
-		String escortEventId = servId.uid()+"-"+MawEvent.ESCORT.uid();
-		String totemEventId = servId.uid()+"-"+MawEvent.TOTEM.uid();
+		String protectEventId = servId.getUid()+"-"+MawEvent.PROTECT.uid();
+		String escortEventId = servId.getUid()+"-"+MawEvent.ESCORT.uid();
+		String totemEventId = servId.getUid()+"-"+MawEvent.TOTEM.uid();
 		
-		String portalEventId = servId.uid()+"-"+MawEvent.PORTALS.uid();
-		String guardsEventId = servId.uid()+"-"+MawEvent.GUARDS.uid();
-		String shamanEventId = servId.uid()+"-"+MawEvent.SHAMANS.uid();
+		String portalEventId = servId.getUid()+"-"+MawEvent.PORTALS.uid();
+		String guardsEventId = servId.getUid()+"-"+MawEvent.GUARDS.uid();
+		String shamanEventId = servId.getUid()+"-"+MawEvent.SHAMANS.uid();
 		
-		String chiefEventId = servId.uid()+"-"+MawEvent.CHIEF.uid();
+		String chiefEventId = servId.getUid()+"-"+MawEvent.CHIEF.uid();
 
 		String protectStatus = lowLevelEventData.getEventStatus(protectEventId);
 		String escortStatus = lowLevelEventData.getEventStatus(escortEventId);
@@ -150,6 +150,6 @@ public enum MawEvent {
 			color = EventStateColor.FAIL.color();
 		}
 		
-		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Maw");
+		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Maw", Waypoint.MAW.toString());
 	}
 }

@@ -128,7 +128,7 @@ public class DragonBean {
 	}
 	
 	public List<EventStatus> getSorStatus() {
-		ServerID servId = ServerID.SoR;
+		ServerID servId = ServerID.getByID(checkboxBean.getServerOne().getServerId());
 		
 		List<EventStatus> status = new ArrayList<EventStatus>();
 		
@@ -138,7 +138,7 @@ public class DragonBean {
 	}
 	
 	public List<EventStatus> getEtStatus() {
-		ServerID servId = ServerID.ET;
+		ServerID servId = ServerID.getByID(checkboxBean.getServerThree().getServerId());
 		
 		List<EventStatus> status = new ArrayList<EventStatus>();
 		
@@ -148,7 +148,7 @@ public class DragonBean {
 	}
 
 	public List<EventStatus> getFcStatus() {
-		ServerID servId = ServerID.FC;
+		ServerID servId = ServerID.getByID(checkboxBean.getServerTwo().getServerId());
 		
 		List<EventStatus> status = new ArrayList<EventStatus>();
 		

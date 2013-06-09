@@ -7,15 +7,18 @@
         <title>World Events Tracker</title>
         <link rel="stylesheet" type="text/css" href="css/events.css"/>
         <script src="script/datetime.js"></script>
-        <script>
+        <script src="script/clipboard.js"></script>
+        <script src="script/ZeroClipboard.js"></script>
+        <script  type="text/javascript">
 		function startTime()
 		{
 			updateServerTimes();
+			updatePositions();
 			t=setTimeout(function(){startTime()},1000);
 		}
 		</script>
     </h:head>
-    <h:body onload="startTime()">
+    <h:body onload="startTime(); createClipboards();">
     	<p:layout fullPage="true">
     	<p:ajax event="resize" listener="#{checkboxBean.handleResize}"/>
     	<p:ajax event="toggle" listener="#{checkboxBean.handleToggle}"/>
@@ -23,7 +26,6 @@
 
             <p:menubar>
                 <p:submenu label="Display Type" icon="ui-icon-document">
-                    <p:menuitem value="By Event" url="indexAR.jsf" />
                     <p:menuitem value="By Server" url="#" />
                 </p:submenu>
             </p:menubar>
@@ -36,7 +38,7 @@
             	
         	<p:dashboard id="board" model="#{serverDashboardBean.model}">
         		 <p:ajax event="reorder"/>
-        		 <p:panel id="sorPanel" header="Sanctum of Rall (Home)" toggleable="true" collapsed="#{serverDashboardBean.sorCollapsed}">
+        		 <p:panel id="sorPanel" header="#{checkboxBean.serverOne.serverName}" toggleable="true" collapsed="#{serverDashboardBean.sorCollapsed}">
         		 	<p:ajax event="toggle" listener="#{serverDashboardBean.handleSorToggle}"/>
         		 	<p:dataTable  binding="#{serv1Table}" var="status" value="#{dragonBean.sorStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
         		 		<p:column>  
@@ -48,10 +50,13 @@
 				        <p:column styleClass="dateColumn">  
 				            <h:panelGroup id="dateCol">#{status.date}</h:panelGroup>
 				        </p:column>
+				        <p:column styleClass="clipboard">
+				        	<button data-clipboard-text="#{status.waypoint}" class="clipbutton"></button>
+				        </p:column>
         		 	</p:dataTable>
         		 </p:panel>
         		 
-        		 <p:panel id="fcPanel" header="Ferguson's Crossing" toggleable="true" collapsed="#{serverDashboardBean.fcCollapsed}">
+        		 <p:panel id="fcPanel" header="#{checkboxBean.serverTwo.serverName}" toggleable="true" collapsed="#{serverDashboardBean.fcCollapsed}">
         		 	<p:ajax event="toggle" listener="#{serverDashboardBean.handleFcToggle}"/>
         		 	<p:dataTable binding="#{serv2Table}" var="status" value="#{dragonBean.fcStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
         		 		<p:column>  
@@ -63,10 +68,13 @@
 				        <p:column styleClass="dateColumn">  
 				            <h:panelGroup  id="dateCol">#{status.date}</h:panelGroup>
 				        </p:column>
+				        <p:column styleClass="clipboard">
+				        	<button data-clipboard-text="#{status.waypoint}" class="clipbutton"></button>
+				        </p:column>
         		 	</p:dataTable>
         		 </p:panel>
         		 
-        		 <p:panel id="etPanel" header="Eredon Terrace" toggleable="true" collapsed="#{serverDashboardBean.etCollapsed}">
+        		 <p:panel id="etPanel" header="#{checkboxBean.serverThree.serverName}" toggleable="true" collapsed="#{serverDashboardBean.etCollapsed}">
         		 	<p:ajax event="toggle" listener="#{serverDashboardBean.handleEtToggle}"/>
         		 	<p:dataTable binding="#{serv3Table}" var="status" value="#{dragonBean.etStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
         		 		<p:column>  
@@ -77,6 +85,9 @@
 				        </p:column>
 				        <p:column styleClass="dateColumn">  
 				            <h:panelGroup id="dateCol">#{status.date}</h:panelGroup>
+				        </p:column>
+				        <p:column styleClass="clipboard">
+				        	<button data-clipboard-text="#{status.waypoint}" class="clipbutton"></button>
 				        </p:column>
         		 	</p:dataTable>
         		 </p:panel>
@@ -97,6 +108,23 @@
 		        <p:commandButton value="Clear All" update="smcb" id="ajax"  
              			actionListener="#{checkboxBean.clearAll(serv1Table, serv2Table, serv3Table)}">
 		        </p:commandButton>
+		        <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+		        	<h:outputText value="Server 1: " />  
+			        <p:selectOneMenu id="serv1SM" value="#{checkboxBean.serverOne}" converter="serverConverter">
+			        	<p:ajax listener="#{checkboxBean.handleServChange}" update=":form:sorPanel, :checkboxes:serv1SM"/>
+			        	<f:selectItems value="#{checkboxBean.serverIds}" var="server" itemLabel="#{server.serverName}" itemValue="#{server}"/>  
+			        </p:selectOneMenu>
+			        <h:outputText value="Server 2: " />  
+			        <p:selectOneMenu id="serv2SM" value="#{checkboxBean.serverTwo}" converter="serverConverter">
+			        	<p:ajax listener="#{checkboxBean.handleServChange}" update=":form:fcPanel, :checkboxes:serv2SM" />
+			        	<f:selectItems value="#{checkboxBean.serverIds}" var="server" itemLabel="#{server.serverName}" itemValue="#{server}"/>  
+			        </p:selectOneMenu>
+			        <h:outputText value="Server 3: " />  
+			        <p:selectOneMenu id="serv3SM" value="#{checkboxBean.serverThree}" converter="serverConverter">
+			        	<p:ajax listener="#{checkboxBean.handleServChange}" update=":form:etPanel, :checkboxes:serv3SM" />
+			        	<f:selectItems value="#{checkboxBean.serverIds}" var="server" itemLabel="#{server.serverName}" itemValue="#{server}"/>  
+			        </p:selectOneMenu>
+			    </h:panelGrid>
         	</h:form>
         </p:layoutUnit>
         </p:layout>  

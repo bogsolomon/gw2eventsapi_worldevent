@@ -50,9 +50,9 @@ public enum HarathiChestEvent {
 		DateTime time = null;
 		int fontWeight = 400; 
 
-		String warCouncilEventId = servId.uid()+"-"+WARCOUNCIL.uid();
-		String defenseEventId = servId.uid()+"-"+DEFENSE.uid();
-		String centaurEventId = servId.uid()+"-"+CENTAUR.uid();
+		String warCouncilEventId = servId.getUid()+"-"+WARCOUNCIL.uid();
+		String defenseEventId = servId.getUid()+"-"+DEFENSE.uid();
+		String centaurEventId = servId.getUid()+"-"+CENTAUR.uid();
 		
 		String warCouncilStatus = lowPriorityEventData.getEventStatus(warCouncilEventId);
 		String defenseStatus = lowPriorityEventData.getEventStatus(defenseEventId);
@@ -86,6 +86,6 @@ public enum HarathiChestEvent {
 			color = EventStateColor.FAIL.color();
 		}
 		
-		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Kilava Chest");
+		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Kilava Chest", Waypoint.HARATHI.toString());
 	}
 }

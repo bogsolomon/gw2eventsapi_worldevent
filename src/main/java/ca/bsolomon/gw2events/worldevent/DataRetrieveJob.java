@@ -43,10 +43,6 @@ public class DataRetrieveJob implements Job {
 	
 	public void execute(JobExecutionContext context)
 			throws JobExecutionException {
-		if (GW2EventsAPI.eventIdToName.size() == 0) {
-			System.out.println("Generating Event IDs");
-			GW2EventsAPI.generateEventIds();
-		}
 		
 		DateTimeZone zone = DateTimeZone.forID("America/New_York");
 		Chronology gregorianJuian = GJChronology.getInstance(zone);
@@ -71,7 +67,7 @@ public class DataRetrieveJob implements Job {
 		List<String> serverIds = new ArrayList<>();
 		
 		for (ServerID servId:ServerID.values()) {
-			serverIds.add(servId.uid()+"");
+			serverIds.add(servId.getUid()+"");
 		}
 	
 		//System.out.println("Starting Thread retrieve "+this.toString()+" at "+new DateTime(gregorianJuian));

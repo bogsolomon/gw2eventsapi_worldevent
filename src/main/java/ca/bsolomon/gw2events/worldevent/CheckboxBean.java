@@ -16,6 +16,9 @@ import org.primefaces.event.ResizeEvent;
 import org.primefaces.event.ToggleEvent;
 import org.primefaces.model.Visibility;
 
+import ca.bsolomon.gw2events.worldevent.enums.ServerID;
+import ca.bsolomon.gw2events.worldevent.util.Server;
+
 @ManagedBean(name="checkboxBean")
 @SessionScoped
 public class CheckboxBean {
@@ -23,8 +26,14 @@ public class CheckboxBean {
 	private List<String> selectedEvents;
   
     private Map<String,String> events;  
-  
-    private int eastSize = 300;
+    
+    private List<Server> serverIds = new ArrayList<>();
+    
+    private Server serverOne;
+    private Server serverTwo;
+    private Server serverThree;
+
+	private int eastSize = 300;
     private boolean eastCollapsed;
 	
 	public CheckboxBean() {  
@@ -45,6 +54,13 @@ public class CheckboxBean {
     	events.put("Hydra Queen", "Hydra Queen");
     	events.put("Fire Shaman", "Fire Shaman");
     	events.put("Karka Queen", "Karka Queen");
+    	
+		for (ServerID servId:ServerID.values()) {
+			serverIds.add(new Server(servId.getUid(), servId.getName()));
+		}
+		serverOne = new Server(ServerID.SoR.getUid(), ServerID.SoR.getName());
+		serverTwo = new Server(ServerID.FC.getUid(), ServerID.FC.getName());
+		serverThree =new Server(ServerID.ET.getUid(), ServerID.ET.getName());
     }
 	
 	public void handleToggle(ToggleEvent event) {
@@ -90,6 +106,10 @@ public class CheckboxBean {
 		Ajax.update(serv1Table.getClientId());
 		Ajax.update(serv2Table.getClientId());
 		Ajax.update(serv3Table.getClientId());
+	}
+	
+	public void handleServChange() {  
+		
 	}
 	
 	public void handleCheckbox(Panel fePanel, Panel teqPanel, Panel shatPanel, Panel jorPanel, Panel karkaPanel, Panel mawPanel,
@@ -148,4 +168,42 @@ public class CheckboxBean {
 		this.eastCollapsed = eastCollapsed;
 	}
 	
+    public List<Server> getServerIds() {
+		return serverIds;
+	}
+
+	public void setServerIds(List<Server> serverIds) {
+		this.serverIds = serverIds;
+	}
+
+	public Server getServerOne() {
+		return serverOne;
+	}
+
+	public void setServerOne(Server server) {
+		if (server.equals(serverTwo) || server.equals(serverThree))
+			return;
+		
+		this.serverOne = server;
+	}
+
+	public Server getServerTwo() {
+		return serverTwo;
+	}
+
+	public void setServerTwo(Server server) {
+		if (server.equals(serverOne) || server.equals(serverThree))
+			return;
+		this.serverTwo = server;
+	}
+
+	public Server getServerThree() {
+		return serverThree;
+	}
+
+	public void setServerThree(Server server) {
+		if (server.equals(serverOne) || server.equals(serverTwo))
+			return;
+		this.serverThree = server;
+	}
 }

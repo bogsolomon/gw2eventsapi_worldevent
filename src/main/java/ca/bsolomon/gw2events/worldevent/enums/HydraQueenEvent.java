@@ -52,11 +52,11 @@ public enum HydraQueenEvent {
 		DateTime time = null;
 		int fontWeight = 400;
 
-		String lionguardEventId = servId.uid()+"-"+LIONGUARD.uid();
-		String northCanonEventId = servId.uid()+"-"+NORTHCANON.uid();
-		String sothTowerEventId = servId.uid()+"-"+SOUTHTOWER.uid();
-		String galleonEventId = servId.uid()+"-"+GALLEON.uid();
-		String taidhaEventId = servId.uid()+"-"+TAIDHA.uid();
+		String lionguardEventId = servId.getUid()+"-"+LIONGUARD.uid();
+		String northCanonEventId = servId.getUid()+"-"+NORTHCANON.uid();
+		String sothTowerEventId = servId.getUid()+"-"+SOUTHTOWER.uid();
+		String galleonEventId = servId.getUid()+"-"+GALLEON.uid();
+		String taidhaEventId = servId.getUid()+"-"+TAIDHA.uid();
 		
 		String lionguardStatus = lowLevelEventData.getEventStatus(lionguardEventId);
 		String northCanonStatus = lowLevelEventData.getEventStatus(northCanonEventId);
@@ -106,6 +106,6 @@ public enum HydraQueenEvent {
 			color = EventStateColor.FAIL.color();
 		}
 		
-		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Hydra Queen");
+		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Hydra Queen", Waypoint.HYDRA.toString());
 	}
 }

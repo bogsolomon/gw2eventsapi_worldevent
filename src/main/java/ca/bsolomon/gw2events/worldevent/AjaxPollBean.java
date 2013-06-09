@@ -121,9 +121,28 @@ public class AjaxPollBean {
 
 	private void checkServerEvent(DataTable serv1Table, DataTable serv2Table,
 			DataTable serv3Table, List<EventStatus> status,  String event) {
-		checkStatusUpdate(serv1Table, status, event, serv1);
-		checkStatusUpdate(serv2Table, status, event, serv2);
-		checkStatusUpdate(serv3Table, status, event, serv3);
+		ServerID oldServ1 = serv1;
+		ServerID oldServ2 = serv2;
+		ServerID oldServ3 = serv3;
+		
+		serv1 = ServerID.getByID(checkboxBean.getServerOne().getServerId());
+		serv2 = ServerID.getByID(checkboxBean.getServerTwo().getServerId());
+		serv3 = ServerID.getByID(checkboxBean.getServerThree().getServerId());
+		
+		if (serv1 == oldServ1)
+			checkStatusUpdate(serv1Table, status, event, serv1);
+		else
+			Ajax.update(serv1Table.getClientId());
+			
+		if (serv2 == oldServ2)
+			checkStatusUpdate(serv2Table, status, event, serv2);
+		else
+			Ajax.update(serv2Table.getClientId());
+		
+		if (serv3 == oldServ3)
+			checkStatusUpdate(serv3Table, status, event, serv3);
+		else
+			Ajax.update(serv3Table.getClientId());
 	}
 	
 	private void checkStatusUpdate(DataTable servTable,

@@ -51,10 +51,10 @@ public enum KarkaEnum {
 		DateTime time = null;
 		int fontWeight = 400; 
 
-		String queenId1 = servId.uid()+"-"+QUEEN1.uid();
-		String queenId2 = servId.uid()+"-"+QUEEN2.uid();
-		String queenId3 = servId.uid()+"-"+QUEEN3.uid();
-		String queenId4 = servId.uid()+"-"+QUEEN4.uid();
+		String queenId1 = servId.getUid()+"-"+QUEEN1.uid();
+		String queenId2 = servId.getUid()+"-"+QUEEN2.uid();
+		String queenId3 = servId.getUid()+"-"+QUEEN3.uid();
+		String queenId4 = servId.getUid()+"-"+QUEEN4.uid();
 		
 		String queenStatus1 = lowLevelEventData.getEventStatus(queenId1);
 		String queenStatus2 = lowLevelEventData.getEventStatus(queenId2);
@@ -77,6 +77,6 @@ public enum KarkaEnum {
 			 color = EventStateColor.FAIL.color();
 		 }
 		
-		 EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Karka Queen");
+		 EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Karka Queen", Waypoint.KARKA.toString());
 	}
 }

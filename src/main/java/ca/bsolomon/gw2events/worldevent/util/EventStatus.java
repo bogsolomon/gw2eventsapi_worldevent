@@ -7,15 +7,17 @@ public final class EventStatus {
 	private final String date;
 	private final String color;
 	private final String event;
-	
+	private final String waypoint;
+
 	private int fHashCode;
 	
-	public EventStatus(String server, String status, String date, String color, String event) {
+	public EventStatus(String server, String status, String date, String color, String event, String waypoint) {
 		this.server = server;
 		this.status = status;
 		this.date = date;
 		this.color = color;
 		this.event = event;
+		this.waypoint = waypoint;
 	}
 	
 	public String getEvent() {
@@ -32,6 +34,9 @@ public final class EventStatus {
 	}
 	public String getDate() {
 		return date;
+	}
+	public String getWaypoint() {
+		return waypoint;
 	}
 	
 	@Override
