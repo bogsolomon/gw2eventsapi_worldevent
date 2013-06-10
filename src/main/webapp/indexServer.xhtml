@@ -22,14 +22,6 @@
     	<p:layout fullPage="true">
     	<p:ajax event="resize" listener="#{checkboxBean.handleResize}"/>
     	<p:ajax event="toggle" listener="#{checkboxBean.handleToggle}"/>
-    	<p:layoutUnit id="top" position="north" size="50">
-
-            <p:menubar>
-                <p:submenu label="Display Type" icon="ui-icon-document">
-                    <p:menuitem value="By Server" url="#" />
-                </p:submenu>
-            </p:menubar>
-        </p:layoutUnit>
     	<p:layoutUnit position="center" header="Events" resizable="true" closable="false" collapsible="false">       
         <h:form id="form">
         	<p:poll interval="15"   
@@ -124,6 +116,13 @@
 			        	<p:ajax listener="#{checkboxBean.handleServChange}" update=":form:etPanel, :checkboxes:serv3SM" />
 			        	<f:selectItems value="#{checkboxBean.serverIds}" var="server" itemLabel="#{server.serverName}" itemValue="#{server}"/>  
 			        </p:selectOneMenu>
+			        
+			        <h:outputText value="Theme: " />  
+			        <p:themeSwitcher value="#{themeSwitcherBean.theme}" style="width:165px" effect="fade" id="statefulSwitcher">  
+			            <f:selectItem itemLabel="Choose Theme" itemValue="" />  
+			            <f:selectItems value="#{themeSwitcherBean.themes}" />  
+			            <p:ajax listener="#{themeSwitcherBean.saveTheme}" />  
+			        </p:themeSwitcher>  
 			    </h:panelGrid>
         	</h:form>
         </p:layoutUnit>

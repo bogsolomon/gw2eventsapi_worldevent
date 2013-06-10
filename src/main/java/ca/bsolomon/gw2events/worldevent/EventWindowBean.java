@@ -38,7 +38,7 @@ public class EventWindowBean {
 		windows.add(new EventWindow("Tequatl", dragonData.getMaxPeriod(eventUid), dragonData.getMinPeriod(eventUid)));
 		
 		eventUid = DragonEvent.SHATTERER_UP.uid();
-		windows.add(new EventWindow("Shaterrer", dragonData.getMaxPeriod(eventUid), dragonData.getMinPeriod(eventUid)));
+		windows.add(new EventWindow("RageDragon", dragonData.getMaxPeriod(eventUid), dragonData.getMinPeriod(eventUid)));
 		
 		eventUid = DragonEvent.JORMAG_UP.uid();
 		windows.add(new EventWindow("Jormag", dragonData.getMaxPeriod(eventUid), dragonData.getMinPeriod(eventUid)));

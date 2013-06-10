@@ -44,7 +44,7 @@ public class DragonBean {
 	}
 	
 	public List<EventStatus> getShattererStatus() {
-		if (!checkboxBean.getSelectedEvents().contains("Shaterrer"))
+		if (!checkboxBean.getSelectedEvents().contains("RageDragon"))
 			return DragonEvent.getShatStatus();
 		else
 			return new ArrayList<>();
@@ -160,7 +160,7 @@ public class DragonBean {
 	public void formatServer(ServerID servId, List<EventStatus> status) {
 		if (!checkboxBean.getSelectedEvents().contains("Tequatl"))
 			formatServerEvent(servId, status, DragonEvent.getTeqStatus());
-		if (!checkboxBean.getSelectedEvents().contains("Shaterrer"))
+		if (!checkboxBean.getSelectedEvents().contains("RageDragon"))
 			formatServerEvent(servId, status, DragonEvent.getShatStatus());
 		if (!checkboxBean.getSelectedEvents().contains("Jormag"))
 			formatServerEvent(servId, status, DragonEvent.getJorStatus());

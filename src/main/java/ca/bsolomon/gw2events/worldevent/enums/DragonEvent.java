@@ -18,9 +18,9 @@ public enum DragonEvent {
 	JORMAG_CRYSTALF("BFD87D5B-6419-4637-AFC5-35357932AD2C", "Jormag Final Crystal"),
 	JORMAG_UP("0464CB9E-1848-4AAA-BA31-4779A959DD71", "Jormag Up"),
 	TEQUATL("568A30CF-8512-462F-9D67-647D69BEFAED", "Tequatl Up"),
-	SHATTERER_UP("03BF176A-D59F-49CA-A311-39FC6F533F2F", "Shaterrer Up"),
-	SHATTERER_SIEGE("580A44EE-BAED-429A-B8BE-907A18E36189", "Shaterrer Siege Collect"),
-	SHATTERER_ESCORT("8E064416-64B5-4749-B9E2-31971AB41783", "Shaterrer Escort");
+	SHATTERER_UP("03BF176A-D59F-49CA-A311-39FC6F533F2F", "RageDragon Up"),
+	SHATTERER_SIEGE("580A44EE-BAED-429A-B8BE-907A18E36189", "RageDragon Siege Collect"),
+	SHATTERER_ESCORT("8E064416-64B5-4749-B9E2-31971AB41783", "RageDragon Escort");
 	
 	private String uid;
 	private String prettyName;
@@ -176,7 +176,7 @@ public enum DragonEvent {
 			color = EventStateColor.FAIL.color();
 		}
 		
-		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Shaterrer", Waypoint.SHATERRER.toString());
+		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "RageDragon", Waypoint.SHATERRER.toString());
 	}
 
 	public static void formatJormagString(EventData dragonData) {

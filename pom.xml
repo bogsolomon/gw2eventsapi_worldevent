@@ -74,11 +74,10 @@
 	</dependency>
 	
 	<dependency>  
-    	<groupId>org.primefaces.themes</groupId>  
-    	<artifactId>sunny</artifactId>  
-    	<version>1.0.9</version>  
-	</dependency>  
-	            
+        <groupId>org.primefaces.themes</groupId>  
+        <artifactId>all-themes</artifactId>  
+        <version>1.0.9</version>  
+    </dependency>  
   </dependencies>
   <build>
     <finalName>worldevent</finalName>

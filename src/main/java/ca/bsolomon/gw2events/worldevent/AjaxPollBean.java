@@ -46,7 +46,7 @@ public class AjaxPollBean {
 		if (!checkboxBean.getSelectedEvents().contains("Tequatl"))
 			checkStatusUpdate(teqPanel, DragonEvent.getTeqStatus(), "-teq");
 		
-		if (!checkboxBean.getSelectedEvents().contains("Shaterrer"))
+		if (!checkboxBean.getSelectedEvents().contains("RageDragon"))
 			checkStatusUpdate(shatPanel, DragonEvent.getShatStatus(), "-shat");
 		
 		if (!checkboxBean.getSelectedEvents().contains("Jormag"))
@@ -89,7 +89,7 @@ public class AjaxPollBean {
 	public void updateEventServer(DataTable serv1Table, DataTable serv2Table, DataTable serv3Table) {
 		if (!checkboxBean.getSelectedEvents().contains("Tequatl"))
 			checkServerEvent(serv1Table, serv2Table, serv3Table, DragonEvent.getTeqStatus(), "-teq");
-		if (!checkboxBean.getSelectedEvents().contains("Shaterrer"))
+		if (!checkboxBean.getSelectedEvents().contains("RageDragon"))
 			checkServerEvent(serv1Table, serv2Table, serv3Table, DragonEvent.getShatStatus(), "-shat");
 		if (!checkboxBean.getSelectedEvents().contains("Jormag"))
 			checkServerEvent(serv1Table, serv2Table, serv3Table, DragonEvent.getJorStatus(), "-jor");

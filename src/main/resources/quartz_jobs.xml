@@ -5,20 +5,62 @@
   version="1.8">
     <schedule>
         <job>
-            <name>WorldEventDataRetrieveJob</name>
-            <group>WorldEventDataRetrieveGroup</group>
+            <name>DragonDataRetrieveJob</name>
+            <group>DragonDataRetrieveGroup</group>
 
             <description>The job description</description>
-            <job-class>ca.bsolomon.gw2events.worldevent.DataRetrieveJob</job-class>
+            <job-class>ca.bsolomon.gw2events.worldevent.DragonDataRetrieveJob</job-class>
         </job>
 
         <trigger>
             <cron>
-                <name>WorldEventDataRetrieveTrigger</name>
-                <group>WorldEventDataRetrieveTriggerGroup</group>
-                <job-name>WorldEventDataRetrieveJob</job-name>
+                <name>DragonDataRetrieveTrigger</name>
+                <group>DragonDataRetrieveTriggerGroup</group>
+                <job-name>DragonDataRetrieveJob</job-name>
 
-                <job-group>WorldEventDataRetrieveGroup</job-group>
+                <job-group>DragonDataRetrieveGroup</job-group>
+                <cron-expression>0/15 * * * * ?</cron-expression>
+            </cron>
+        </trigger>
+    </schedule>
+    
+    <schedule>
+        <job>
+            <name>LowLevelDataRetrieveJob</name>
+            <group>LowLevelDataRetrieveGroup</group>
+
+            <description>The job description</description>
+            <job-class>ca.bsolomon.gw2events.worldevent.LowLevelDataRetrieveJob</job-class>
+        </job>
+
+        <trigger>
+            <cron>
+                <name>LowLevelDataRetrieveTrigger</name>
+                <group>LowLevelDataRetrieveTriggerGroup</group>
+                <job-name>LowLevelDataRetrieveJob</job-name>
+
+                <job-group>LowLevelDataRetrieveGroup</job-group>
+                <cron-expression>0/15 * * * * ?</cron-expression>
+            </cron>
+        </trigger>
+    </schedule>
+    
+    <schedule>
+        <job>
+            <name>LowPriorityDataRetrieveJob</name>
+            <group>LowPriorityDataRetrieveGroup</group>
+
+            <description>The job description</description>
+            <job-class>ca.bsolomon.gw2events.worldevent.LowPriorityDataRetrieveJob</job-class>
+        </job>
+
+        <trigger>
+            <cron>
+                <name>LowPriorityDataRetrieveTrigger</name>
+                <group>LowPriorityDataRetrieveTriggerGroup</group>
+                <job-name>LowPriorityDataRetrieveJob</job-name>
+
+                <job-group>LowPriorityDataRetrieveGroup</job-group>
                 <cron-expression>0/15 * * * * ?</cron-expression>
             </cron>
         </trigger>

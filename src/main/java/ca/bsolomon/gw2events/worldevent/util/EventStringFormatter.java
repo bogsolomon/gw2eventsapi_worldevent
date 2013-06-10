@@ -53,7 +53,7 @@ public class EventStringFormatter {
 		
 		String periodStr = HHMMSSFormater.print(period);
 		
-		String fullWPName = waypoint+" - "+eventName+" - "+servId.toString()+ ":"+outStatus;
+		String fullWPName = waypoint+" - "+eventName+" - "+servId.toString()+ ": "+outStatus;
 		
 		EventStatus newStatus = new EventStatus(servId.toString(), outStatus, periodStr, color, eventName, fullWPName);
 		

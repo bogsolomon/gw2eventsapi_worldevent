@@ -39,7 +39,7 @@ public class CheckboxBean {
 	public CheckboxBean() {  
     	events = new LinkedHashMap<String, String>();  
     	events.put("Tequatl", "Tequatl");  
-    	events.put("Shaterrer", "Shaterrer");  
+    	events.put("RageDragon", "RageDragon");  
     	events.put("Jormag", "Jormag");  
     	
     	events.put("Maw", "Maw");
@@ -59,8 +59,8 @@ public class CheckboxBean {
 			serverIds.add(new Server(servId.getUid(), servId.getName()));
 		}
 		serverOne = new Server(ServerID.SoR.getUid(), ServerID.SoR.getName());
-		serverTwo = new Server(ServerID.FC.getUid(), ServerID.FC.getName());
-		serverThree =new Server(ServerID.ET.getUid(), ServerID.ET.getName());
+		serverTwo = new Server(ServerID.STORMBLUFF.getUid(), ServerID.STORMBLUFF.getName());
+		serverThree =new Server(ServerID.MAGUM.getUid(), ServerID.MAGUM.getName());
     }
 	
 	public void handleToggle(ToggleEvent event) {

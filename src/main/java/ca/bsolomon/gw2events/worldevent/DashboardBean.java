@@ -180,7 +180,7 @@ public class DashboardBean implements Serializable {
     		shatCollapsed = false;
     	}
 		
-		return shatCollapsed || checkboxBean.getSelectedEvents().contains("Shaterrer");
+		return shatCollapsed || checkboxBean.getSelectedEvents().contains("RageDragon");
 	}
 
 	public boolean isJormagCollapsed() {
