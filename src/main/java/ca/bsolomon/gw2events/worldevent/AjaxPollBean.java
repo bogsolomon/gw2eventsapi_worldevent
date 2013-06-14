@@ -25,6 +25,9 @@ import ca.bsolomon.gw2events.worldevent.enums.KarkaEnum;
 import ca.bsolomon.gw2events.worldevent.enums.MawEvent;
 import ca.bsolomon.gw2events.worldevent.enums.ServerID;
 import ca.bsolomon.gw2events.worldevent.enums.ShadowBehemothEvent;
+import ca.bsolomon.gw2events.worldevent.temples.enums.BalthazzarEvent;
+import ca.bsolomon.gw2events.worldevent.temples.enums.DwaynaEvent;
+import ca.bsolomon.gw2events.worldevent.temples.enums.LyssaEvent;
 import ca.bsolomon.gw2events.worldevent.util.EventStatus;
 
 @ManagedBean(name="ajaxPollBean")
@@ -117,6 +120,19 @@ public class AjaxPollBean {
 			checkServerEvent(serv1Table, serv2Table, serv3Table, FireShamanEnum.getStatus(), "-firesham");
 		if (!checkboxBean.getSelectedEvents().contains("Karka Queen"))
 			checkServerEvent(serv1Table, serv2Table, serv3Table, KarkaEnum.getStatus(), "-karka");
+	}
+	
+	public void updateEventTempleServer(DataTable serv1Table, DataTable serv2Table, DataTable serv3Table) {
+		if (!checkboxBean.getSelectedEvents().contains("Balthazar"))
+			checkServerEvent(serv1Table, serv2Table, serv3Table, BalthazzarEvent.getStatus(), "-balth");
+		if (!checkboxBean.getSelectedEvents().contains("Lyssa"))
+			checkServerEvent(serv1Table, serv2Table, serv3Table, LyssaEvent.getStatus(), "-lyssa");
+		if (!checkboxBean.getSelectedEvents().contains("Dwayna"))
+			checkServerEvent(serv1Table, serv2Table, serv3Table, DwaynaEvent.getStatus(), "-dwayna");
+		if (!checkboxBean.getSelectedEvents().contains("Melandru"))
+			checkServerEvent(serv1Table, serv2Table, serv3Table, BalthazzarEvent.getStatus(), "-melandru");
+		if (!checkboxBean.getSelectedEvents().contains("Grenth"))
+			checkServerEvent(serv1Table, serv2Table, serv3Table, BalthazzarEvent.getStatus(), "-grenth");
 	}
 
 	private void checkServerEvent(DataTable serv1Table, DataTable serv2Table,

@@ -15,7 +15,14 @@ public enum Waypoint {
 	FOULBEAR("[&BE4BAAA=]"),
 	HYDRA("[&BKgBAAA=]"),
 	FIRESHAM("[&BO4BAAA=]"),
-	KARKA("[&BNcGAAA=]");
+	KARKA("[&BNcGAAA=]"),
+	
+	
+	LYSSA("[&BK0CAAA=]"),
+	BALTH("[&BNIEAAA=]"),
+	GRENTH("[&BCIDAAA=]"),
+	MELANDRU("[&BBsDAAA=]"),
+	DWAYNA("[&BLICAAA=]");
 	
 	private String wp;
 	

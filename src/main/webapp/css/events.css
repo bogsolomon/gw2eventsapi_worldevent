@@ -28,19 +28,19 @@
 }
 
 .red {
-	color: #FFFFFF;
+	color: #999999;
 	background: #660000;
 	font-weight:bold;
 	font-size: 90% !important;
 }
 .yellow {
-	color: #FFFFFF;
+	color: #999999;
 	background: #000066;
 	font-weight:bold;
 	font-size: 90% !important;
 }
 .green {
-	color: #FFFFFF;
+	color: #000000;
 	background: #009933;
 	font-weight:bold;
 	font-size: 90% !important;

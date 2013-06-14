@@ -30,6 +30,10 @@ public class ServerDashboardBean implements Serializable {
 	private boolean etCollapsed = false;
 	private boolean fcCollapsed = false;
 	
+	private boolean serv1Collapsed = false;
+	private boolean serv2Collapsed = false;
+	private boolean serv3Collapsed = false;
+	
 	private DateTime lastChange = new DateTime(gregorianJuian);
 	
     public ServerDashboardBean() {  
@@ -39,8 +43,13 @@ public class ServerDashboardBean implements Serializable {
         DashboardColumn column3 = new DefaultDashboardColumn();  
           
         column1.addWidget("sorPanel");
+        column1.addWidget("serv1TemplePanel");
+        
         column2.addWidget("fcPanel");
+        column2.addWidget("serv2TemplePanel");
+        
         column3.addWidget("etPanel");
+        column3.addWidget("serv3TemplePanel");
   
         model.addColumn(column1);  
         model.addColumn(column2);  
@@ -56,7 +65,7 @@ public class ServerDashboardBean implements Serializable {
     	sorCollapsed = (event.getVisibility() == Visibility.HIDDEN);
     }
     
-    public void handleEtToggle(ToggleEvent event) {
+	public void handleEtToggle(ToggleEvent event) {
     	lastChange = new DateTime(gregorianJuian);
     	etCollapsed = (event.getVisibility() == Visibility.HIDDEN);
     }
@@ -98,4 +107,28 @@ public class ServerDashboardBean implements Serializable {
     	
 		return fcCollapsed;
 	}
+
+	public boolean isServ1Collapsed() {
+		return serv1Collapsed;
+	}
+	
+	public void handleServ1Toggle(ToggleEvent event) {
+    	serv1Collapsed = (event.getVisibility() == Visibility.HIDDEN);
+    }
+    
+	public boolean isServ2Collapsed() {
+		return serv2Collapsed;
+	}
+	
+	public void handleServ2Toggle(ToggleEvent event) {
+    	serv2Collapsed = (event.getVisibility() == Visibility.HIDDEN);
+    }
+	
+	public boolean isServ3Collapsed() {
+		return serv3Collapsed;
+	}
+	
+	public void handleServ3Toggle(ToggleEvent event) {
+    	serv3Collapsed = (event.getVisibility() == Visibility.HIDDEN);
+    }
 }

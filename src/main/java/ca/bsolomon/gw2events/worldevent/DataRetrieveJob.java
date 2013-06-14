@@ -20,15 +20,17 @@ public class DataRetrieveJob {
 		JSONArray data = api.queryServer(eventUID);
 		boolean changed = false;
 		
-		for (int i=0; i<data.size(); i++) {
-			JSONObject obj = data.getJSONObject(i);
-			
-			String serverId = obj.getString("world_id");
-			
-			if (serverIds.contains(serverId)) {
-				String status = obj.getString("state");
-				if (dataStructure.addEventStatus(serverId, eventUID, status, new DateTime(gregorianJuian))) {
-					changed = true;
+		if (data != null) {
+			for (int i=0; i<data.size(); i++) {
+				JSONObject obj = data.getJSONObject(i);
+				
+				String serverId = obj.getString("world_id");
+				
+				if (serverIds.contains(serverId)) {
+					String status = obj.getString("state");
+					if (dataStructure.addEventStatus(serverId, eventUID, status, new DateTime(gregorianJuian))) {
+						changed = true;
+					}
 				}
 			}
 		}

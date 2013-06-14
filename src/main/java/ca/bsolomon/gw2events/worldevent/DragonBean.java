@@ -20,6 +20,11 @@ import ca.bsolomon.gw2events.worldevent.enums.KarkaEnum;
 import ca.bsolomon.gw2events.worldevent.enums.MawEvent;
 import ca.bsolomon.gw2events.worldevent.enums.ServerID;
 import ca.bsolomon.gw2events.worldevent.enums.ShadowBehemothEvent;
+import ca.bsolomon.gw2events.worldevent.temples.enums.BalthazzarEvent;
+import ca.bsolomon.gw2events.worldevent.temples.enums.DwaynaEvent;
+import ca.bsolomon.gw2events.worldevent.temples.enums.GrenthEvent;
+import ca.bsolomon.gw2events.worldevent.temples.enums.LyssaEvent;
+import ca.bsolomon.gw2events.worldevent.temples.enums.MelandruEvent;
 import ca.bsolomon.gw2events.worldevent.util.EventStatus;
 
 @ManagedBean(name="dragonBean")
@@ -201,5 +206,48 @@ public class DragonBean {
 
 	public void setCheckboxBean(CheckboxBean checkboxBean) {
 		this.checkboxBean = checkboxBean;
+	}
+	
+	public List<EventStatus> getServ1TempleStatus() {
+		ServerID servId = ServerID.getByID(checkboxBean.getServerOne().getServerId());
+		
+		List<EventStatus> status = new ArrayList<EventStatus>();
+		
+		formatTempleServer(servId, status);
+		
+		return status;
+	}
+	
+	public List<EventStatus> getServ2TempleStatus() {
+		ServerID servId = ServerID.getByID(checkboxBean.getServerTwo().getServerId());
+		
+		List<EventStatus> status = new ArrayList<EventStatus>();
+		
+		formatTempleServer(servId, status);
+		
+		return status;
+	}
+	
+	public List<EventStatus> getServ3TempleStatus() {
+		ServerID servId = ServerID.getByID(checkboxBean.getServerThree().getServerId());
+		
+		List<EventStatus> status = new ArrayList<EventStatus>();
+		
+		formatTempleServer(servId, status);
+		
+		return status;
+	}
+	
+	public void formatTempleServer(ServerID servId, List<EventStatus> status) {
+		if (!checkboxBean.getSelectedEvents().contains("Balthazar"))
+			formatServerEvent(servId, status, BalthazzarEvent.getStatus());
+		if (!checkboxBean.getSelectedEvents().contains("Lyssa"))
+			formatServerEvent(servId, status, LyssaEvent.getStatus());
+		if (!checkboxBean.getSelectedEvents().contains("Grenth"))
+			formatServerEvent(servId, status, GrenthEvent.getStatus());
+		if (!checkboxBean.getSelectedEvents().contains("Melandru"))
+			formatServerEvent(servId, status, MelandruEvent.getStatus());
+		if (!checkboxBean.getSelectedEvents().contains("Dwayna"))
+			formatServerEvent(servId, status, DwaynaEvent.getStatus());
 	}
 }

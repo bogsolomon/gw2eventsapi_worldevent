@@ -65,4 +65,25 @@
             </cron>
         </trigger>
     </schedule>
+    
+    <schedule>
+        <job>
+            <name>TempleDataRetrieveJob</name>
+            <group>TempleDataRetrieveGroup</group>
+
+            <description>The job description</description>
+            <job-class>ca.bsolomon.gw2events.worldevent.TempleDataRetrieveJob</job-class>
+        </job>
+
+        <trigger>
+            <cron>
+                <name>TempleDataRetrieveTrigger</name>
+                <group>TempleDataRetrieveTriggerGroup</group>
+                <job-name>TempleDataRetrieveJob</job-name>
+
+                <job-group>TempleDataRetrieveGroup</job-group>
+                <cron-expression>0 * * * * ?</cron-expression>
+            </cron>
+        </trigger>
+    </schedule>
 </job-scheduling-data>

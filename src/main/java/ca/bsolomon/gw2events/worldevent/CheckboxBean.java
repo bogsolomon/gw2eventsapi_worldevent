@@ -55,6 +55,12 @@ public class CheckboxBean {
     	events.put("Fire Shaman", "Fire Shaman");
     	events.put("Karka Queen", "Karka Queen");
     	
+    	events.put("Balthazar", "Balthazar");
+    	events.put("Lyssa", "Lyssa");
+    	events.put("Dwayna", "Dwayna");
+    	events.put("Melandru", "Melandru");
+    	events.put("Grenth", "Grenth");
+    	
 		for (ServerID servId:ServerID.values()) {
 			serverIds.add(new Server(servId.getUid(), servId.getName()));
 		}
@@ -102,10 +108,15 @@ public class CheckboxBean {
 		this.events = events;
 	}  
 	
-	public void handleCheckbox(DataTable serv1Table, DataTable serv2Table, DataTable serv3Table) {  
+	public void handleCheckbox(DataTable serv1Table, DataTable serv2Table, DataTable serv3Table,
+			DataTable serv1TempleTable, DataTable serv2TempleTable, DataTable serv3TempleTable) {  
 		Ajax.update(serv1Table.getClientId());
 		Ajax.update(serv2Table.getClientId());
 		Ajax.update(serv3Table.getClientId());
+		
+		Ajax.update(serv1TempleTable.getClientId());
+		Ajax.update(serv2TempleTable.getClientId());
+		Ajax.update(serv3TempleTable.getClientId());
 	}
 	
 	public void handleServChange() {  
@@ -131,12 +142,17 @@ public class CheckboxBean {
 		Ajax.update(fireShamPanel.getClientId());
 	}
 	
-	public void clearAll(DataTable serv1Table, DataTable serv2Table, DataTable serv3Table) {  
+	public void clearAll(DataTable serv1Table, DataTable serv2Table, DataTable serv3Table,
+			DataTable serv1TempleTable, DataTable serv2TempleTable, DataTable serv3TempleTable) {  
 		selectedEvents.clear();
 		
 		Ajax.update(serv1Table.getClientId());
 		Ajax.update(serv2Table.getClientId());
 		Ajax.update(serv3Table.getClientId());
+		
+		Ajax.update(serv1TempleTable.getClientId());
+		Ajax.update(serv2TempleTable.getClientId());
+		Ajax.update(serv3TempleTable.getClientId());
 	}
 	
 	public void clearAll(Panel fePanel, Panel teqPanel, Panel shatPanel, Panel jorPanel, Panel karkaPanel, Panel mawPanel,
