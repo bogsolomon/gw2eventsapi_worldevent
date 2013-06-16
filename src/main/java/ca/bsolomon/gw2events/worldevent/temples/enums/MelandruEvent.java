@@ -84,46 +84,32 @@ public enum MelandruEvent {
 			outStatus = "Not up";
 			color = EventStateColor.FAIL.color();
 			fontWeight = 900;
-		} else if (beacon1Status!=null && (beacon1Status.equals("Preparation") || beacon1Status.equals("Active"))) {
-			time = templeEventData.getEventTime(beacon1EventId);
+		} else if (cleansingStatus!=null && (cleansingStatus.equals("Success"))) {
+			time = templeEventData.getEventTime(priestEventId);
 			
-			outStatus = "Beacon 1 Escort";
+			outStatus = "Under Pact Control";
+			color = EventStateColor.ACTIVE.color();
+			fontWeight = 900;
+			inProgressStatus.put(servId, 0);
+		} else if (cleansingStatus!=null && (cleansingStatus.equals("Active"))) {
+			time = templeEventData.getEventTime(priestEventId);
+			
+			outStatus = "Cleansing Temple";
+			color = EventStateColor.PREPARATION.color();
+			fontWeight = 900;
+			inProgressStatus.put(servId, 0);
+		} else if (priestStatus!=null && (priestStatus.equals("Active"))) {
+			time = templeEventData.getEventTime(priestEventId);
+			
+			outStatus = "Kill Priest";
 			color = EventStateColor.PREPARATION.color();
 			fontWeight = 900;
 			
-			inProgressStatus.put(servId, 1);
-		} else if (inProg == 1 && beacon1Status.equals("Success")) {
-			time = templeEventData.getEventTime(beacon1EventId);
-			
-			outStatus = "Waiting Beacon 2";
-			color = EventStateColor.PREPARATION.color();
-			fontWeight = 900;
-		} else if (beacon2Status!=null && (beacon1Status.equals("Active"))) {
-			time = templeEventData.getEventTime(beacon2EventId);
-			
-			outStatus = "Beacon 2 Escort";
-			color = EventStateColor.PREPARATION.color();
-			fontWeight = 900;
-			
-			inProgressStatus.put(servId, 2);
-		} else if (inProg == 2 && beacon2Status.equals("Success")) {
-			time = templeEventData.getEventTime(beacon2EventId);
-			
-			outStatus = "Beacon 2 Success";
-			color = EventStateColor.PREPARATION.color();
-			fontWeight = 900;
-		} else if (beacon2DefStatus!=null && (beacon2DefStatus.equals("Active"))) {
+			inProgressStatus.put(servId, 0);
+		} else if (inProg == 4 && escortStatus.equals("Success")) {
 			time = templeEventData.getEventTime(beacon2DefEventId);
 			
-			outStatus = "Beacon 2 Defense";
-			color = EventStateColor.PREPARATION.color();
-			fontWeight = 900;
-			
-			inProgressStatus.put(servId, 3);
-		} else if (inProg == 3 && beacon2DefStatus.equals("Success")) {
-			time = templeEventData.getEventTime(beacon2DefEventId);
-			
-			outStatus = "Beacon 2 Defended";
+			outStatus = "Escort Succeded";
 			color = EventStateColor.PREPARATION.color();
 			fontWeight = 900;
 		} else if (escortStatus!=null && (escortStatus.equals("Active"))) {
@@ -134,34 +120,48 @@ public enum MelandruEvent {
 			fontWeight = 900;
 			
 			inProgressStatus.put(servId, 4);
-		} else if (inProg == 4 && escortStatus.equals("Success")) {
+		} else if (inProg == 3 && beacon2DefStatus.equals("Success")) {
 			time = templeEventData.getEventTime(beacon2DefEventId);
 			
-			outStatus = "Escort Succeded";
+			outStatus = "Beacon 2 Defended";
 			color = EventStateColor.PREPARATION.color();
 			fontWeight = 900;
-		} else if (priestStatus!=null && (priestStatus.equals("Active"))) {
-			time = templeEventData.getEventTime(priestEventId);
+		} else if (beacon2DefStatus!=null && (beacon2DefStatus.equals("Active"))) {
+			time = templeEventData.getEventTime(beacon2DefEventId);
 			
-			outStatus = "Kill Priest";
+			outStatus = "Beacon 2 Defense";
 			color = EventStateColor.PREPARATION.color();
 			fontWeight = 900;
 			
-			inProgressStatus.put(servId, 0);
-		} else if (cleansingStatus!=null && (cleansingStatus.equals("Active"))) {
-			time = templeEventData.getEventTime(priestEventId);
+			inProgressStatus.put(servId, 3);
+		} else if (inProg == 2 && beacon2Status.equals("Success")) {
+			time = templeEventData.getEventTime(beacon2EventId);
 			
-			outStatus = "Cleansing Temple";
+			outStatus = "Beacon 2 Success";
 			color = EventStateColor.PREPARATION.color();
 			fontWeight = 900;
-			inProgressStatus.put(servId, 0);
-		} else if (cleansingStatus!=null && (cleansingStatus.equals("Success"))) {
-			time = templeEventData.getEventTime(priestEventId);
+		} else if (beacon2Status!=null && (beacon1Status.equals("Active"))) {
+			time = templeEventData.getEventTime(beacon2EventId);
 			
-			outStatus = "Under Pact Control";
-			color = EventStateColor.ACTIVE.color();
+			outStatus = "Beacon 2 Escort";
+			color = EventStateColor.PREPARATION.color();
 			fontWeight = 900;
-			inProgressStatus.put(servId, 0);
+			
+			inProgressStatus.put(servId, 2);
+		} else if (inProg == 1 && beacon1Status.equals("Success")) {
+			time = templeEventData.getEventTime(beacon1EventId);
+			
+			outStatus = "Waiting Beacon 2";
+			color = EventStateColor.PREPARATION.color();
+			fontWeight = 900;
+		} else if (beacon1Status!=null && (beacon1Status.equals("Preparation") || beacon1Status.equals("Active"))) {
+			time = templeEventData.getEventTime(beacon1EventId);
+			
+			outStatus = "Beacon 1 Escort";
+			color = EventStateColor.PREPARATION.color();
+			fontWeight = 900;
+			
+			inProgressStatus.put(servId, 1);
 		} else {
 			time = templeEventData.getEventTime(priestEventId);
 			

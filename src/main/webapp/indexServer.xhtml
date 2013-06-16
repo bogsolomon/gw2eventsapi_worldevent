@@ -30,7 +30,7 @@
             	
             <p:poll interval="60"   
             	listener="#{ajaxPollBean.updateEventTempleServer(serv1TempleTable, serv2TempleTable, serv3TempleTable)}" 
-            	widgetVar="poll" autoStart="true"/>
+            	widgetVar="pollTemple" autoStart="true"/>
             	
         	<p:dashboard id="board" model="#{serverDashboardBean.model}">
         		 <p:ajax event="reorder"/>

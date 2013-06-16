@@ -98,6 +98,14 @@ public enum LyssaEvent {
 				outStatus = "Kill Priestess";
 				color = EventStateColor.PREPARATION.color();
 				fontWeight = 900;
+			} else if ((containerStatus!=null && containerStatus.equals("Active")) ||
+					(risenFortStatus!=null && risenFortStatus.equals("Active")) ||
+					(sealDefStatus!=null && sealDefStatus.equals("Active"))){
+				time = templeEventData.getEventTime(priestessEventId);
+				
+				outStatus = "Need All 3 Seals";
+				color = EventStateColor.PREPARATION.color();
+				fontWeight = 900;
 			}
 		} else {
 			time = templeEventData.getEventTime(priestessEventId);

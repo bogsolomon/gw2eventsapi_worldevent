@@ -23,7 +23,7 @@ import ca.bsolomon.gw2events.worldevent.util.Server;
 @SessionScoped
 public class CheckboxBean {
 
-	private List<String> selectedEvents;
+	private List<String> selectedEvents = new ArrayList<>();
   
     private Map<String,String> events;  
     
@@ -67,6 +67,12 @@ public class CheckboxBean {
 		serverOne = new Server(ServerID.SoR.getUid(), ServerID.SoR.getName());
 		serverTwo = new Server(ServerID.STORMBLUFF.getUid(), ServerID.STORMBLUFF.getName());
 		serverThree =new Server(ServerID.MAGUM.getUid(), ServerID.MAGUM.getName());
+		
+		selectedEvents.add("Balthazar");
+		selectedEvents.add("Lyssa");
+		selectedEvents.add("Dwayna");
+		selectedEvents.add("Melandru");
+		selectedEvents.add("Grenth");
     }
 	
 	public void handleToggle(ToggleEvent event) {
@@ -91,8 +97,6 @@ public class CheckboxBean {
 	}
     
 	public List<String> getSelectedEvents() {
-		if (selectedEvents == null)
-			return new ArrayList<>();
 		return selectedEvents;
 	}
 
