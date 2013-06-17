@@ -8,8 +8,9 @@ import org.joda.time.DateTime;
 import ca.bsolomon.gw2events.worldevent.util.EventData;
 import ca.bsolomon.gw2events.worldevent.util.EventStatus;
 import ca.bsolomon.gw2events.worldevent.util.EventStringFormatter;
+import ca.bsolomon.gw2events.worldevent.util.PlaySoundStatus;
 
-public enum KarkaEnum {
+public enum KarkaEvent {
 
 	QUEEN1("E1CC6E63-EFFE-4986-A321-95C89EA58C07", "Active"),
 	QUEEN2("5282B66A-126F-4DA4-8E9D-0D9802227B6D", "Active"),
@@ -19,7 +20,7 @@ public enum KarkaEnum {
 	private String uid;
 	private String prettyName;
 	
-	KarkaEnum(String uid, String prettyName) {
+	KarkaEvent(String uid, String prettyName) {
 		this.uid = uid;
 		this.prettyName = prettyName;
 	}
@@ -61,12 +62,16 @@ public enum KarkaEnum {
 		String queenStatus3 = lowLevelEventData.getEventStatus(queenId3);
 		String queenStatus4 = lowLevelEventData.getEventStatus(queenId4);
 		
-		 if ((queenStatus1 != null) && (queenStatus1.equals("Active")) ||
+		boolean playSound = false;
+		
+		if ((queenStatus1 != null) && (queenStatus1.equals("Active")) ||
 				 (queenStatus2 != null) && (queenStatus2.equals("Active")) ||
 				 (queenStatus3 != null) && (queenStatus3.equals("Active")) ||
 				 (queenStatus4 != null) && (queenStatus4.equals("Active"))) {
 			 time = lowLevelEventData.getEventTime(queenId1);
 			
+			 playSound = true;
+			 
 			 outStatus = "Active";
 			 color = EventStateColor.ACTIVE.color();
 			 fontWeight = 900;
@@ -77,6 +82,14 @@ public enum KarkaEnum {
 			 color = EventStateColor.FAIL.color();
 		 }
 		
-		 EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Karka Queen", Waypoint.KARKA.toString());
+		String soundKey = servId.getUid()+"-karka";
+		boolean playSoundList = playSound;
+		if (PlaySoundStatus.playSoundStatus.containsKey(soundKey) && PlaySoundStatus.playSoundStatus.get(soundKey)) {
+			playSound = false;
+		}
+		
+		PlaySoundStatus.playSoundStatus.put(soundKey, playSoundList);
+		
+		 EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Karka Queen", Waypoint.KARKA.toString(), playSound);
 	}
 }

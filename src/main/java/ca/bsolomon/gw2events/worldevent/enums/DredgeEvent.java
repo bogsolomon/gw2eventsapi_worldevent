@@ -8,6 +8,7 @@ import org.joda.time.DateTime;
 import ca.bsolomon.gw2events.worldevent.util.EventData;
 import ca.bsolomon.gw2events.worldevent.util.EventStatus;
 import ca.bsolomon.gw2events.worldevent.util.EventStringFormatter;
+import ca.bsolomon.gw2events.worldevent.util.PlaySoundStatus;
 
 public enum DredgeEvent {
 
@@ -58,13 +59,17 @@ public enum DredgeEvent {
 		String molekDStatus = lowLevelEventData.getEventStatus(molekDEventId);
 		String dredgeStatus = lowLevelEventData.getEventStatus(dredgeEventId);
 		
-		 if ((dredgeStatus != null) &&
+		boolean playSound = false;
+		
+		if ((dredgeStatus != null) &&
 					(dredgeStatus.equals("Active"))) {
 			time = lowLevelEventData.getEventTime(dredgeEventId);
 				
 			outStatus = "Active";
 			color = EventStateColor.ACTIVE.color();
 			fontWeight = 900;
+			
+			playSound = true;
 		} else if ((molekCStatus != null) &&
 				(molekCStatus.equals("Active"))) {
 			time = lowLevelEventData.getEventTime(molekCEventId);
@@ -86,6 +91,14 @@ public enum DredgeEvent {
 			color = EventStateColor.FAIL.color();
 		}
 		
-		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Dredge", Waypoint.DREDGE.toString());
+		String soundKey = servId.getUid()+"-dredge";
+		boolean playSoundList = playSound;
+		if (PlaySoundStatus.playSoundStatus.containsKey(soundKey) && PlaySoundStatus.playSoundStatus.get(soundKey)) {
+			playSound = false;
+		}
+		
+		PlaySoundStatus.playSoundStatus.put(soundKey, playSoundList);
+		
+		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Dredge", Waypoint.DREDGE.toString(), playSound);
 	}
 }

@@ -8,16 +8,18 @@ public final class EventStatus {
 	private final String color;
 	private final String event;
 	private final String waypoint;
+	private final boolean playSound;
 
 	private int fHashCode;
 	
-	public EventStatus(String server, String status, String date, String color, String event, String waypoint) {
+	public EventStatus(String server, String status, String date, String color, String event, String waypoint, boolean playSound) {
 		this.server = server;
 		this.status = status;
 		this.date = date;
 		this.color = color;
 		this.event = event;
 		this.waypoint = waypoint;
+		this.playSound = playSound;
 	}
 	
 	public String getEvent() {
@@ -65,5 +67,9 @@ public final class EventStatus {
 		}
 		
 		return fHashCode;
+	}
+
+	public boolean isPlaySound() {
+		return playSound;
 	}
 }

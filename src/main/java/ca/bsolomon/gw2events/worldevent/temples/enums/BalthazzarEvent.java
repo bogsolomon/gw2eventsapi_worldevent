@@ -11,12 +11,13 @@ import ca.bsolomon.gw2events.worldevent.enums.Waypoint;
 import ca.bsolomon.gw2events.worldevent.util.EventData;
 import ca.bsolomon.gw2events.worldevent.util.EventStatus;
 import ca.bsolomon.gw2events.worldevent.util.EventStringFormatter;
+import ca.bsolomon.gw2events.worldevent.util.PlaySoundStatus;
 
 public enum BalthazzarEvent {
 
 	ALTAR_ESCORT("D0ECDACE-41F8-46BD-BB17-8762EF29868C", "Escort Altar"),
 	SEIZE_ALTAR	("7B7D6D27-67A0-44EF-85EA-7460FFA621A1", "Seize Altar"),
-	//TEMPLE_DEF	("589B1C41-DD96-4AEE-8A3A-4CC607805B05", "Defense"),
+	TEMPLE_DEF	("589B1C41-DD96-4AEE-8A3A-4CC607805B05", "Defense"),
 	PRIEST		("2555EFCB-2927-4589-AB61-1957D9CC70C8", "Priest");
 	
 	
@@ -56,20 +57,36 @@ public enum BalthazzarEvent {
 
 		String altarEscortEventId = servId.getUid()+"-"+ALTAR_ESCORT.uid();
 		String seizeAltarEventId = servId.getUid()+"-"+SEIZE_ALTAR.uid();
-		//String templeDefEventId = servId.getUid()+"-"+TEMPLE_DEF.uid();
+		String templeDefEventId = servId.getUid()+"-"+TEMPLE_DEF.uid();
 		String priestEventId = servId.getUid()+"-"+PRIEST.uid();
 		
 		String altarEscortStatus = templeEventData.getEventStatus(altarEscortEventId);
 		String seizeAltarStatus = templeEventData.getEventStatus(seizeAltarEventId);
-		//String templeDefStatus = templeEventData.getEventStatus(templeDefEventId);
+		String templeDefStatus = templeEventData.getEventStatus(templeDefEventId);
 		String priestStatus = templeEventData.getEventStatus(priestEventId);
 		
-		if (altarEscortStatus!=null && (altarEscortStatus.equals("Preparation") || altarEscortStatus.equals("Active"))) {
+		boolean playSound = false;
+		
+		if (templeDefStatus!=null && (templeDefStatus.equals("Active"))) {
+			time = templeEventData.getEventTime(altarEscortEventId);
+			
+			outStatus = "Defend Altar";
+			color = EventStateColor.PREPARATION.color();
+			fontWeight = 900;
+		} else if (templeDefStatus!=null && (templeDefStatus.equals("Fail"))) {
+			time = templeEventData.getEventTime(altarEscortEventId);
+			
+			outStatus = "Not up";
+			color = EventStateColor.FAIL.color();
+			fontWeight = 900;
+		} else if (altarEscortStatus!=null && (altarEscortStatus.equals("Preparation") || altarEscortStatus.equals("Active"))) {
 			time = templeEventData.getEventTime(altarEscortEventId);
 			
 			outStatus = "Escort to Altar";
 			color = EventStateColor.PREPARATION.color();
 			fontWeight = 900;
+			
+			playSound = true;
 		} else if (seizeAltarStatus!=null && seizeAltarStatus.equals("Active")) {
 			time = templeEventData.getEventTime(seizeAltarEventId);
 			
@@ -96,7 +113,15 @@ public enum BalthazzarEvent {
 			fontWeight = 900;
 		}
 		
-		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Balthazar", Waypoint.BALTH.toString());
+		String soundKey = servId.getUid()+"-balth";
+		boolean playSoundList = playSound;
+		if (PlaySoundStatus.playSoundStatus.containsKey(soundKey) && PlaySoundStatus.playSoundStatus.get(soundKey)) {
+			playSound = false;
+		}
+		
+		PlaySoundStatus.playSoundStatus.put(soundKey, playSoundList);
+		
+		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Balthazar", Waypoint.BALTH.toString(), playSound);
 	}
 }
 

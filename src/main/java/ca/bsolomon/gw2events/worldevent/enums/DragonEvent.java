@@ -8,6 +8,7 @@ import org.joda.time.DateTime;
 import ca.bsolomon.gw2events.worldevent.util.EventData;
 import ca.bsolomon.gw2events.worldevent.util.EventStatus;
 import ca.bsolomon.gw2events.worldevent.util.EventStringFormatter;
+import ca.bsolomon.gw2events.worldevent.util.PlaySoundStatus;
 
 public enum DragonEvent {
 
@@ -95,6 +96,7 @@ public enum DragonEvent {
 		String outStatus = "";
 		String color = "";
 		int fontWeight = 400;
+		boolean playSound = false;
 		
 		if (status==null) {
 			color = EventStateColor.FAIL.color();
@@ -107,12 +109,21 @@ public enum DragonEvent {
 			color = EventStateColor.PREPARATION.color();
 			fontWeight = 600;
 			outStatus = "Something in water";
+			playSound = true;
 		} else {
 			color = EventStateColor.FAIL.color();
 			outStatus = "Not up";
 		}
 		
-		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Tequatl", Waypoint.TEQUATL.toString());
+		String soundKey = servId.getUid()+"-teq";
+		boolean playSoundList = playSound;
+		if (PlaySoundStatus.playSoundStatus.containsKey(soundKey) && PlaySoundStatus.playSoundStatus.get(soundKey)) {
+			playSound = false;
+		}
+		
+		PlaySoundStatus.playSoundStatus.put(soundKey, playSoundList);
+		
+		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Tequatl", Waypoint.TEQUATL.toString(), playSound);
 	}
 
 	public static void formatShattererString(EventData dragonData) {
@@ -140,6 +151,8 @@ public enum DragonEvent {
 		String siegeStatus = dragonData.getEventStatus(siegeEventId);
 		String shatStatus = dragonData.getEventStatus(shatEventId);
 		
+		boolean playSound = false;
+		
 		if (escortStatus!=null && escortStatus.equals("Active")) {
 			time = dragonData.getEventTime(escortEventId);
 			
@@ -150,6 +163,8 @@ public enum DragonEvent {
 			}
 			color = EventStateColor.PREPARATION.color();
 			fontWeight = 600;
+			
+			playSound = true;
 		} else if (siegeStatus!=null && siegeStatus.equals("Active")) {
 			time = dragonData.getEventTime(siegeEventId);
 			
@@ -176,7 +191,15 @@ public enum DragonEvent {
 			color = EventStateColor.FAIL.color();
 		}
 		
-		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "RageDragon", Waypoint.SHATERRER.toString());
+		String soundKey = servId.getUid()+"-shat";
+		boolean playSoundList = playSound;
+		if (PlaySoundStatus.playSoundStatus.containsKey(soundKey) && PlaySoundStatus.playSoundStatus.get(soundKey)) {
+			playSound = false;
+		}
+		
+		PlaySoundStatus.playSoundStatus.put(soundKey, playSoundList);
+		
+		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "RageDragon", Waypoint.SHATERRER.toString(), playSound);
 	}
 
 	public static void formatJormagString(EventData dragonData) {
@@ -210,6 +233,7 @@ public enum DragonEvent {
 		String crystalFStatus = dragonData.getEventStatus(crystalFEventId);
 		String jormagStatus = dragonData.getEventStatus(jormagEventId);
 		
+		boolean playSound = false;
 		
 		if ((crystal1Status != null && crystal2Status != null
 				&& crystal3Status != null && crystal4Status != null) && 
@@ -232,6 +256,8 @@ public enum DragonEvent {
 			outStatus = "About to Land";
 			color = EventStateColor.ACTIVE.color();
 			fontWeight = 900;
+			
+			playSound = true;
 		} else if (jormagStatus != null && jormagStatus.equals("Active")) {
 			time = dragonData.getEventTime(jormagEventId);
 			
@@ -245,6 +271,14 @@ public enum DragonEvent {
 			color = EventStateColor.FAIL.color();	
 		}
 		
-		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Jormag", Waypoint.JORMAG.toString());
+		String soundKey = servId.getUid()+"-jor";
+		boolean playSoundList = playSound;
+		if (PlaySoundStatus.playSoundStatus.containsKey(soundKey) && PlaySoundStatus.playSoundStatus.get(soundKey)) {
+			playSound = false;
+		}
+		
+		PlaySoundStatus.playSoundStatus.put(soundKey, playSoundList);
+		
+		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Jormag", Waypoint.JORMAG.toString(), playSound);
 	}
 }

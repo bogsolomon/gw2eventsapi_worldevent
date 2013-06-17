@@ -9,11 +9,14 @@
         <script src="script/datetime.js"></script>
         <script src="script/clipboard.js"></script>
         <script src="script/ZeroClipboard.js"></script>
+        <script src="script/soundmanager2-nodebug-jsmin.js"></script>  
+        <script src="script/sound.js"></script>
         <script  type="text/javascript">
 		function startTime()
 		{
 			updateServerTimes();
 			updatePositions();
+			playSound();
 			t=setTimeout(function(){startTime()},1000);
 		}
 		</script>
@@ -49,6 +52,9 @@
 				        <p:column styleClass="clipboard">
 				        	<button data-clipboard-text="#{status.waypoint}" class="clipbutton"></button>
 				        </p:column>
+				        <p:column styleClass="soundClass">
+				        	<h:panelGroup id="soundCol">#{status.playSound}</h:panelGroup>
+				        </p:column>
         		 	</p:dataTable>
         		 </p:panel>
         		 
@@ -66,6 +72,9 @@
 				        </p:column>
 				        <p:column styleClass="clipboard">
 				        	<button data-clipboard-text="#{status.waypoint}" class="clipbutton"></button>
+				        </p:column>
+				        <p:column styleClass="soundClass">
+				        	<h:panelGroup id="soundCol">#{status.playSound}</h:panelGroup>
 				        </p:column>
         		 	</p:dataTable>
         		 </p:panel>
@@ -85,6 +94,9 @@
 				        <p:column styleClass="clipboard">
 				        	<button data-clipboard-text="#{status.waypoint}" class="clipbutton"></button>
 				        </p:column>
+				        <p:column styleClass="soundClass">
+				        	<h:panelGroup id="soundCol">#{status.playSound}</h:panelGroup>
+				        </p:column>
         		 	</p:dataTable>
         		 </p:panel>
         		 
@@ -102,6 +114,9 @@
 				        </p:column>
 				        <p:column styleClass="clipboard">
 				        	<button data-clipboard-text="#{status.waypoint}" class="clipbutton"></button>
+				        </p:column>
+				        <p:column styleClass="soundClass">
+				        	<h:panelGroup id="soundCol">#{status.playSound}</h:panelGroup>
 				        </p:column>
         		 	</p:dataTable>
         		 </p:panel>
@@ -121,6 +136,9 @@
 				        <p:column styleClass="clipboard">
 				        	<button data-clipboard-text="#{status.waypoint}" class="clipbutton"></button>
 				        </p:column>
+				        <p:column styleClass="soundClass">
+				        	<h:panelGroup id="soundCol">#{status.playSound}</h:panelGroup>
+				        </p:column>
         		 	</p:dataTable>
         		 </p:panel>
         		 
@@ -138,6 +156,9 @@
 				        </p:column>
 				        <p:column styleClass="clipboard">
 				        	<button data-clipboard-text="#{status.waypoint}" class="clipbutton"></button>
+				        </p:column>
+				        <p:column styleClass="soundClass">
+				        	<h:panelGroup id="soundCol">#{status.playSound}</h:panelGroup>
 				        </p:column>
         		 	</p:dataTable>
         		 </p:panel>
@@ -182,6 +203,10 @@
 			            <p:ajax listener="#{themeSwitcherBean.saveTheme}" />  
 			        </p:themeSwitcher>  
 			    </h:panelGrid>
+			    			        
+		        <p:selectManyCheckbox layout="pageDirection" id="playSoundCB" styleClass="soundClassCB">
+	            	<f:selectItem itemLabel="Play Sound" itemValue="Play Sound" />  
+	            </p:selectManyCheckbox>  
         	</h:form>
         </p:layoutUnit>
         </p:layout>  

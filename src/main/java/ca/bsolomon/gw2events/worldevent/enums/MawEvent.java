@@ -10,6 +10,7 @@ import org.joda.time.DateTime;
 import ca.bsolomon.gw2events.worldevent.util.EventData;
 import ca.bsolomon.gw2events.worldevent.util.EventStatus;
 import ca.bsolomon.gw2events.worldevent.util.EventStringFormatter;
+import ca.bsolomon.gw2events.worldevent.util.PlaySoundStatus;
 
 public enum MawEvent {
 
@@ -76,6 +77,8 @@ public enum MawEvent {
 		String shamaStatus = lowLevelEventData.getEventStatus(shamanEventId);
 		String chiefStatus = lowLevelEventData.getEventStatus(chiefEventId);
 		
+		boolean playSound = false;
+		
 		Integer inProg = 0;
 		
 		if (inProgressStatus.get(servId) != null)
@@ -87,6 +90,8 @@ public enum MawEvent {
 			outStatus = MawEvent.PROTECT.toString();
 			color = EventStateColor.PREPARATION.color();
 			fontWeight = 600;
+			
+			playSound = true;
 			
 			inProgressStatus.put(servId, 1);
 		} else if (escortStatus != null && (escortStatus.equals("Active") || escortStatus.equals("Preparation"))) {
@@ -150,6 +155,14 @@ public enum MawEvent {
 			color = EventStateColor.FAIL.color();
 		}
 		
-		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Maw", Waypoint.MAW.toString());
+		String soundKey = servId.getUid()+"-maw";
+		boolean playSoundList = playSound;
+		if (PlaySoundStatus.playSoundStatus.containsKey(soundKey) && PlaySoundStatus.playSoundStatus.get(soundKey)) {
+			playSound = false;
+		}
+		
+		PlaySoundStatus.playSoundStatus.put(soundKey, playSoundList);
+		
+		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Maw", Waypoint.MAW.toString(), playSound);
 	}
 }

@@ -8,6 +8,7 @@ import org.joda.time.DateTime;
 import ca.bsolomon.gw2events.worldevent.util.EventStatus;
 import ca.bsolomon.gw2events.worldevent.util.EventStringFormatter;
 import ca.bsolomon.gw2events.worldevent.util.EventData;
+import ca.bsolomon.gw2events.worldevent.util.PlaySoundStatus;
 
 public enum HarathiChestEvent {
 
@@ -58,6 +59,8 @@ public enum HarathiChestEvent {
 		String defenseStatus = lowPriorityEventData.getEventStatus(defenseEventId);
 		String centaurStatus = lowPriorityEventData.getEventStatus(centaurEventId);
 		
+		boolean playSound = false;
+		
 		if ((warCouncilStatus != null) &&
 				(warCouncilStatus.equals("Active") || warCouncilStatus.equals("Preparation"))) {
 			time = lowPriorityEventData.getEventTime(warCouncilEventId);
@@ -79,6 +82,8 @@ public enum HarathiChestEvent {
 			outStatus = CENTAUR.toString();
 			color = EventStateColor.ACTIVE.color();
 			fontWeight = 900;
+			
+			playSound = true;
 		} else {
 			time = lowPriorityEventData.getEventTime(centaurEventId);
 			
@@ -86,6 +91,14 @@ public enum HarathiChestEvent {
 			color = EventStateColor.FAIL.color();
 		}
 		
-		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Kilava Chest", Waypoint.HARATHI.toString());
+		String soundKey = servId.getUid()+"-harathi";
+		boolean playSoundList = playSound;
+		if (PlaySoundStatus.playSoundStatus.containsKey(soundKey) && PlaySoundStatus.playSoundStatus.get(soundKey)) {
+			playSound = false;
+		}
+		
+		PlaySoundStatus.playSoundStatus.put(soundKey, playSoundList);
+		
+		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Kilava Chest", Waypoint.HARATHI.toString(), playSound);
 	}
 }

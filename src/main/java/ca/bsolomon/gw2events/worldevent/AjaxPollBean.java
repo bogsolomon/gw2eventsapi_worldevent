@@ -21,7 +21,7 @@ import ca.bsolomon.gw2events.worldevent.enums.GolemEvent;
 import ca.bsolomon.gw2events.worldevent.enums.HarathiChestEvent;
 import ca.bsolomon.gw2events.worldevent.enums.HydraQueenEvent;
 import ca.bsolomon.gw2events.worldevent.enums.JungleWurmEvent;
-import ca.bsolomon.gw2events.worldevent.enums.KarkaEnum;
+import ca.bsolomon.gw2events.worldevent.enums.KarkaEvent;
 import ca.bsolomon.gw2events.worldevent.enums.MawEvent;
 import ca.bsolomon.gw2events.worldevent.enums.ServerID;
 import ca.bsolomon.gw2events.worldevent.enums.ShadowBehemothEvent;
@@ -56,7 +56,7 @@ public class AjaxPollBean {
 			checkStatusUpdate(jorPanel, DragonEvent.getJorStatus(), "-jor");
 		
 		if (!checkboxBean.getSelectedEvents().contains("Karka Queen"))
-			checkStatusUpdate(karkaPanel, KarkaEnum.getStatus(), "-karka");
+			checkStatusUpdate(karkaPanel, KarkaEvent.getStatus(), "-karka");
 		
 		if (!checkboxBean.getSelectedEvents().contains("Maw"))
 			checkStatusUpdate(mawPanel, MawEvent.getStatus(), "-maw");
@@ -119,7 +119,7 @@ public class AjaxPollBean {
 		if (!checkboxBean.getSelectedEvents().contains("Fire Shaman"))
 			checkServerEvent(serv1Table, serv2Table, serv3Table, FireShamanEnum.getStatus(), "-firesham");
 		if (!checkboxBean.getSelectedEvents().contains("Karka Queen"))
-			checkServerEvent(serv1Table, serv2Table, serv3Table, KarkaEnum.getStatus(), "-karka");
+			checkServerEvent(serv1Table, serv2Table, serv3Table, KarkaEvent.getStatus(), "-karka");
 	}
 	
 	public void updateEventTempleServer(DataTable serv1Table, DataTable serv2Table, DataTable serv3Table) {

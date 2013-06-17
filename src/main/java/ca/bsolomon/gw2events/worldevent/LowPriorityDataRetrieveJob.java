@@ -18,7 +18,7 @@ import ca.bsolomon.gw2events.worldevent.enums.FoulBearEvent;
 import ca.bsolomon.gw2events.worldevent.enums.GolemEvent;
 import ca.bsolomon.gw2events.worldevent.enums.HarathiChestEvent;
 import ca.bsolomon.gw2events.worldevent.enums.HydraQueenEvent;
-import ca.bsolomon.gw2events.worldevent.enums.KarkaEnum;
+import ca.bsolomon.gw2events.worldevent.enums.KarkaEvent;
 import ca.bsolomon.gw2events.worldevent.enums.ServerID;
 import ca.bsolomon.gw2events.worldevent.util.LowPriorityEventData;
 
@@ -65,7 +65,7 @@ public class LowPriorityDataRetrieveJob extends DataRetrieveJob implements Job {
 			queryEvent(gregorianJuian, serverIds, eventId.uid(), lowPriorityEventData);  
 		}
 		
-		for (KarkaEnum eventId:KarkaEnum.values()) {
+		for (KarkaEvent eventId:KarkaEvent.values()) {
 			queryEvent(gregorianJuian, serverIds, eventId.uid(), lowPriorityEventData);  
 		}
 		
@@ -77,7 +77,7 @@ public class LowPriorityDataRetrieveJob extends DataRetrieveJob implements Job {
 		HarathiChestEvent.formatHarathiString(lowPriorityEventData);
 		HydraQueenEvent.formatHydraString(lowPriorityEventData);
 		FireShamanEnum.formatShamanString(lowPriorityEventData);
-		KarkaEnum.formatKarkaString(lowPriorityEventData);
+		KarkaEvent.formatKarkaString(lowPriorityEventData);
 		
 		//System.out.println("Ended LowPriority Thread formating "+this.toString()+" at "+new DateTime(gregorianJuian));
 	}

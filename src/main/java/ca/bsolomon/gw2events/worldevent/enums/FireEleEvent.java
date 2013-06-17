@@ -10,6 +10,7 @@ import org.joda.time.DateTime;
 import ca.bsolomon.gw2events.worldevent.util.EventData;
 import ca.bsolomon.gw2events.worldevent.util.EventStatus;
 import ca.bsolomon.gw2events.worldevent.util.EventStringFormatter;
+import ca.bsolomon.gw2events.worldevent.util.PlaySoundStatus;
 
 public enum FireEleEvent {
 
@@ -67,6 +68,8 @@ public enum FireEleEvent {
 		String stolenStatus = lowLevelEventData.getEventStatus(stolenEventId);
 		String fireEleStatus = lowLevelEventData.getEventStatus(fireEleEventId);
 		
+		boolean playSound = false;
+		
 		Integer inProg = 0;
 		
 		if (inProgressStatus.get(servId) != null)
@@ -92,6 +95,8 @@ public enum FireEleEvent {
 			outStatus = FireEleEvent.DEFEND.toString();
 			color = EventStateColor.PREPARATION.color();
 			fontWeight = 600;
+			
+			playSound = true;
 			
 			inProgressStatus.put(servId, 2);
 		} else if (stolenStatus!=null && (stolenStatus.equals("Active") || stolenStatus.equals("Preparation"))) {
@@ -128,6 +133,14 @@ public enum FireEleEvent {
 			color = EventStateColor.FAIL.color();
 		}
 		
-		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Fire Elemental", Waypoint.FIREELE.toString());
+		String soundKey = servId.getUid()+"-fe";
+		boolean playSoundList = playSound;
+		if (PlaySoundStatus.playSoundStatus.containsKey(soundKey) && PlaySoundStatus.playSoundStatus.get(soundKey)) {
+			playSound = false;
+		}
+		
+		PlaySoundStatus.playSoundStatus.put(soundKey, playSoundList);
+		
+		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Fire Elemental", Waypoint.FIREELE.toString(), playSound);
 	}
 }

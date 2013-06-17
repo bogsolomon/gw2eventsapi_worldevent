@@ -16,7 +16,7 @@ import ca.bsolomon.gw2events.worldevent.enums.GolemEvent;
 import ca.bsolomon.gw2events.worldevent.enums.HarathiChestEvent;
 import ca.bsolomon.gw2events.worldevent.enums.HydraQueenEvent;
 import ca.bsolomon.gw2events.worldevent.enums.JungleWurmEvent;
-import ca.bsolomon.gw2events.worldevent.enums.KarkaEnum;
+import ca.bsolomon.gw2events.worldevent.enums.KarkaEvent;
 import ca.bsolomon.gw2events.worldevent.enums.MawEvent;
 import ca.bsolomon.gw2events.worldevent.enums.ServerID;
 import ca.bsolomon.gw2events.worldevent.enums.ShadowBehemothEvent;
@@ -36,7 +36,7 @@ public class DragonBean {
 	
 	public List<EventStatus> getKarkaStatus() {
 		if (!checkboxBean.getSelectedEvents().contains("Karka Queen"))
-			return KarkaEnum.getStatus();
+			return KarkaEvent.getStatus();
 		else
 			return new ArrayList<>();
 	}
@@ -192,7 +192,7 @@ public class DragonBean {
 		if (!checkboxBean.getSelectedEvents().contains("Fire Shaman"))
 			formatServerEvent(servId, status, FireShamanEnum.getStatus());
 		if (!checkboxBean.getSelectedEvents().contains("Karka Queen"))
-			formatServerEvent(servId, status, KarkaEnum.getStatus());
+			formatServerEvent(servId, status, KarkaEvent.getStatus());
 	}
 
 	private void formatServerEvent(ServerID servId, List<EventStatus> status, 

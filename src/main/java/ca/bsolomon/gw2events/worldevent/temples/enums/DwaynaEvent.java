@@ -11,6 +11,7 @@ import ca.bsolomon.gw2events.worldevent.enums.Waypoint;
 import ca.bsolomon.gw2events.worldevent.util.EventData;
 import ca.bsolomon.gw2events.worldevent.util.EventStatus;
 import ca.bsolomon.gw2events.worldevent.util.EventStringFormatter;
+import ca.bsolomon.gw2events.worldevent.util.PlaySoundStatus;
 
 public enum DwaynaEvent {
 
@@ -65,6 +66,8 @@ public enum DwaynaEvent {
 		String priestessStatus = templeEventData.getEventStatus(priestessEventId);
 		String statueStatus = templeEventData.getEventStatus(statueEventId);
 		
+		boolean playSound = false;
+		
 		if (altarEscortStatus!=null && (altarEscortStatus.equals("Warmup"))) {
 			time = templeEventData.getEventTime(altarEscortEventId);
 			
@@ -79,6 +82,8 @@ public enum DwaynaEvent {
 			fontWeight = 900;
 		} else if (priestessStatus!=null && (priestessStatus.equals("Preparation") || priestessStatus.equals("Active"))) {
 			time = templeEventData.getEventTime(priestessEventId);
+			
+			playSound = true;
 			
 			outStatus = "Kill Priestess";
 			color = EventStateColor.PREPARATION.color();
@@ -109,7 +114,15 @@ public enum DwaynaEvent {
 			fontWeight = 900;
 		}
 		
-		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Dwayna", Waypoint.DWAYNA.toString());
+		String soundKey = servId.getUid()+"-dwayna";
+		boolean playSoundList = playSound;
+		if (PlaySoundStatus.playSoundStatus.containsKey(soundKey) && PlaySoundStatus.playSoundStatus.get(soundKey)) {
+			playSound = false;
+		}
+		
+		PlaySoundStatus.playSoundStatus.put(soundKey, playSoundList);
+		
+		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Dwayna", Waypoint.DWAYNA.toString(), playSound);
 	}
 }
 

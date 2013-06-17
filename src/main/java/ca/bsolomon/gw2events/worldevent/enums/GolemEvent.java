@@ -8,6 +8,7 @@ import org.joda.time.DateTime;
 import ca.bsolomon.gw2events.worldevent.util.EventStatus;
 import ca.bsolomon.gw2events.worldevent.util.EventStringFormatter;
 import ca.bsolomon.gw2events.worldevent.util.EventData;
+import ca.bsolomon.gw2events.worldevent.util.PlaySoundStatus;
 
 public enum GolemEvent {
 
@@ -58,6 +59,8 @@ public enum GolemEvent {
 		String containerStatus = lowLevelEventData.getEventStatus(containerEventId);
 		String golemStatus = lowLevelEventData.getEventStatus(golemEventId);
 		
+		boolean playSound = false;
+		
 		if ((kelpStatus != null) &&
 				(kelpStatus.equals("Active"))) {
 			time = lowLevelEventData.getEventTime(kelpEventId);
@@ -68,6 +71,8 @@ public enum GolemEvent {
 		} else if ((containerStatus != null) &&
 				(containerStatus.equals("Active"))) {
 			time = lowLevelEventData.getEventTime(containerEventId);
+			
+			playSound = true;
 			
 			outStatus = CONTAINER.toString();
 			color = EventStateColor.PREPARATION.color();
@@ -93,6 +98,14 @@ public enum GolemEvent {
 			color = EventStateColor.FAIL.color();
 		}
 		
-		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Golem MKII", Waypoint.GOLEM.toString());
+		String soundKey = servId.getUid()+"-golem";
+		boolean playSoundList = playSound;
+		if (PlaySoundStatus.playSoundStatus.containsKey(soundKey) && PlaySoundStatus.playSoundStatus.get(soundKey)) {
+			playSound = false;
+		}
+		
+		PlaySoundStatus.playSoundStatus.put(soundKey, playSoundList);
+		
+		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Golem MKII", Waypoint.GOLEM.toString(), playSound);
 	}
 }

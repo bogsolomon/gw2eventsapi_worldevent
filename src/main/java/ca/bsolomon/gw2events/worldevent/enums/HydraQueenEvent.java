@@ -8,6 +8,7 @@ import org.joda.time.DateTime;
 import ca.bsolomon.gw2events.worldevent.util.EventData;
 import ca.bsolomon.gw2events.worldevent.util.EventStatus;
 import ca.bsolomon.gw2events.worldevent.util.EventStringFormatter;
+import ca.bsolomon.gw2events.worldevent.util.PlaySoundStatus;
 
 public enum HydraQueenEvent {
 
@@ -64,9 +65,13 @@ public enum HydraQueenEvent {
 		String galleonStatus = lowLevelEventData.getEventStatus(galleonEventId);
 		String taidhaStatus = lowLevelEventData.getEventStatus(taidhaEventId);
 		
+		boolean playSound = false;
+		
 		if ((taidhaStatus != null) &&
 				(taidhaStatus.equals("Active"))) {
 			time = lowLevelEventData.getEventTime(taidhaEventId);
+			
+			playSound = true;
 			
 			outStatus = "Active";
 			color = EventStateColor.ACTIVE.color();
@@ -106,6 +111,14 @@ public enum HydraQueenEvent {
 			color = EventStateColor.FAIL.color();
 		}
 		
-		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Hydra Queen", Waypoint.HYDRA.toString());
+		String soundKey = servId.getUid()+"-hydra";
+		boolean playSoundList = playSound;
+		if (PlaySoundStatus.playSoundStatus.containsKey(soundKey) && PlaySoundStatus.playSoundStatus.get(soundKey)) {
+			playSound = false;
+		}
+		
+		PlaySoundStatus.playSoundStatus.put(soundKey, playSoundList);
+		
+		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Hydra Queen", Waypoint.HYDRA.toString(), playSound);
 	}
 }

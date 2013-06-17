@@ -11,6 +11,7 @@ import ca.bsolomon.gw2events.worldevent.enums.Waypoint;
 import ca.bsolomon.gw2events.worldevent.util.EventData;
 import ca.bsolomon.gw2events.worldevent.util.EventStatus;
 import ca.bsolomon.gw2events.worldevent.util.EventStringFormatter;
+import ca.bsolomon.gw2events.worldevent.util.PlaySoundStatus;
 
 public enum GrenthEvent {
 
@@ -79,6 +80,8 @@ public enum GrenthEvent {
 		String secureDGStatus = templeEventData.getEventStatus(secureDGEventId);
 		//String templeDefStatus = templeEventData.getEventStatus(templeDefEventId);
 		
+		boolean playSound = false;
+		
 		if (escortDGStatus!=null && (escortDGStatus.equals("Active"))) {
 			time = templeEventData.getEventTime(escortDGEventId);
 			
@@ -115,6 +118,8 @@ public enum GrenthEvent {
 			outStatus = "Kill Priest";
 			color = EventStateColor.PREPARATION.color();
 			fontWeight = 900;
+			
+			playSound = true;
 		} else if (coverJonesStatus!=null && (coverJonesStatus.equals("Active") || coverJonesStatus.equals("Preparation") || coverJonesStatus.equals("Warmup"))) {
 			time = templeEventData.getEventTime(coverJonesEventId);
 			
@@ -135,7 +140,15 @@ public enum GrenthEvent {
 			fontWeight = 900;
 		}
 		
-		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Grenth", Waypoint.GRENTH.toString());
+		String soundKey = servId.getUid()+"-grenth";
+		boolean playSoundList = playSound;
+		if (PlaySoundStatus.playSoundStatus.containsKey(soundKey) && PlaySoundStatus.playSoundStatus.get(soundKey)) {
+			playSound = false;
+		}
+		
+		PlaySoundStatus.playSoundStatus.put(soundKey, playSoundList);
+		
+		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Grenth", Waypoint.GRENTH.toString(), playSound);
 	}
 }
 

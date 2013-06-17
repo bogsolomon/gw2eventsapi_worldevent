@@ -47,7 +47,7 @@ public class EventStringFormatter {
 
 	public static void generateEventString(List<EventStatus> statusList,
 			ServerID servId, String outStatus, String color, int fontWeight,
-			DateTime time, String eventName, String waypoint) {
+			DateTime time, String eventName, String waypoint, boolean playSound) {
 		DateTime now = new DateTime(gregorianJuian);
 		Period period = new Period(time, now);
 		
@@ -55,7 +55,7 @@ public class EventStringFormatter {
 		
 		String fullWPName = waypoint+" - "+eventName+" - "+servId.toString()+ ": "+outStatus;
 		
-		EventStatus newStatus = new EventStatus(servId.toString(), outStatus, periodStr, color, eventName, fullWPName);
+		EventStatus newStatus = new EventStatus(servId.toString(), outStatus, periodStr, color, eventName, fullWPName, playSound);
 		
 		statusList.add(newStatus);
 	}

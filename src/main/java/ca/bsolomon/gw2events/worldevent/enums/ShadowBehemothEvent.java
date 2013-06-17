@@ -8,6 +8,7 @@ import org.joda.time.DateTime;
 import ca.bsolomon.gw2events.worldevent.util.EventData;
 import ca.bsolomon.gw2events.worldevent.util.EventStatus;
 import ca.bsolomon.gw2events.worldevent.util.EventStringFormatter;
+import ca.bsolomon.gw2events.worldevent.util.PlaySoundStatus;
 
 public enum ShadowBehemothEvent {
 
@@ -65,6 +66,8 @@ public enum ShadowBehemothEvent {
 		String swampStatus = lowLevelEventData.getEventStatus(swampEventId);
 		String sbStatus = lowLevelEventData.getEventStatus(sbEventId);
 		
+		boolean playSound = false;
+		
 		if ((hillStatus != null && monStatus != null && woodStatus != null) &&
 				(hillStatus.equals("Active") || monStatus.equals("Active") || woodStatus.equals("Active")
 						|| hillStatus.equals("Warmup") || monStatus.equals("Warmup") || woodStatus.equals("Warmup"))) {
@@ -73,6 +76,8 @@ public enum ShadowBehemothEvent {
 			outStatus = "Outside Portals Pre";
 			color = EventStateColor.PREPARATION.color();
 			fontWeight = 600;
+			
+			playSound = true;
 		} else if ((swampStatus != null) &&
 				(swampStatus.equals("Active"))) {
 			time = lowLevelEventData.getEventTime(swampEventId);
@@ -98,6 +103,14 @@ public enum ShadowBehemothEvent {
 			swampPortalsDestroyed = false;
 		}
 		
-		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "SB", Waypoint.SB.toString());
+		String soundKey = servId.getUid()+"-sb";
+		boolean playSoundList = playSound;
+		if (PlaySoundStatus.playSoundStatus.containsKey(soundKey) && PlaySoundStatus.playSoundStatus.get(soundKey)) {
+			playSound = false;
+		}
+		
+		PlaySoundStatus.playSoundStatus.put(soundKey, playSoundList);
+		
+		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "SB", Waypoint.SB.toString(), playSound);
 	}
 }

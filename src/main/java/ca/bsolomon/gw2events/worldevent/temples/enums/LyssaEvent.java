@@ -11,6 +11,7 @@ import ca.bsolomon.gw2events.worldevent.enums.Waypoint;
 import ca.bsolomon.gw2events.worldevent.util.EventData;
 import ca.bsolomon.gw2events.worldevent.util.EventStatus;
 import ca.bsolomon.gw2events.worldevent.util.EventStringFormatter;
+import ca.bsolomon.gw2events.worldevent.util.PlaySoundStatus;
 
 public enum LyssaEvent {
 
@@ -69,6 +70,8 @@ public enum LyssaEvent {
 		String risenFortStatus = templeEventData.getEventStatus(risenFortEventId);
 		String risenFortDefStatus = templeEventData.getEventStatus(risenFortDefEventId);
 		
+		boolean playSound = false;
+		
 		if (priestessStatus!=null && priestessStatus.equals("Success")) {
 			time = templeEventData.getEventTime(priestessEventId);
 			
@@ -95,6 +98,8 @@ public enum LyssaEvent {
 					sealDefStatus!=null && sealDefStatus.equals("Success")){
 				time = templeEventData.getEventTime(priestessEventId);
 				
+				playSound = true;
+				
 				outStatus = "Kill Priestess";
 				color = EventStateColor.PREPARATION.color();
 				fontWeight = 900;
@@ -115,7 +120,15 @@ public enum LyssaEvent {
 			fontWeight = 900;
 		}
 		
-		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Lyssa", Waypoint.LYSSA.toString());
+		String soundKey = servId.getUid()+"-lyssa";
+		boolean playSoundList = playSound;
+		if (PlaySoundStatus.playSoundStatus.containsKey(soundKey) && PlaySoundStatus.playSoundStatus.get(soundKey)) {
+			playSound = false;
+		}
+		
+		PlaySoundStatus.playSoundStatus.put(soundKey, playSoundList);
+		
+		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Lyssa", Waypoint.LYSSA.toString(), playSound);
 	}
 }
 

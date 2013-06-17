@@ -8,6 +8,7 @@ import org.joda.time.DateTime;
 import ca.bsolomon.gw2events.worldevent.util.EventData;
 import ca.bsolomon.gw2events.worldevent.util.EventStatus;
 import ca.bsolomon.gw2events.worldevent.util.EventStringFormatter;
+import ca.bsolomon.gw2events.worldevent.util.PlaySoundStatus;
 
 public enum JungleWurmEvent {
 
@@ -66,12 +67,16 @@ public enum JungleWurmEvent {
 		String avatarsStatus = lowLevelEventData.getEventStatus(avatarsEventId);
 		String wurmStatus = lowLevelEventData.getEventStatus(wurmEventId);
 		
+		boolean playSound = false;
+		
 		if (escortStatus != null && (escortStatus.equals("Active") || escortStatus.equals("Preparation"))) {
 			time = lowLevelEventData.getEventTime(escortEventId);
 			
 			outStatus = JungleWurmEvent.ESCORT.toString();
 			color = EventStateColor.PREPARATION.color();
 			fontWeight = 600;
+			
+			playSound = true;
 		} else if ((growth1Status != null && growth2Status != null && grubStatus != null) &&
 				(growth1Status.equals("Active") || growth2Status.equals("Active") || grubStatus.equals("Active"))) {
 			time = lowLevelEventData.getEventTime(grubEventId);
@@ -99,6 +104,14 @@ public enum JungleWurmEvent {
 			color = EventStateColor.FAIL.color();
 		}
 		
-		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Jungle Wurm", Waypoint.JUNGLEWURM.toString());
+		String soundKey = servId.getUid()+"-wurm";
+		boolean playSoundList = playSound;
+		if (PlaySoundStatus.playSoundStatus.containsKey(soundKey) && PlaySoundStatus.playSoundStatus.get(soundKey)) {
+			playSound = false;
+		}
+		
+		PlaySoundStatus.playSoundStatus.put(soundKey, playSoundList);
+		
+		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Jungle Wurm", Waypoint.JUNGLEWURM.toString(), playSound);
 	}
 }

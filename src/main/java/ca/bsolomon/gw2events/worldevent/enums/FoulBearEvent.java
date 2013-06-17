@@ -10,12 +10,13 @@ import org.joda.time.DateTime;
 import ca.bsolomon.gw2events.worldevent.util.EventStatus;
 import ca.bsolomon.gw2events.worldevent.util.EventStringFormatter;
 import ca.bsolomon.gw2events.worldevent.util.EventData;
+import ca.bsolomon.gw2events.worldevent.util.PlaySoundStatus;
 
 public enum FoulBearEvent {
 
 	
-	SAPPER(		"724343EA-B32C-4AE1-AB7E-E5FC160C26F9", "Sapper Delve"),
-	SAPPERDEF(	"8D45B410-B614-4008-8A5C-E8D8230CEB40", "Sapper Delve Defense"),
+	//SAPPER(		"724343EA-B32C-4AE1-AB7E-E5FC160C26F9", "Sapper Delve"),
+	//SAPPERDEF(	"8D45B410-B614-4008-8A5C-E8D8230CEB40", "Sapper Delve Defense"),
 	BLOODGORGE(	"44ABC8F1-ED5C-4E00-9338-5A8C40B228B4", "Capture Bloodgorge"),
 	ASSAULT(	"D9F1CF48-B1CB-49F5-BFAF-4CEC5E68C9CF", "Animal Trainers"),
 	DESTROY(	"4B478454-8CD2-4B44-808C-A35918FA86AA", "Destroy Houses"),
@@ -57,19 +58,21 @@ public enum FoulBearEvent {
 		DateTime time = null;
 		int fontWeight = 400;
 
-		String sapperEventId = servId.getUid()+"-"+SAPPER.uid();
-		String sapperDefEventId = servId.getUid()+"-"+SAPPERDEF.uid();
+		//String sapperEventId = servId.getUid()+"-"+SAPPER.uid();
+		//String sapperDefEventId = servId.getUid()+"-"+SAPPERDEF.uid();
 		String bloodEventId = servId.getUid()+"-"+BLOODGORGE.uid();
 		String assaultEventId = servId.getUid()+"-"+ASSAULT.uid();
 		String destroyEventId = servId.getUid()+"-"+DESTROY.uid();
 		String chiefEventId = servId.getUid()+"-"+CHIEF.uid();
 		
-		String sapperStatus = lowLevelEventData.getEventStatus(sapperEventId);
-		String sapperDefStatus = lowLevelEventData.getEventStatus(sapperDefEventId);
+		//String sapperStatus = lowLevelEventData.getEventStatus(sapperEventId);
+		//String sapperDefStatus = lowLevelEventData.getEventStatus(sapperDefEventId);
 		String bloodStatus = lowLevelEventData.getEventStatus(bloodEventId);
 		String assaultStatus = lowLevelEventData.getEventStatus(assaultEventId);
 		String destroyStatus = lowLevelEventData.getEventStatus(destroyEventId);
 		String chiefStatus = lowLevelEventData.getEventStatus(chiefEventId);
+		
+		boolean playSound = false;
 		
 		Integer inProg = 0;
 		
@@ -84,6 +87,8 @@ public enum FoulBearEvent {
 			color = EventStateColor.ACTIVE.color();
 			fontWeight = 900;
 			
+			playSound = true;
+			
 			inProgressStatus.put(servId, 0);
 		} else if ((destroyStatus != null) &&
 				(destroyStatus.equals("Active") || destroyStatus.equals("Preparation") || destroyStatus.equals("Warmup"))) {
@@ -92,6 +97,9 @@ public enum FoulBearEvent {
 			outStatus = DESTROY.toString();
 			color = EventStateColor.PREPARATION.color();
 			fontWeight = 600;
+			
+			playSound = true;
+			
 			inProgressStatus.put(servId, 3);
 		} else if ((assaultStatus != null) &&
 				(assaultStatus.equals("Active") || assaultStatus.equals("Preparation"))) {
@@ -135,6 +143,14 @@ public enum FoulBearEvent {
 			color = EventStateColor.FAIL.color();
 		}
 		
-		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Foulbear", Waypoint.FOULBEAR.toString());
+		String soundKey = servId.getUid()+"-foulbear";
+		boolean playSoundList = playSound;
+		if (PlaySoundStatus.playSoundStatus.containsKey(soundKey) && PlaySoundStatus.playSoundStatus.get(soundKey)) {
+			playSound = false;
+		}
+		
+		PlaySoundStatus.playSoundStatus.put(soundKey, playSoundList);
+		
+		EventStringFormatter.generateEventString(statusList, servId, outStatus, color, fontWeight, time, "Foulbear", Waypoint.FOULBEAR.toString(), playSound);
 	}
 }

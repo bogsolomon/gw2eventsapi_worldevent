@@ -7,7 +7,6 @@ import org.joda.time.DateTime;
 import org.joda.time.Duration;
 import org.joda.time.Period;
 
-import ca.bsolomon.gw2events.worldevent.enums.DragonEvent;
 import ca.bsolomon.gw2events.worldevent.enums.ShadowBehemothEvent;
 
 public class LowLevelEventData implements EventData {
