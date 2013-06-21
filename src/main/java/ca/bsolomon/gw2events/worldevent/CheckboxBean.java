@@ -60,6 +60,7 @@ public class CheckboxBean {
     	events.put("Dwayna", "Dwayna");
     	events.put("Melandru", "Melandru");
     	events.put("Grenth", "Grenth");
+    	events.put("Plinx", "Plinx");
     	
 		for (ServerID servId:ServerID.values()) {
 			serverIds.add(new Server(servId.getUid(), servId.getName()));
@@ -73,6 +74,7 @@ public class CheckboxBean {
 		selectedEvents.add("Dwayna");
 		selectedEvents.add("Melandru");
 		selectedEvents.add("Grenth");
+		selectedEvents.add("Plinx");
     }
 	
 	public void handleToggle(ToggleEvent event) {

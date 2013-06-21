@@ -25,6 +25,7 @@ import ca.bsolomon.gw2events.worldevent.temples.enums.DwaynaEvent;
 import ca.bsolomon.gw2events.worldevent.temples.enums.GrenthEvent;
 import ca.bsolomon.gw2events.worldevent.temples.enums.LyssaEvent;
 import ca.bsolomon.gw2events.worldevent.temples.enums.MelandruEvent;
+import ca.bsolomon.gw2events.worldevent.temples.enums.PlinxEvent;
 import ca.bsolomon.gw2events.worldevent.util.EventStatus;
 
 @ManagedBean(name="dragonBean")
@@ -249,5 +250,7 @@ public class DragonBean {
 			formatServerEvent(servId, status, MelandruEvent.getStatus());
 		if (!checkboxBean.getSelectedEvents().contains("Dwayna"))
 			formatServerEvent(servId, status, DwaynaEvent.getStatus());
+		if (!checkboxBean.getSelectedEvents().contains("Plinx"))
+			formatServerEvent(servId, status, PlinxEvent.getStatus());
 	}
 }

@@ -87,7 +87,7 @@ public enum MelandruEvent {
 			outStatus = "Not up";
 			color = EventStateColor.FAIL.color();
 			fontWeight = 900;
-		} else if (cleansingStatus!=null && (cleansingStatus.equals("Active"))) {
+		} else if (cleansingStatus!=null && (cleansingStatus.equals("Active") || cleansingStatus.equals("Preparation"))) {
 			time = templeEventData.getEventTime(priestEventId);
 			
 			outStatus = "Cleansing Temple";

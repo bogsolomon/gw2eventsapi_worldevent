@@ -27,7 +27,10 @@ import ca.bsolomon.gw2events.worldevent.enums.ServerID;
 import ca.bsolomon.gw2events.worldevent.enums.ShadowBehemothEvent;
 import ca.bsolomon.gw2events.worldevent.temples.enums.BalthazzarEvent;
 import ca.bsolomon.gw2events.worldevent.temples.enums.DwaynaEvent;
+import ca.bsolomon.gw2events.worldevent.temples.enums.GrenthEvent;
 import ca.bsolomon.gw2events.worldevent.temples.enums.LyssaEvent;
+import ca.bsolomon.gw2events.worldevent.temples.enums.MelandruEvent;
+import ca.bsolomon.gw2events.worldevent.temples.enums.PlinxEvent;
 import ca.bsolomon.gw2events.worldevent.util.EventStatus;
 
 @ManagedBean(name="ajaxPollBean")
@@ -130,9 +133,11 @@ public class AjaxPollBean {
 		if (!checkboxBean.getSelectedEvents().contains("Dwayna"))
 			checkServerEvent(serv1Table, serv2Table, serv3Table, DwaynaEvent.getStatus(), "-dwayna");
 		if (!checkboxBean.getSelectedEvents().contains("Melandru"))
-			checkServerEvent(serv1Table, serv2Table, serv3Table, BalthazzarEvent.getStatus(), "-melandru");
+			checkServerEvent(serv1Table, serv2Table, serv3Table, MelandruEvent.getStatus(), "-melandru");
 		if (!checkboxBean.getSelectedEvents().contains("Grenth"))
-			checkServerEvent(serv1Table, serv2Table, serv3Table, BalthazzarEvent.getStatus(), "-grenth");
+			checkServerEvent(serv1Table, serv2Table, serv3Table, GrenthEvent.getStatus(), "-grenth");
+		if (!checkboxBean.getSelectedEvents().contains("Plinx"))
+			checkServerEvent(serv1Table, serv2Table, serv3Table, PlinxEvent.getStatus(), "-plinx");
 	}
 
 	private void checkServerEvent(DataTable serv1Table, DataTable serv2Table,

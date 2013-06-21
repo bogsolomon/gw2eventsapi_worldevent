@@ -22,7 +22,8 @@ public enum Waypoint {
 	BALTH("[&BNIEAAA=]"),
 	GRENTH("[&BCIDAAA=]"),
 	MELANDRU("[&BBsDAAA=]"),
-	DWAYNA("[&BLICAAA=]");
+	DWAYNA("[&BLICAAA=]"),
+	PLINX("[&BCEDAAA=]");
 	
 	private String wp;
 	
