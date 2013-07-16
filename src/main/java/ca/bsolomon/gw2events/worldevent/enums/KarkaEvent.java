@@ -106,25 +106,29 @@ public enum KarkaEvent {
 			 color = EventStateColor.ACTIVE.color();
 			 fontWeight = 900;
 		 }  else {
-			 if (set1FailStatus.equals("Success") || set1DefStatus.equals("Success") || set1DefStatus.equals("Active")
-					 || set1DefStatus.equals("Warmup") || set1DefStatus.equals("Preparation")) {
-				 settlementCount++;
-			 }
+			 if (set1FailStatus != null && set1DefStatus != null)
+				 if (set1FailStatus.equals("Success") || set1DefStatus.equals("Success") || set1DefStatus.equals("Active")
+						 || set1DefStatus.equals("Warmup") || set1DefStatus.equals("Preparation")) {
+					 settlementCount++;
+				 }
 			 
-			 if (set2FailStatus.equals("Success") || set2DefStatus.equals("Success")|| set2DefStatus.equals("Active")
-					 || set2DefStatus.equals("Warmup") || set2DefStatus.equals("Preparation")) {
-				 settlementCount++;
-			 }
+			 if (set2FailStatus != null && set2DefStatus != null)
+				 if (set2FailStatus.equals("Success") || set2DefStatus.equals("Success")|| set2DefStatus.equals("Active")
+						 || set2DefStatus.equals("Warmup") || set2DefStatus.equals("Preparation")) {
+					 settlementCount++;
+				 }
 			 
-			 if (set3FailStatus.equals("Success") || set3DefStatus.equals("Success") || set3DefStatus.equals("Active")
-					 || set3DefStatus.equals("Warmup") || set3DefStatus.equals("Preparation")) {
-				 settlementCount++;
-			 }
+			 if (set3FailStatus != null && set3DefStatus != null)
+				 if (set3FailStatus.equals("Success") || set3DefStatus.equals("Success") || set3DefStatus.equals("Active")
+						 || set3DefStatus.equals("Warmup") || set3DefStatus.equals("Preparation")) {
+					 settlementCount++;
+				 }
 			 
-			 if (set4FailStatus.equals("Success") || set4DefStatus.equals("Success")|| set4DefStatus.equals("Active")
-					 || set4DefStatus.equals("Warmup") || set4DefStatus.equals("Preparation")) {
-				 settlementCount++;
-			 }
+			 if (set4FailStatus != null && set4DefStatus != null)
+				 if (set4FailStatus.equals("Success") || set4DefStatus.equals("Success")|| set4DefStatus.equals("Active")
+						 || set4DefStatus.equals("Warmup") || set4DefStatus.equals("Preparation")) {
+					 settlementCount++;
+				 }
 			 
 			 time = lowLevelEventData.getEventTime(queenId1);
 			

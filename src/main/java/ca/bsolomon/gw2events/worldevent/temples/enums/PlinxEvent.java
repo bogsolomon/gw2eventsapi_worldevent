@@ -69,13 +69,13 @@ public enum PlinxEvent {
 		
 		boolean playSound = false;
 		
-		if (champAbomStatus!=null && (champAbomStatus.equals("Active"))) {
+		if (champAbomStatus!=null && (champAbomStatus.equals("Active") || champAbomStatus.equals("Preparation"))) {
 			time = templeEventData.getEventTime(champAbomEventId);
 			
 			outStatus = "Kill Abomination";
 			color = EventStateColor.ACTIVE.color();
 			fontWeight = 900;
-		} else if (suppliesEscortStatus!=null && (suppliesEscortStatus.equals("Active"))) {
+		} else if (suppliesEscortStatus!=null && (suppliesEscortStatus.equals("Active") || suppliesEscortStatus.equals("Preparation"))) {
 			time = templeEventData.getEventTime(suppliesEscortEventId);
 			
 			outStatus = "Escort Supplies";
@@ -87,14 +87,14 @@ public enum PlinxEvent {
 			outStatus = "Clear LZ";
 			color = EventStateColor.PREPARATION.color();
 			fontWeight = 900;
-		} else if (singalEscortStatus!=null && (singalEscortStatus.equals("Active"))) {
+		} else if (singalEscortStatus!=null && (singalEscortStatus.equals("Active") || singalEscortStatus.equals("Preparation"))) {
 			time = templeEventData.getEventTime(singalEscortEventId);
 			
 			outStatus = "Escort Plinx to LZ";
 			color = EventStateColor.PREPARATION.color();
 			fontWeight = 900;
 		} else if (hazmatRepairEscortStatus!=null && (hazmatRepairEscortStatus.equals("Active") ||
-				hazmatRepairEscortStatus.equals("Preparation") || hazmatRepairEscortStatus.equals("Warmup"))) {
+				hazmatRepairEscortStatus.equals("Preparation"))) {
 			time = templeEventData.getEventTime(hazmatRepairEventId);
 			
 			outStatus = "Repair Hazmat";
