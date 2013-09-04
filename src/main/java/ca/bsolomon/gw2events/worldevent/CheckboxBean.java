@@ -37,22 +37,24 @@ public class CheckboxBean {
     private boolean eastCollapsed;
 	
 	public CheckboxBean() {  
-    	events = new LinkedHashMap<String, String>();  
-    	events.put("Tequatl", "Tequatl");  
-    	events.put("RageDragon", "RageDragon");  
-    	events.put("Jormag", "Jormag");  
+    	events = new LinkedHashMap<String, String>();
     	
     	events.put("Maw", "Maw");
     	events.put("Fire Ele", "Fire Ele");  
     	events.put("Jungle Wurm", "Jungle Wurm");  
     	events.put("SB", "SB");
     	
-    	events.put("Golem MKII", "Golem MKII");
-    	events.put("Dredge", "Dredge");
-    	events.put("Kilava Chest", "Kilava Chest");
     	events.put("Foulbear", "Foulbear");
+    	events.put("Kilava Chest", "Kilava Chest");
+    	events.put("Dredge", "Dredge");
+    	
     	events.put("Hydra Queen", "Hydra Queen");
+    	events.put("RageDragon", "RageDragon");  
     	events.put("Fire Shaman", "Fire Shaman");
+    	
+    	events.put("Tequatl", "Tequatl");  
+    	events.put("Golem MKII", "Golem MKII");
+    	events.put("Jormag", "Jormag");  
     	events.put("Karka Queen", "Karka Queen");
     	
     	events.put("Balthazar", "Balthazar");

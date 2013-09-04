@@ -164,35 +164,34 @@ public class DragonBean {
 	}
 	
 	public void formatServer(ServerID servId, List<EventStatus> status) {
-		if (!checkboxBean.getSelectedEvents().contains("Tequatl"))
-			formatServerEvent(servId, status, DragonEvent.getTeqStatus());
-		if (!checkboxBean.getSelectedEvents().contains("RageDragon"))
-			formatServerEvent(servId, status, DragonEvent.getShatStatus());
-		if (!checkboxBean.getSelectedEvents().contains("Jormag"))
-			formatServerEvent(servId, status, DragonEvent.getJorStatus());
-
-		if (!checkboxBean.getSelectedEvents().contains("Maw"))
+		if (!checkboxBean.getSelectedEvents().contains("Maw"))//10
 			formatServerEvent(servId, status, MawEvent.getStatus());
-		if (!checkboxBean.getSelectedEvents().contains("Fire Ele"))
+		if (!checkboxBean.getSelectedEvents().contains("Fire Ele"))//15
 			formatServerEvent(servId, status, FireEleEvent.getStatus());
-		if (!checkboxBean.getSelectedEvents().contains("Jungle Wurm"))
+		if (!checkboxBean.getSelectedEvents().contains("Jungle Wurm")) //15
 			formatServerEvent(servId, status, JungleWurmEvent.getStatus());
-		if (!checkboxBean.getSelectedEvents().contains("SB"))
+		if (!checkboxBean.getSelectedEvents().contains("SB")) //15
 			formatServerEvent(servId, status, ShadowBehemothEvent.getStatus());
 		
-		if (!checkboxBean.getSelectedEvents().contains("Golem MKII"))
-			formatServerEvent(servId, status, GolemEvent.getStatus());
-		if (!checkboxBean.getSelectedEvents().contains("Dredge"))
-			formatServerEvent(servId, status, DredgeEvent.getStatus());
-		if (!checkboxBean.getSelectedEvents().contains("Kilava Chest"))
-			formatServerEvent(servId, status, HarathiChestEvent.getStatus());
-		if (!checkboxBean.getSelectedEvents().contains("Foulbear"))
+		if (!checkboxBean.getSelectedEvents().contains("Foulbear")) //34
 			formatServerEvent(servId, status, FoulBearEvent.getStatus());
-		if (!checkboxBean.getSelectedEvents().contains("Hydra Queen"))
+		if (!checkboxBean.getSelectedEvents().contains("Kilava Chest"))//43
+			formatServerEvent(servId, status, HarathiChestEvent.getStatus());
+		if (!checkboxBean.getSelectedEvents().contains("Dredge")) //50
+			formatServerEvent(servId, status, DredgeEvent.getStatus());
+		if (!checkboxBean.getSelectedEvents().contains("Hydra Queen")) //50
 			formatServerEvent(servId, status, HydraQueenEvent.getStatus());
-		if (!checkboxBean.getSelectedEvents().contains("Fire Shaman"))
+		if (!checkboxBean.getSelectedEvents().contains("RageDragon")) //50
+			formatServerEvent(servId, status, DragonEvent.getShatStatus());
+		if (!checkboxBean.getSelectedEvents().contains("Fire Shaman")) //60
 			formatServerEvent(servId, status, FireShamanEnum.getStatus());
-		if (!checkboxBean.getSelectedEvents().contains("Karka Queen"))
+		if (!checkboxBean.getSelectedEvents().contains("Tequatl"))//65
+			formatServerEvent(servId, status, DragonEvent.getTeqStatus());
+		if (!checkboxBean.getSelectedEvents().contains("Golem MKII"))//68
+			formatServerEvent(servId, status, GolemEvent.getStatus());
+		if (!checkboxBean.getSelectedEvents().contains("Jormag"))//80
+			formatServerEvent(servId, status, DragonEvent.getJorStatus());
+		if (!checkboxBean.getSelectedEvents().contains("Karka Queen")) //80
 			formatServerEvent(servId, status, KarkaEvent.getStatus());
 	}
 
