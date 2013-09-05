@@ -8,7 +8,6 @@ import org.joda.time.Duration;
 import org.joda.time.Period;
 
 import ca.bsolomon.gw2events.worldevent.enums.FireShamanEnum;
-import ca.bsolomon.gw2events.worldevent.enums.ShadowBehemothEvent;
 
 public class LowPriorityEventData  implements EventData {
 

@@ -31,6 +31,7 @@ import ca.bsolomon.gw2events.worldevent.temples.enums.GrenthEvent;
 import ca.bsolomon.gw2events.worldevent.temples.enums.LyssaEvent;
 import ca.bsolomon.gw2events.worldevent.temples.enums.MelandruEvent;
 import ca.bsolomon.gw2events.worldevent.temples.enums.PlinxEvent;
+import ca.bsolomon.gw2events.worldevent.temples.enums.ScarlettEvent;
 import ca.bsolomon.gw2events.worldevent.util.EventStatus;
 
 @ManagedBean(name="ajaxPollBean")
@@ -138,6 +139,8 @@ public class AjaxPollBean {
 			checkServerEvent(serv1Table, serv2Table, serv3Table, GrenthEvent.getStatus(), "-grenth");
 		if (!checkboxBean.getSelectedEvents().contains("Plinx"))
 			checkServerEvent(serv1Table, serv2Table, serv3Table, PlinxEvent.getStatus(), "-plinx");
+		if (!checkboxBean.getSelectedEvents().contains("Scarlett"))
+			checkServerEvent(serv1Table, serv2Table, serv3Table, ScarlettEvent.getStatus(), "-scarlett");
 	}
 
 	private void checkServerEvent(DataTable serv1Table, DataTable serv2Table,

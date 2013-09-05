@@ -16,7 +16,7 @@ soundManager.setup({
 function playSound() {
 	var elements = document.getElementsByClassName("soundClass");
 	
-	var elementCB = document.getElementById("checkboxes:playSoundCB:0");
+	var elementCB = document.getElementById("checkboxTab:checkboxes:playSoundCB:0");
 	
 	var playSound = false;
 	

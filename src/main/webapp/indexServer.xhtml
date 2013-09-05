@@ -170,44 +170,60 @@
         </p:layoutUnit>
         <p:layoutUnit id="east" position="east" header="Checkboxes" size="#{checkboxBean.eastSize}" collapsed="#{checkboxBean.eastCollapsed}" 
         	closable="false" collapsible="true" resizable="true">
-        	<h:form id="checkboxes">
-        		<p:selectManyCheckbox value="#{checkboxBean.selectedEvents}"  
-		            layout="pageDirection" id="smcb">  
-		            <f:selectItems value="#{checkboxBean.events}" />
-		            <p:ajax listener="#{checkboxBean.handleCheckbox(serv1Table, serv2Table, serv3Table, serv1TempleTable, serv2TempleTable, serv3TempleTable)}"/> 
-		        </p:selectManyCheckbox>
-		        <p:commandButton value="Clear All" update="smcb" id="ajax"  
-             			actionListener="#{checkboxBean.clearAll(serv1Table, serv2Table, serv3Table, serv1TempleTable, serv2TempleTable, serv3TempleTable)}">
-		        </p:commandButton>
-		        <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
-		        	<h:outputText value="Server 1: " />  
-			        <p:selectOneMenu id="serv1SM" value="#{checkboxBean.serverOne}" converter="serverConverter">
-			        	<p:ajax listener="#{checkboxBean.handleServChange}" update=":form:sorPanel, :form:serv1TemplePanel, :checkboxes:serv1SM"/>
-			        	<f:selectItems value="#{checkboxBean.serverIds}" var="server" itemLabel="#{server.serverName}" itemValue="#{server}"/>  
-			        </p:selectOneMenu>
-			        <h:outputText value="Server 2: " />  
-			        <p:selectOneMenu id="serv2SM" value="#{checkboxBean.serverTwo}" converter="serverConverter">
-			        	<p:ajax listener="#{checkboxBean.handleServChange}" update=":form:fcPanel, :form:serv2TemplePanel, :checkboxes:serv2SM" />
-			        	<f:selectItems value="#{checkboxBean.serverIds}" var="server" itemLabel="#{server.serverName}" itemValue="#{server}"/>  
-			        </p:selectOneMenu>
-			        <h:outputText value="Server 3: " />  
-			        <p:selectOneMenu id="serv3SM" value="#{checkboxBean.serverThree}" converter="serverConverter">
-			        	<p:ajax listener="#{checkboxBean.handleServChange}" update=":form:etPanel, :form:serv3TemplePanel, :checkboxes:serv3SM" />
-			        	<f:selectItems value="#{checkboxBean.serverIds}" var="server" itemLabel="#{server.serverName}" itemValue="#{server}"/>  
-			        </p:selectOneMenu>
-			        
-			        <h:outputText value="Theme: " />  
-			        <p:themeSwitcher value="#{themeSwitcherBean.theme}" style="width:165px" effect="fade" id="statefulSwitcher">  
-			            <f:selectItem itemLabel="Choose Theme" itemValue="" />  
-			            <f:selectItems value="#{themeSwitcherBean.themes}" />  
-			            <p:ajax listener="#{themeSwitcherBean.saveTheme}" />  
-			        </p:themeSwitcher>  
-			    </h:panelGrid>
-			    			        
-		        <p:selectManyCheckbox layout="pageDirection" id="playSoundCB" styleClass="soundClassCB">
-	            	<f:selectItem itemLabel="Play Sound" itemValue="Play Sound" />  
-	            </p:selectManyCheckbox>  
-        	</h:form>
+        	<p:tabView scrollable="true" id="checkboxTab">
+        		<p:tab id="eventTab" title="Events">  
+		        	<h:form id="checkboxes">
+		        		<p:selectManyCheckbox value="#{checkboxBean.selectedEvents}"  
+				            layout="pageDirection" id="smcb">  
+				            <f:selectItems value="#{checkboxBean.events}" />
+				            <p:ajax listener="#{checkboxBean.handleCheckbox(serv1Table, serv2Table, serv3Table, serv1TempleTable, serv2TempleTable, serv3TempleTable)}"/> 
+				        </p:selectManyCheckbox>
+				        <p:commandButton value="Clear All" update="smcb" id="ajax"  
+		             			actionListener="#{checkboxBean.clearAll(serv1Table, serv2Table, serv3Table, serv1TempleTable, serv2TempleTable, serv3TempleTable)}">
+				        </p:commandButton>
+				        <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+				        	<h:outputText value="Server 1: " />  
+					        <p:selectOneMenu id="serv1SM" value="#{checkboxBean.serverOne}" converter="serverConverter">
+					        	<p:ajax listener="#{checkboxBean.handleServChange}" update=":form:sorPanel, :form:serv1TemplePanel, :checkboxTab:checkboxes:serv1SM"/>
+					        	<f:selectItems value="#{checkboxBean.serverIds}" var="server" itemLabel="#{server.serverName}" itemValue="#{server}"/>  
+					        </p:selectOneMenu>
+					        <h:outputText value="Server 2: " />  
+					        <p:selectOneMenu id="serv2SM" value="#{checkboxBean.serverTwo}" converter="serverConverter">
+					        	<p:ajax listener="#{checkboxBean.handleServChange}" update=":form:fcPanel, :form:serv2TemplePanel, :checkboxTab:checkboxes:serv2SM" />
+					        	<f:selectItems value="#{checkboxBean.serverIds}" var="server" itemLabel="#{server.serverName}" itemValue="#{server}"/>  
+					        </p:selectOneMenu>
+					        <h:outputText value="Server 3: " />  
+					        <p:selectOneMenu id="serv3SM" value="#{checkboxBean.serverThree}" converter="serverConverter">
+					        	<p:ajax listener="#{checkboxBean.handleServChange}" update=":form:etPanel, :form:serv3TemplePanel, :checkboxTab:checkboxes:serv3SM" />
+					        	<f:selectItems value="#{checkboxBean.serverIds}" var="server" itemLabel="#{server.serverName}" itemValue="#{server}"/>  
+					        </p:selectOneMenu>
+					        
+					        <h:outputText value="Theme: " />  
+					        <p:themeSwitcher value="#{themeSwitcherBean.theme}" style="width:165px" effect="fade" id="statefulSwitcher">  
+					            <f:selectItem itemLabel="Choose Theme" itemValue="" />  
+					            <f:selectItems value="#{themeSwitcherBean.themes}" />  
+					            <p:ajax listener="#{themeSwitcherBean.saveTheme}" />  
+					        </p:themeSwitcher>  
+					    </h:panelGrid>
+					    			        
+				        <p:selectManyCheckbox layout="pageDirection" id="playSoundCB" styleClass="soundClassCB">
+			            	<f:selectItem itemLabel="Play Sound" itemValue="Play Sound" />  
+			            </p:selectManyCheckbox>  
+		        	</h:form>
+		        </p:tab>
+		        <p:tab id="dailyTab" title="Daily Tracker">
+		        	<h:form id="dailyCBs">
+		        		<p:selectManyCheckbox value="#{dailyCheckboxBean.selectedEvents}"  
+				            layout="pageDirection" id="dsmcb">  
+				            <f:selectItems value="#{dailyCheckboxBean.events}" />
+				            <p:ajax listener="#{dailyCheckboxBean.handleCheckbox()}"/>
+				        </p:selectManyCheckbox>
+				        <p:commandButton value="Clear All" update="dsmcb" id="ajax"  
+		             			actionListener="#{dailyCheckboxBean.clearAll()}">
+				        </p:commandButton>
+		        	</h:form>  
+		        </p:tab>
+	        </p:tabView>
         </p:layoutUnit>
         </p:layout>  
     </h:body>

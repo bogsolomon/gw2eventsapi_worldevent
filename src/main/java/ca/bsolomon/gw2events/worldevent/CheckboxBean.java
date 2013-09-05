@@ -63,6 +63,7 @@ public class CheckboxBean {
     	events.put("Melandru", "Melandru");
     	events.put("Grenth", "Grenth");
     	events.put("Plinx", "Plinx");
+    	events.put("Scarlett" ,"Scarlett");
     	
 		for (ServerID servId:ServerID.values()) {
 			serverIds.add(new Server(servId.getUid(), servId.getName()));

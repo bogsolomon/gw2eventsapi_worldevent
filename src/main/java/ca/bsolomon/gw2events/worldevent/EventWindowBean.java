@@ -22,6 +22,7 @@ import ca.bsolomon.gw2events.worldevent.util.EventData;
 import ca.bsolomon.gw2events.worldevent.util.EventWindow;
 import ca.bsolomon.gw2events.worldevent.util.LowLevelEventData;
 import ca.bsolomon.gw2events.worldevent.util.LowPriorityEventData;
+import ca.bsolomon.gw2events.worldevent.util.TempleEventData;
 
 @ManagedBean(name="eventWindowBean")
 @SessionScoped
@@ -30,6 +31,7 @@ public class EventWindowBean {
 	private DragonData dragonData = new DragonData();
 	private EventData lowLevelEventData = new LowLevelEventData();
 	private LowPriorityEventData lowPriorityEventData = new LowPriorityEventData();
+	private TempleEventData templeEventData = new TempleEventData();
 	
 	public List<EventWindow> getEventWindows() {
 		List<EventWindow> windows = new ArrayList<>();
@@ -72,6 +74,8 @@ public class EventWindowBean {
 		
 		eventUid = FireShamanEnum.SHAMAN.uid();
 		windows.add(new EventWindow("Fire Shaman", lowPriorityEventData.getMaxPeriod(eventUid), lowPriorityEventData.getMinPeriod(eventUid)));
+		
+		windows.add(new EventWindow("Scarlett", templeEventData.getMaxPeriod("Scarlett"), templeEventData.getMinPeriod("Scarlett")));
 		
 		return windows;
 	}
