@@ -43,6 +43,7 @@ public class CheckboxBean {
     	events.put("Fire Ele", "Fire Ele");  
     	events.put("Jungle Wurm", "Jungle Wurm");  
     	events.put("SB", "SB");
+    	events.put("Flame", "Flame");
     	
     	events.put("Foulbear", "Foulbear");
     	events.put("Kilava Chest", "Kilava Chest");
@@ -72,11 +73,11 @@ public class CheckboxBean {
 		serverTwo = new Server(ServerID.STORMBLUFF.getUid(), ServerID.STORMBLUFF.getName());
 		serverThree =new Server(ServerID.MAGUM.getUid(), ServerID.MAGUM.getName());
 		
-		selectedEvents.add("Balthazar");
-		selectedEvents.add("Lyssa");
-		selectedEvents.add("Dwayna");
-		selectedEvents.add("Melandru");
-		selectedEvents.add("Grenth");
+		//selectedEvents.add("Balthazar");
+		//selectedEvents.add("Lyssa");
+		//selectedEvents.add("Dwayna");
+		//selectedEvents.add("Melandru");
+		//selectedEvents.add("Grenth");
 		selectedEvents.add("Plinx");
     }
 	

@@ -16,6 +16,7 @@ import ca.bsolomon.gw2events.worldevent.enums.DragonEvent;
 import ca.bsolomon.gw2events.worldevent.enums.DredgeEvent;
 import ca.bsolomon.gw2events.worldevent.enums.FireEleEvent;
 import ca.bsolomon.gw2events.worldevent.enums.FireShamanEnum;
+import ca.bsolomon.gw2events.worldevent.enums.FlameBattleEvent;
 import ca.bsolomon.gw2events.worldevent.enums.FoulBearEvent;
 import ca.bsolomon.gw2events.worldevent.enums.GolemEvent;
 import ca.bsolomon.gw2events.worldevent.enums.HarathiChestEvent;
@@ -73,7 +74,7 @@ public class AjaxPollBean {
 		
 		if (!checkboxBean.getSelectedEvents().contains("SB"))
 			checkStatusUpdate(sbPanel, ShadowBehemothEvent.getStatus(), "-sb");
-		
+			
 		if (!checkboxBean.getSelectedEvents().contains("Golem MKII"))
 			checkStatusUpdate(golemPanel, GolemEvent.getStatus(), "-golem");
 		
@@ -109,6 +110,8 @@ public class AjaxPollBean {
 			checkServerEvent(serv1Table, serv2Table, serv3Table, JungleWurmEvent.getStatus(), "-wurm");
 		if (!checkboxBean.getSelectedEvents().contains("SB"))
 			checkServerEvent(serv1Table, serv2Table, serv3Table, ShadowBehemothEvent.getStatus(), "-sb");
+		if (!checkboxBean.getSelectedEvents().contains("Flame"))
+			checkServerEvent(serv1Table, serv2Table, serv3Table, FlameBattleEvent.getStatus(), "-flamebattle");
 		
 		if (!checkboxBean.getSelectedEvents().contains("Golem MKII"))
 			checkServerEvent(serv1Table, serv2Table, serv3Table, GolemEvent.getStatus(), "-golem");

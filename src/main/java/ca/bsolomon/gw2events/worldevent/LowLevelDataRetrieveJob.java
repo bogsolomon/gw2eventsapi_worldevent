@@ -12,6 +12,7 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
 import ca.bsolomon.gw2events.worldevent.enums.FireEleEvent;
+import ca.bsolomon.gw2events.worldevent.enums.FlameBattleEvent;
 import ca.bsolomon.gw2events.worldevent.enums.JungleWurmEvent;
 import ca.bsolomon.gw2events.worldevent.enums.MawEvent;
 import ca.bsolomon.gw2events.worldevent.enums.ServerID;
@@ -54,12 +55,17 @@ public class LowLevelDataRetrieveJob extends DataRetrieveJob implements Job {
 			queryEvent(gregorianJuian, serverIds, eventId.uid(), lowLevelEventData); 
 		}
 		
+		for (FlameBattleEvent eventId:FlameBattleEvent.values()) {
+			queryEvent(gregorianJuian, serverIds, eventId.uid(), lowLevelEventData); 
+		}
+		
 		//System.out.println("Ended LowLevel Thread retrieve "+this.toString()+" at "+new DateTime(gregorianJuian));
 		
 		FireEleEvent.formatFireEleString(lowLevelEventData);
 		MawEvent.formatMawString(lowLevelEventData);
 		JungleWurmEvent.formatJungleWurmString(lowLevelEventData);
 		ShadowBehemothEvent.formatShadowBehemothString(lowLevelEventData);
+		FlameBattleEvent.formatFlameBattleString(lowLevelEventData);
 		
 		//System.out.println("Ended LowLevel Thread formating "+this.toString()+" at "+new DateTime(gregorianJuian));
 	}

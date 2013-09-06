@@ -11,6 +11,7 @@ import ca.bsolomon.gw2events.worldevent.enums.DragonEvent;
 import ca.bsolomon.gw2events.worldevent.enums.DredgeEvent;
 import ca.bsolomon.gw2events.worldevent.enums.FireEleEvent;
 import ca.bsolomon.gw2events.worldevent.enums.FireShamanEnum;
+import ca.bsolomon.gw2events.worldevent.enums.FlameBattleEvent;
 import ca.bsolomon.gw2events.worldevent.enums.FoulBearEvent;
 import ca.bsolomon.gw2events.worldevent.enums.GolemEvent;
 import ca.bsolomon.gw2events.worldevent.enums.HarathiChestEvent;
@@ -173,6 +174,8 @@ public class DragonBean {
 			formatServerEvent(servId, status, JungleWurmEvent.getStatus());
 		if (!checkboxBean.getSelectedEvents().contains("SB")) //15
 			formatServerEvent(servId, status, ShadowBehemothEvent.getStatus());
+		if (!checkboxBean.getSelectedEvents().contains("Flame")) //25
+			formatServerEvent(servId, status, FlameBattleEvent.getStatus());
 		
 		if (!checkboxBean.getSelectedEvents().contains("Foulbear")) //34
 			formatServerEvent(servId, status, FoulBearEvent.getStatus());

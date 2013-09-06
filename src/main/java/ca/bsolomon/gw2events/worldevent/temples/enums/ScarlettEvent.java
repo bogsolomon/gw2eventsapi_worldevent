@@ -73,10 +73,6 @@ public enum ScarlettEvent {
 			if (servEventStatus!=null && (servEventStatus.equals("Active"))) {
 				time = templeEventData.getEventTime(servEventId);
 				
-				if ((lastTime != null && lastTime.isBefore(time)) || lastTime == null) {
-					lastTime = time;
-				}
-				
 				outStatus = eventId.toString();
 				color = EventStateColor.ACTIVE.color();
 				fontWeight = 900;
@@ -84,6 +80,12 @@ public enum ScarlettEvent {
 				playSound = true;
 				
 				break;
+			} else if (servEventStatus!=null) {
+				time = templeEventData.getEventTime(servEventId);
+				
+				if ((lastTime != null && lastTime.isBefore(time)) || lastTime == null) {
+					lastTime = time;
+				}
 			}
 			
 			time = lastTime;
