@@ -247,12 +247,12 @@ public class DragonBean {
 			formatServerEvent(servId, status, BalthazzarEvent.getStatus());
 		if (!checkboxBean.getSelectedEvents().contains("Lyssa"))
 			formatServerEvent(servId, status, LyssaEvent.getStatus());
-		if (!checkboxBean.getSelectedEvents().contains("Grenth"))
-			formatServerEvent(servId, status, GrenthEvent.getStatus());
-		if (!checkboxBean.getSelectedEvents().contains("Melandru"))
-			formatServerEvent(servId, status, MelandruEvent.getStatus());
 		if (!checkboxBean.getSelectedEvents().contains("Dwayna"))
 			formatServerEvent(servId, status, DwaynaEvent.getStatus());
+		if (!checkboxBean.getSelectedEvents().contains("Melandru"))
+			formatServerEvent(servId, status, MelandruEvent.getStatus());
+		if (!checkboxBean.getSelectedEvents().contains("Grenth"))
+			formatServerEvent(servId, status, GrenthEvent.getStatus());
 		if (!checkboxBean.getSelectedEvents().contains("Plinx"))
 			formatServerEvent(servId, status, PlinxEvent.getStatus());
 		if (!checkboxBean.getSelectedEvents().contains("Scarlett"))
