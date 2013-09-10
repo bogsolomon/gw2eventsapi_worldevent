@@ -54,6 +54,7 @@ public class CheckboxBean {
     	events.put("Fire Shaman", "Fire Shaman");
     	
     	events.put("Tequatl", "Tequatl");  
+    	events.put("Megadestroyer", "Megadestroyer");
     	events.put("Golem MKII", "Golem MKII");
     	events.put("Jormag", "Jormag");  
     	events.put("Karka Queen", "Karka Queen");

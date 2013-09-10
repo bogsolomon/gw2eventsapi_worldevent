@@ -17,6 +17,7 @@ public enum Waypoint {
 	FIRESHAM("[&BO4BAAA=]"),
 	KARKA("[&BNcGAAA=]"),
 	FLAME_BATTLE("[&BNsAAAA=]"),
+	MEGADESTROYER("[&BNYCAAA=]"),
 	
 	
 	LYSSA("[&BK0CAAA=]"),

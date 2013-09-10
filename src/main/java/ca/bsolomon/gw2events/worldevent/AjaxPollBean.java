@@ -24,6 +24,7 @@ import ca.bsolomon.gw2events.worldevent.enums.HydraQueenEvent;
 import ca.bsolomon.gw2events.worldevent.enums.JungleWurmEvent;
 import ca.bsolomon.gw2events.worldevent.enums.KarkaEvent;
 import ca.bsolomon.gw2events.worldevent.enums.MawEvent;
+import ca.bsolomon.gw2events.worldevent.enums.MegadestroyerEvent;
 import ca.bsolomon.gw2events.worldevent.enums.ServerID;
 import ca.bsolomon.gw2events.worldevent.enums.ShadowBehemothEvent;
 import ca.bsolomon.gw2events.worldevent.temples.enums.BalthazzarEvent;
@@ -113,6 +114,8 @@ public class AjaxPollBean {
 		if (!checkboxBean.getSelectedEvents().contains("Flame"))
 			checkServerEvent(serv1Table, serv2Table, serv3Table, FlameBattleEvent.getStatus(), "-flamebattle");
 		
+		if (!checkboxBean.getSelectedEvents().contains("Megadestroyer"))
+			checkServerEvent(serv1Table, serv2Table, serv3Table, MegadestroyerEvent.getStatus(), "-megad");
 		if (!checkboxBean.getSelectedEvents().contains("Golem MKII"))
 			checkServerEvent(serv1Table, serv2Table, serv3Table, GolemEvent.getStatus(), "-golem");
 		if (!checkboxBean.getSelectedEvents().contains("Dredge"))

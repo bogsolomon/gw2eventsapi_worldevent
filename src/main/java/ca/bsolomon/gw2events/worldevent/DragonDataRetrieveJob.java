@@ -12,6 +12,7 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
 import ca.bsolomon.gw2events.worldevent.enums.DragonEvent;
+import ca.bsolomon.gw2events.worldevent.enums.MegadestroyerEvent;
 import ca.bsolomon.gw2events.worldevent.enums.ServerID;
 import ca.bsolomon.gw2events.worldevent.util.DragonData;
 
@@ -38,11 +39,16 @@ public class DragonDataRetrieveJob extends DataRetrieveJob implements Job {
 			queryEvent(gregorianJuian, serverIds, eventId.uid(), dragonData);
 		}
 		
+		for (MegadestroyerEvent eventId:MegadestroyerEvent.values()) {
+			queryEvent(gregorianJuian, serverIds, eventId.uid(), dragonData);  
+		}
+		
 		//System.out.println("Ended Dragon Thread retrieve "+this.toString()+" at "+new DateTime(gregorianJuian));
 		
 		DragonEvent.formatTequatlString(dragonData);
 		DragonEvent.formatShattererString(dragonData);
 		DragonEvent.formatJormagString(dragonData);
+		MegadestroyerEvent.formatMegadestroyerString(dragonData);
 		
 		//System.out.println("Ended Dragon Thread formating "+this.toString()+" at "+new DateTime(gregorianJuian));
 	}

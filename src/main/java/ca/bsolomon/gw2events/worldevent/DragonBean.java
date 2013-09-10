@@ -19,6 +19,7 @@ import ca.bsolomon.gw2events.worldevent.enums.HydraQueenEvent;
 import ca.bsolomon.gw2events.worldevent.enums.JungleWurmEvent;
 import ca.bsolomon.gw2events.worldevent.enums.KarkaEvent;
 import ca.bsolomon.gw2events.worldevent.enums.MawEvent;
+import ca.bsolomon.gw2events.worldevent.enums.MegadestroyerEvent;
 import ca.bsolomon.gw2events.worldevent.enums.ServerID;
 import ca.bsolomon.gw2events.worldevent.enums.ShadowBehemothEvent;
 import ca.bsolomon.gw2events.worldevent.temples.enums.BalthazzarEvent;
@@ -191,6 +192,8 @@ public class DragonBean {
 			formatServerEvent(servId, status, FireShamanEnum.getStatus());
 		if (!checkboxBean.getSelectedEvents().contains("Tequatl"))//65
 			formatServerEvent(servId, status, DragonEvent.getTeqStatus());
+		if (!checkboxBean.getSelectedEvents().contains("Megadestroyer"))//66
+			formatServerEvent(servId, status, MegadestroyerEvent.getStatus());
 		if (!checkboxBean.getSelectedEvents().contains("Golem MKII"))//68
 			formatServerEvent(servId, status, GolemEvent.getStatus());
 		if (!checkboxBean.getSelectedEvents().contains("Jormag"))//80
