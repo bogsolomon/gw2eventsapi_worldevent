@@ -15,10 +15,10 @@ import ca.bsolomon.gw2events.worldevent.util.PlaySoundStatus;
 
 public enum DwaynaEvent {
 
-	ALTAR_ESCORT("F531683F-FC09-467F-9661-6741E8382E24", "Escort to altar"),
-	PRIESTESS("7EF31D63-DB2A-4FEB-A6C6-478F382BFBCB", "Priestess"),
-	MALCHOR("526732A0-E7F2-4E7E-84C9-7CDED1962000", "Malchor"),
-	STATUE("6A6FD312-E75C-4ABF-8EA1-7AE31E469ABA", "Statue");
+	ALTAR_ESCORT("F531683F-FC09-467F-9661-6741E8382E24", "4. Escort Scholar"),
+	PRIESTESS("7EF31D63-DB2A-4FEB-A6C6-478F382BFBCB", "3. Kill Priestess"),
+	MALCHOR("526732A0-E7F2-4E7E-84C9-7CDED1962000", "2. Drive Malchor"),
+	STATUE("6A6FD312-E75C-4ABF-8EA1-7AE31E469ABA", "1. Destroy Statue");
 	//PROTECT1("0723E056-E665-439F-99B7-20385442AD4E", "Protect"),
 	//PROTECT2("B78631EA-1584-452A-859F-CE935321B52D", "Protect");
 	
@@ -77,7 +77,7 @@ public enum DwaynaEvent {
 		} else if (altarEscortStatus!=null && (altarEscortStatus.equals("Preparation") || altarEscortStatus.equals("Active"))) {
 			time = templeEventData.getEventTime(altarEscortEventId);
 			
-			outStatus = "Escort Scholar";
+			outStatus = ALTAR_ESCORT.toString();
 			color = EventStateColor.PREPARATION.color();
 			fontWeight = 900;
 		} else if (priestessStatus!=null && (priestessStatus.equals("Preparation") || priestessStatus.equals("Active"))) {
@@ -85,25 +85,25 @@ public enum DwaynaEvent {
 			
 			playSound = true;
 			
-			outStatus = "Kill Priestess";
+			outStatus = PRIESTESS.toString();
 			color = EventStateColor.PREPARATION.color();
 			fontWeight = 900;
 		} else if (malchorStatus!=null && (malchorStatus.equals("Preparation") || malchorStatus.equals("Active"))) {
 			time = templeEventData.getEventTime(malchorEventId);
 			
-			outStatus = "Drive Malchor";
+			outStatus = MALCHOR.toString();
 			color = EventStateColor.PREPARATION.color();
 			fontWeight = 900;
 		} else if (statueStatus!=null && (statueStatus.equals("Preparation") || statueStatus.equals("Active"))) {
 			time = templeEventData.getEventTime(statueEventId);
 			
-			outStatus = "Destroy Statue";
-			color = EventStateColor.PREPARATION.color();
+			outStatus = STATUE.toString();
+			color = EventStateColor.ACTIVE.color();
 			fontWeight = 900;
 		} else if (statueStatus!=null && (statueStatus.equals("Success"))) {
 			time = templeEventData.getEventTime(statueEventId);
 			
-			outStatus = "Under Pact Control";
+			outStatus = "0. Under Pact Control";
 			color = EventStateColor.ACTIVE.color();
 			fontWeight = 900;
 		} else {

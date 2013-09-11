@@ -22,7 +22,7 @@ public enum LyssaEvent {
 	RISEN_FORT("35997B10-179B-4E39-AD7F-54E131ECDD57", "Risen Fortification"),
 	RISEN_FORT_DEF("F5436671-8934-4BD4-AEF7-4F3741A9CDA4", "Risen Fortification Defense"),
 	SEAL_CORRUP("ADC3AA4C-0212-4AE6-98FA-4F59F3C9BCFA", "Seal of Union Corruption"),
-	PRIESTESS("0372874E-59B7-4A8F-B535-2CF57B8E67E4", "Priestess");
+	PRIESTESS("0372874E-59B7-4A8F-B535-2CF57B8E67E4", "1. Priestess");
 	
 	private String uid;
 	private String prettyName;
@@ -81,7 +81,7 @@ public enum LyssaEvent {
 		if (priestessStatus!=null && priestessStatus.equals("Success")) {
 			time = templeEventData.getEventTime(priestessEventId);
 			
-			outStatus = "Under Pact Control";
+			outStatus = "0. Under Pact Control";
 			color = EventStateColor.ACTIVE.color();
 			fontWeight = 900;
 		} else if (priestessStatus!=null && priestessStatus.equals("Active")) {
@@ -105,8 +105,14 @@ public enum LyssaEvent {
 			
 			time = templeEventData.getEventTime(priestessEventId);
 			
-			outStatus = "Seals: "+sealCount+"/3 controlled";
-			color = EventStateColor.PREPARATION.color();
+			if (sealCount == 3) {
+				outStatus = "1. Seals: 3/3 controlled";
+				color = EventStateColor.ACTIVE.color();
+			} else {
+				outStatus = "2. Seals: "+sealCount+"/3 controlled";
+				color = EventStateColor.PREPARATION.color();
+			}
+			
 			fontWeight = 900;
 		} else {
 			time = templeEventData.getEventTime(priestessEventId);

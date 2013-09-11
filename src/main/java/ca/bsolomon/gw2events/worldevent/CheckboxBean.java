@@ -156,6 +156,7 @@ public class CheckboxBean {
 	public void clearAll(DataTable serv1Table, DataTable serv2Table, DataTable serv3Table,
 			DataTable serv1TempleTable, DataTable serv2TempleTable, DataTable serv3TempleTable) {  
 		selectedEvents.clear();
+		selectedEvents.add("Plinx");
 		
 		Ajax.update(serv1Table.getClientId());
 		Ajax.update(serv2Table.getClientId());

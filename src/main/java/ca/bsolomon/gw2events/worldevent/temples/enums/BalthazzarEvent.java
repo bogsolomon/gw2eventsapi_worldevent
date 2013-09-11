@@ -15,10 +15,10 @@ import ca.bsolomon.gw2events.worldevent.util.PlaySoundStatus;
 
 public enum BalthazzarEvent {
 
-	ALTAR_ESCORT("D0ECDACE-41F8-46BD-BB17-8762EF29868C", "Escort Altar"),
-	SEIZE_ALTAR	("7B7D6D27-67A0-44EF-85EA-7460FFA621A1", "Seize Altar"),
-	TEMPLE_DEF	("589B1C41-DD96-4AEE-8A3A-4CC607805B05", "Defense"),
-	PRIEST		("2555EFCB-2927-4589-AB61-1957D9CC70C8", "Priest");
+	ALTAR_ESCORT("D0ECDACE-41F8-46BD-BB17-8762EF29868C", "3. Escort Altar"),
+	SEIZE_ALTAR	("7B7D6D27-67A0-44EF-85EA-7460FFA621A1", "2. Seize Altar"),
+	TEMPLE_DEF	("589B1C41-DD96-4AEE-8A3A-4CC607805B05", "0. Defense"),
+	PRIEST		("2555EFCB-2927-4589-AB61-1957D9CC70C8", "1. Priest");
 	
 	
 	private String uid;
@@ -70,7 +70,7 @@ public enum BalthazzarEvent {
 		if (templeDefStatus!=null && (templeDefStatus.equals("Active"))) {
 			time = templeEventData.getEventTime(altarEscortEventId);
 			
-			outStatus = "Defend Altar";
+			outStatus = TEMPLE_DEF.toString();
 			color = EventStateColor.PREPARATION.color();
 			fontWeight = 900;
 		} else if (templeDefStatus!=null && (templeDefStatus.equals("Fail"))) {
@@ -82,7 +82,7 @@ public enum BalthazzarEvent {
 		} else if (altarEscortStatus!=null && (altarEscortStatus.equals("Preparation") || altarEscortStatus.equals("Active"))) {
 			time = templeEventData.getEventTime(altarEscortEventId);
 			
-			outStatus = "Escort to Altar";
+			outStatus = ALTAR_ESCORT.toString();
 			color = EventStateColor.PREPARATION.color();
 			fontWeight = 900;
 			
@@ -90,19 +90,19 @@ public enum BalthazzarEvent {
 		} else if (seizeAltarStatus!=null && seizeAltarStatus.equals("Active")) {
 			time = templeEventData.getEventTime(seizeAltarEventId);
 			
-			outStatus = "Seize Altar";
+			outStatus = SEIZE_ALTAR.toString();
 			color = EventStateColor.PREPARATION.color();
 			fontWeight = 900;
 		} else if (priestStatus!=null && (priestStatus.equals("Active") || priestStatus.equals("Warmup"))) {
 			time = templeEventData.getEventTime(priestEventId);
 			
-			outStatus = "Kill Priest";
-			color = EventStateColor.PREPARATION.color();
+			outStatus = PRIEST.toString();
+			color = EventStateColor.ACTIVE.color();
 			fontWeight = 900;
 		} else if (priestStatus!=null && (priestStatus.equals("Success"))) {
 			time = templeEventData.getEventTime(priestEventId);
 			
-			outStatus = "Under Pact Control";
+			outStatus = "0. Under Pact Control";
 			color = EventStateColor.ACTIVE.color();
 			fontWeight = 900;
 		} else {

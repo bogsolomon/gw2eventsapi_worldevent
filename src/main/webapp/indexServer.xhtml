@@ -178,7 +178,7 @@
 				            <f:selectItems value="#{checkboxBean.events}" />
 				            <p:ajax listener="#{checkboxBean.handleCheckbox(serv1Table, serv2Table, serv3Table, serv1TempleTable, serv2TempleTable, serv3TempleTable)}"/> 
 				        </p:selectManyCheckbox>
-				        <p:commandButton value="Clear All" update="smcb" id="ajax"  
+				        <p:commandButton value="Reset" update="smcb" id="ajax"  
 		             			actionListener="#{checkboxBean.clearAll(serv1Table, serv2Table, serv3Table, serv1TempleTable, serv2TempleTable, serv3TempleTable)}">
 				        </p:commandButton>
 				        <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
