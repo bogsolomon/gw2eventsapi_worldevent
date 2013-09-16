@@ -35,13 +35,13 @@
 	<dependency>
 	    <groupId>org.omnifaces</groupId>
 	    <artifactId>omnifaces</artifactId>
-	    <version>1.4.1</version> <!-- Or 1.5-SNAPSHOT -->
+	    <version>1.5</version> <!-- Or 1.5-SNAPSHOT -->
 	</dependency>
 	
 	<dependency>  
         <groupId>org.primefaces</groupId>  
         <artifactId>primefaces</artifactId>  
-        <version>4.0-20130605.174828-3</version>  
+        <version>4.0-20130910.075046-7</version>  
     </dependency>
     
     <dependency>

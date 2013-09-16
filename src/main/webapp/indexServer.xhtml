@@ -17,6 +17,7 @@
 			updateServerTimes();
 			updatePositions();
 			playSound();
+			updateColors();
 			t=setTimeout(function(){startTime()},1000);
 		}
 		</script>
@@ -55,6 +56,9 @@
 				        <p:column styleClass="soundClass">
 				        	<h:panelGroup id="soundCol">#{status.playSound}</h:panelGroup>
 				        </p:column>
+				        <p:column styleClass="colorClass">
+				        	<h:panelGroup id="colorCol">#{status.color}</h:panelGroup>
+				        </p:column>
         		 	</p:dataTable>
         		 </p:panel>
         		 
@@ -75,6 +79,9 @@
 				        </p:column>
 				        <p:column styleClass="soundClass">
 				        	<h:panelGroup id="soundCol">#{status.playSound}</h:panelGroup>
+				        </p:column>
+				        <p:column styleClass="colorClass">
+				        	<h:panelGroup id="colorCol">#{status.color}</h:panelGroup>
 				        </p:column>
         		 	</p:dataTable>
         		 </p:panel>
@@ -97,6 +104,9 @@
 				        <p:column styleClass="soundClass">
 				        	<h:panelGroup id="soundCol">#{status.playSound}</h:panelGroup>
 				        </p:column>
+				        <p:column styleClass="colorClass">
+				        	<h:panelGroup id="colorCol">#{status.color}</h:panelGroup>
+				        </p:column>
         		 	</p:dataTable>
         		 </p:panel>
         		 
@@ -117,6 +127,9 @@
 				        </p:column>
 				        <p:column styleClass="soundClass">
 				        	<h:panelGroup id="soundCol">#{status.playSound}</h:panelGroup>
+				        </p:column>
+				        <p:column styleClass="colorClass">
+				        	<h:panelGroup id="colorCol">#{status.color}</h:panelGroup>
 				        </p:column>
         		 	</p:dataTable>
         		 </p:panel>
@@ -139,6 +152,9 @@
 				        <p:column styleClass="soundClass">
 				        	<h:panelGroup id="soundCol">#{status.playSound}</h:panelGroup>
 				        </p:column>
+				        <p:column styleClass="colorClass">
+				        	<h:panelGroup id="colorCol">#{status.color}</h:panelGroup>
+				        </p:column>
         		 	</p:dataTable>
         		 </p:panel>
         		 
@@ -159,6 +175,9 @@
 				        </p:column>
 				        <p:column styleClass="soundClass">
 				        	<h:panelGroup id="soundCol">#{status.playSound}</h:panelGroup>
+				        </p:column>
+				        <p:column styleClass="colorClass">
+				        	<h:panelGroup id="colorCol">#{status.color}</h:panelGroup>
 				        </p:column>
         		 	</p:dataTable>
         		 </p:panel>

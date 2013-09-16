@@ -14,6 +14,7 @@ import org.quartz.JobExecutionException;
 import ca.bsolomon.gw2events.worldevent.enums.ServerID;
 import ca.bsolomon.gw2events.worldevent.temples.enums.BalthazzarEvent;
 import ca.bsolomon.gw2events.worldevent.temples.enums.DwaynaEvent;
+import ca.bsolomon.gw2events.worldevent.temples.enums.GatesofArahEvent;
 import ca.bsolomon.gw2events.worldevent.temples.enums.GrenthEvent;
 import ca.bsolomon.gw2events.worldevent.temples.enums.LyssaEvent;
 import ca.bsolomon.gw2events.worldevent.temples.enums.MelandruEvent;
@@ -69,6 +70,10 @@ public class TempleDataRetrieveJob extends DataRetrieveJob implements Job {
 			queryEvent(gregorianJuian, serverIds, eventId.uid(), templeEventData); 
 		}
 		
+		for (GatesofArahEvent eventId:GatesofArahEvent.values()) {
+			queryEvent(gregorianJuian, serverIds, eventId.uid(), templeEventData); 
+		}
+		
 		//System.out.println("Ended LowLevel Thread retrieve "+this.toString()+" at "+new DateTime(gregorianJuian));
 		
 		BalthazzarEvent.formatBalthazarString(templeEventData);
@@ -78,6 +83,7 @@ public class TempleDataRetrieveJob extends DataRetrieveJob implements Job {
 		MelandruEvent.formatMelandruString(templeEventData);
 		PlinxEvent.formatPlinxString(templeEventData);
 		ScarlettEvent.formatScarlettString(templeEventData);
+		GatesofArahEvent.formatArahString(templeEventData);
 		
 		//System.out.println("Ended LowLevel Thread formating "+this.toString()+" at "+new DateTime(gregorianJuian));
 	}

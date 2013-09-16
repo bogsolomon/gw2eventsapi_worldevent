@@ -24,6 +24,7 @@ import ca.bsolomon.gw2events.worldevent.enums.ServerID;
 import ca.bsolomon.gw2events.worldevent.enums.ShadowBehemothEvent;
 import ca.bsolomon.gw2events.worldevent.temples.enums.BalthazzarEvent;
 import ca.bsolomon.gw2events.worldevent.temples.enums.DwaynaEvent;
+import ca.bsolomon.gw2events.worldevent.temples.enums.GatesofArahEvent;
 import ca.bsolomon.gw2events.worldevent.temples.enums.GrenthEvent;
 import ca.bsolomon.gw2events.worldevent.temples.enums.LyssaEvent;
 import ca.bsolomon.gw2events.worldevent.temples.enums.MelandruEvent;
@@ -256,9 +257,11 @@ public class DragonBean {
 			formatServerEvent(servId, status, MelandruEvent.getStatus());
 		if (!checkboxBean.getSelectedEvents().contains("Grenth"))
 			formatServerEvent(servId, status, GrenthEvent.getStatus());
-		if (!checkboxBean.getSelectedEvents().contains("Plinx"))
-			formatServerEvent(servId, status, PlinxEvent.getStatus());
 		if (!checkboxBean.getSelectedEvents().contains("Scarlett"))
 			formatServerEvent(servId, status, ScarlettEvent.getStatus());
+		if (!checkboxBean.getSelectedEvents().contains("Plinx"))
+			formatServerEvent(servId, status, PlinxEvent.getStatus());
+		if (!checkboxBean.getSelectedEvents().contains("Arah"))
+			formatServerEvent(servId, status, GatesofArahEvent.getStatus());
 	}
 }

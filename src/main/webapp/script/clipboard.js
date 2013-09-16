@@ -21,3 +21,13 @@ function updatePositions() {
 			});
 	}
 }
+
+function updateColors() {
+	var elements = document.getElementsByClassName("colorClass");
+	
+	for(var i=0; i<elements.length; i++) {
+		var content = elements[i].getElementsByTagName("span")[0].innerHTML;
+		
+		elements[i].parentNode.className = "ui-widget-content ui-datatable-odd "+content;
+	}
+}

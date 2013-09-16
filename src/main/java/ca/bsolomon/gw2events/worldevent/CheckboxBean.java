@@ -64,8 +64,9 @@ public class CheckboxBean {
     	events.put("Dwayna", "Dwayna");
     	events.put("Melandru", "Melandru");
     	events.put("Grenth", "Grenth");
-    	events.put("Plinx", "Plinx");
     	events.put("Scarlett" ,"Scarlett");
+    	events.put("Plinx", "Plinx");
+    	events.put("Arah", "Arah");
     	
 		for (ServerID servId:ServerID.values()) {
 			serverIds.add(new Server(servId.getUid(), servId.getName()));
@@ -80,6 +81,7 @@ public class CheckboxBean {
 		//selectedEvents.add("Melandru");
 		//selectedEvents.add("Grenth");
 		selectedEvents.add("Plinx");
+		selectedEvents.add("Arah");
     }
 	
 	public void handleToggle(ToggleEvent event) {
@@ -157,6 +159,7 @@ public class CheckboxBean {
 			DataTable serv1TempleTable, DataTable serv2TempleTable, DataTable serv3TempleTable) {  
 		selectedEvents.clear();
 		selectedEvents.add("Plinx");
+		selectedEvents.add("Arah");
 		
 		Ajax.update(serv1Table.getClientId());
 		Ajax.update(serv2Table.getClientId());

@@ -25,6 +25,7 @@ public enum Waypoint {
 	GRENTH("[&BCIDAAA=]"),
 	MELANDRU("[&BBsDAAA=]"),
 	DWAYNA("[&BLICAAA=]"),
+	ARAH("[&BB8DAAA=]"),
 	PLINX("[&BCEDAAA=]");
 	
 	private String wp;
@@ -35,3 +36,4 @@ public enum Waypoint {
 	
 	public String toString() {return wp;}
 }
+

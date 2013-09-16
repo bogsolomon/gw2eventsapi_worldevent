@@ -58,6 +58,10 @@
     vertical-align: middle; /* align the text vertically centered */
 }
 
-.soundclass {
+.soundClass {
+	display: none;
+}
+
+.colorClass {
 	display: none;
 }
