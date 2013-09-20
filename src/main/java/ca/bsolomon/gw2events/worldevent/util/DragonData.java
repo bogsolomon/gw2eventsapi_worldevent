@@ -30,7 +30,7 @@ public class DragonData implements EventData{
 				
 				if (status.equals("Active")) {
 					EventWindowCalc.computeEventTiming(serverId, eventId, time, lastActiveTime, maxEventDiff, minEventDiff, MAXHOURS);
-				} else if (status.equals("Success") || (eventId.equals(DragonEvent.TEQUATL.uid()) && status.equals("Warmup"))) {
+				} else if (status.equals("Success") || status.equals("Fail")) {
 					if (!lastActiveTime.containsKey(eventId)) {
 						lastActiveTime.put(eventId, new ConcurrentHashMap<String, DateTime>(10, 0.9f, 1));
 					}

@@ -40,7 +40,7 @@
         		 <p:ajax event="reorder"/>
         		 <p:panel id="sorPanel" header="#{checkboxBean.serverOne.serverName}" toggleable="true" collapsed="#{serverDashboardBean.sorCollapsed}">
         		 	<p:ajax event="toggle" listener="#{serverDashboardBean.handleSorToggle}"/>
-        		 	<p:dataTable binding="#{serv1Table}" var="status" value="#{dragonBean.sorStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
+        		 	<p:dataTable rowIndexVar="row" id="serv1Table" binding="#{serv1Table}" var="status" value="#{dragonBean.sorStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
         		 		<p:column>  
 				            <h:panelGroup id="eventCol">#{status.event}</h:panelGroup>  
 				        </p:column>  
@@ -51,7 +51,7 @@
 				            <h:panelGroup id="dateCol">#{status.date}</h:panelGroup>
 				        </p:column>
 				        <p:column styleClass="clipboard">
-				        	<button data-clipboard-text="#{status.waypoint}" class="clipbutton"></button>
+				        	<button data-clipboard-target="form:serv1Table:#{row}:waypointCol" class="clipbutton"></button>
 				        </p:column>
 				        <p:column styleClass="soundClass">
 				        	<h:panelGroup id="soundCol">#{status.playSound}</h:panelGroup>
@@ -59,12 +59,15 @@
 				        <p:column styleClass="colorClass">
 				        	<h:panelGroup id="colorCol">#{status.color}</h:panelGroup>
 				        </p:column>
+				        <p:column styleClass="waypointClass">
+				        	<h:panelGroup id="waypointCol">#{status.waypoint}</h:panelGroup>
+				        </p:column>
         		 	</p:dataTable>
         		 </p:panel>
         		 
         		 <p:panel id="fcPanel" header="#{checkboxBean.serverTwo.serverName}" toggleable="true" collapsed="#{serverDashboardBean.fcCollapsed}">
         		 	<p:ajax event="toggle" listener="#{serverDashboardBean.handleFcToggle}"/>
-        		 	<p:dataTable binding="#{serv2Table}" var="status" value="#{dragonBean.fcStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
+        		 	<p:dataTable rowIndexVar="row" binding="#{serv2Table}" id="serv2Table" var="status" value="#{dragonBean.fcStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
         		 		<p:column>  
 				            <h:panelGroup id="eventCol">#{status.event}</h:panelGroup>  
 				        </p:column>  
@@ -75,20 +78,23 @@
 				            <h:panelGroup  id="dateCol">#{status.date}</h:panelGroup>
 				        </p:column>
 				        <p:column styleClass="clipboard">
-				        	<button data-clipboard-text="#{status.waypoint}" class="clipbutton"></button>
+				        	<button data-clipboard-target="form:serv2Table:#{row}:waypointCol" class="clipbutton"></button>
 				        </p:column>
 				        <p:column styleClass="soundClass">
 				        	<h:panelGroup id="soundCol">#{status.playSound}</h:panelGroup>
 				        </p:column>
 				        <p:column styleClass="colorClass">
 				        	<h:panelGroup id="colorCol">#{status.color}</h:panelGroup>
+				        </p:column>
+				        <p:column styleClass="waypointClass">
+				        	<h:panelGroup id="waypointCol">#{status.waypoint}</h:panelGroup>
 				        </p:column>
         		 	</p:dataTable>
         		 </p:panel>
         		 
         		 <p:panel id="etPanel" header="#{checkboxBean.serverThree.serverName}" toggleable="true" collapsed="#{serverDashboardBean.etCollapsed}">
         		 	<p:ajax event="toggle" listener="#{serverDashboardBean.handleEtToggle}"/>
-        		 	<p:dataTable binding="#{serv3Table}" var="status" value="#{dragonBean.etStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
+        		 	<p:dataTable rowIndexVar="row" binding="#{serv3Table}" id="serv3Table" var="status" value="#{dragonBean.etStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
         		 		<p:column>  
 				            <h:panelGroup id="eventCol">#{status.event}</h:panelGroup>  
 				        </p:column>  
@@ -99,20 +105,23 @@
 				            <h:panelGroup id="dateCol">#{status.date}</h:panelGroup>
 				        </p:column>
 				        <p:column styleClass="clipboard">
-				        	<button data-clipboard-text="#{status.waypoint}" class="clipbutton"></button>
+				        	<button data-clipboard-target="form:serv3Table:#{row}:waypointCol" class="clipbutton"></button>
 				        </p:column>
 				        <p:column styleClass="soundClass">
 				        	<h:panelGroup id="soundCol">#{status.playSound}</h:panelGroup>
 				        </p:column>
 				        <p:column styleClass="colorClass">
 				        	<h:panelGroup id="colorCol">#{status.color}</h:panelGroup>
+				        </p:column>
+				        <p:column styleClass="waypointClass">
+				        	<h:panelGroup id="waypointCol">#{status.waypoint}</h:panelGroup>
 				        </p:column>
         		 	</p:dataTable>
         		 </p:panel>
         		 
         		  <p:panel id="serv1TemplePanel" header="#{checkboxBean.serverOne.serverName}" toggleable="true" collapsed="#{serverDashboardBean.serv1Collapsed}">
         		 	<p:ajax event="toggle" listener="#{serverDashboardBean.handleServ1Toggle}"/>
-        		 	<p:dataTable binding="#{serv1TempleTable}" var="status" value="#{dragonBean.serv1TempleStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
+        		 	<p:dataTable rowIndexVar="row" binding="#{serv1TempleTable}" id="serv1Temple" var="status" value="#{dragonBean.serv1TempleStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
         		 		<p:column>  
 				            <h:panelGroup id="eventCol">#{status.event}</h:panelGroup>  
 				        </p:column>  
@@ -123,20 +132,23 @@
 				            <h:panelGroup id="dateCol">#{status.date}</h:panelGroup>
 				        </p:column>
 				        <p:column styleClass="clipboard">
-				        	<button data-clipboard-text="#{status.waypoint}" class="clipbutton"></button>
+				        	<button data-clipboard-target="form:serv1Temple:#{row}:waypointCol" class="clipbutton"></button>
 				        </p:column>
 				        <p:column styleClass="soundClass">
 				        	<h:panelGroup id="soundCol">#{status.playSound}</h:panelGroup>
 				        </p:column>
 				        <p:column styleClass="colorClass">
 				        	<h:panelGroup id="colorCol">#{status.color}</h:panelGroup>
+				        </p:column>
+				        <p:column styleClass="waypointClass">
+				        	<h:panelGroup id="waypointCol">#{status.waypoint}</h:panelGroup>
 				        </p:column>
         		 	</p:dataTable>
         		 </p:panel>
         		 
         		 <p:panel id="serv2TemplePanel" header="#{checkboxBean.serverTwo.serverName}" toggleable="true" collapsed="#{serverDashboardBean.serv2Collapsed}">
         		 	<p:ajax event="toggle" listener="#{serverDashboardBean.handleServ2Toggle}"/>
-        		 	<p:dataTable binding="#{serv2TempleTable}" var="status" value="#{dragonBean.serv2TempleStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
+        		 	<p:dataTable rowIndexVar="row" binding="#{serv2TempleTable}" var="status" id="serv2Temple" value="#{dragonBean.serv2TempleStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
         		 		<p:column>  
 				            <h:panelGroup id="eventCol">#{status.event}</h:panelGroup>  
 				        </p:column>  
@@ -147,20 +159,23 @@
 				            <h:panelGroup id="dateCol">#{status.date}</h:panelGroup>
 				        </p:column>
 				        <p:column styleClass="clipboard">
-				        	<button data-clipboard-text="#{status.waypoint}" class="clipbutton"></button>
+				        	<button data-clipboard-target="form:serv2Temple:#{row}:waypointCol" class="clipbutton"></button>
 				        </p:column>
 				        <p:column styleClass="soundClass">
 				        	<h:panelGroup id="soundCol">#{status.playSound}</h:panelGroup>
 				        </p:column>
 				        <p:column styleClass="colorClass">
 				        	<h:panelGroup id="colorCol">#{status.color}</h:panelGroup>
+				        </p:column>
+				        <p:column styleClass="waypointClass">
+				        	<h:panelGroup id="waypointCol">#{status.waypoint}</h:panelGroup>
 				        </p:column>
         		 	</p:dataTable>
         		 </p:panel>
         		 
         		 <p:panel id="serv3TemplePanel" header="#{checkboxBean.serverThree.serverName}" toggleable="true" collapsed="#{serverDashboardBean.serv3Collapsed}">
         		 	<p:ajax event="toggle" listener="#{serverDashboardBean.handleServ3Toggle}"/>
-        		 	<p:dataTable binding="#{serv3TempleTable}" var="status" value="#{dragonBean.serv3TempleStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
+        		 	<p:dataTable rowIndexVar="row" binding="#{serv3TempleTable}" var="status" id="serv3Temple" value="#{dragonBean.serv3TempleStatus}" styleClass="hide-column-names" rowStyleClass="#{status.color}">
         		 		<p:column>  
 				            <h:panelGroup id="eventCol">#{status.event}</h:panelGroup>  
 				        </p:column>  
@@ -171,7 +186,7 @@
 				            <h:panelGroup id="dateCol">#{status.date}</h:panelGroup>
 				        </p:column>
 				        <p:column styleClass="clipboard">
-				        	<button data-clipboard-text="#{status.waypoint}" class="clipbutton"></button>
+				        	<button data-clipboard-target="form:serv3Temple:#{row}:waypointCol" class="clipbutton"></button>
 				        </p:column>
 				        <p:column styleClass="soundClass">
 				        	<h:panelGroup id="soundCol">#{status.playSound}</h:panelGroup>
@@ -179,14 +194,29 @@
 				        <p:column styleClass="colorClass">
 				        	<h:panelGroup id="colorCol">#{status.color}</h:panelGroup>
 				        </p:column>
+				        <p:column styleClass="waypointClass">
+				        	<h:panelGroup id="waypointCol">#{status.waypoint}</h:panelGroup>
+				        </p:column>
         		 	</p:dataTable>
         		 </p:panel>
         	</p:dashboard>
         </h:form>
         </p:layoutUnit>
-        <!--  >p:layoutUnit id="bottom" position="south" size="200" resizable="true">
-            <ui:include src="eventWindow.xhtml"></ui:include>
-        </p:layoutUnit-->
+        <p:dialog id="dialog" header="Event Windows" widgetVar="dlg" dynamic="true">  
+		    <h:form id="formEventWindow">
+        		<p:dataTable id="eventWindowPanel" var="window" value="#{eventWindowBean.eventWindows}">
+       		 		<p:column headerText="Event">  
+			            <h:outputText value="#{window.eventName}" />  
+			        </p:column>  
+			        <p:column headerText="Minimum Window">  
+			            <h:outputText value="#{window.minWindow}"/>  
+			        </p:column>
+			        <p:column headerText="Maximum Window">  
+			            <h:outputText value="#{window.maxWindow}" />  
+			        </p:column>
+       		 	</p:dataTable>
+            </h:form>
+		</p:dialog>  
         <p:layoutUnit id="east" position="east" header="Checkboxes" size="#{checkboxBean.eastSize}" collapsed="#{checkboxBean.eastCollapsed}" 
         	closable="false" collapsible="true" resizable="true">
         	<p:tabView scrollable="true" id="checkboxTab">
@@ -228,8 +258,10 @@
 				        <p:selectManyCheckbox layout="pageDirection" id="playSoundCB" styleClass="soundClassCB">
 			            	<f:selectItem itemLabel="Play Sound" itemValue="Play Sound" />  
 			            </p:selectManyCheckbox>  
+			            
+			            <p:commandButton id="basic" value="Show Event Windows" actionListener="#{eventWindowBean.calculateEventWindows}" oncomplete="PF('dlg').show();" update=":dialog"/>  
 		        	</h:form>
-		        </p:tab>
+		        </p:tab><!--  oncomplete="PF('dlg').show();" -->
 		        <p:tab id="dailyTab" title="Daily Tracker">
 		        	<h:form id="dailyCBs">
 		        		<p:selectManyCheckbox value="#{dailyCheckboxBean.selectedEvents}"  

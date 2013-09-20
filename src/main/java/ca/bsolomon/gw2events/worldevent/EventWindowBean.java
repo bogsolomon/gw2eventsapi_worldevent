@@ -80,4 +80,7 @@ public class EventWindowBean {
 		return windows;
 	}
 	
+	public void calculateEventWindows() {
+		
+	}
 }
