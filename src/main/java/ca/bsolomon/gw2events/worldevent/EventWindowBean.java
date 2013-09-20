@@ -36,16 +36,7 @@ public class EventWindowBean {
 	public List<EventWindow> getEventWindows() {
 		List<EventWindow> windows = new ArrayList<>();
 		
-		String eventUid = DragonEvent.TEQUATL.uid();
-		windows.add(new EventWindow("Tequatl", dragonData.getMaxPeriod(eventUid), dragonData.getMinPeriod(eventUid)));
-		
-		eventUid = DragonEvent.SHATTERER_UP.uid();
-		windows.add(new EventWindow("RageDragon", dragonData.getMaxPeriod(eventUid), dragonData.getMinPeriod(eventUid)));
-		
-		eventUid = DragonEvent.JORMAG_UP.uid();
-		windows.add(new EventWindow("Jormag", dragonData.getMaxPeriod(eventUid), dragonData.getMinPeriod(eventUid)));
-		
-		eventUid = MawEvent.CHIEF.uid();
+		String eventUid = MawEvent.CHIEF.uid();
 		windows.add(new EventWindow("Maw", lowLevelEventData.getMaxPeriod(eventUid), lowLevelEventData.getMinPeriod(eventUid)));
 		
 		eventUid = FireEleEvent.FIREELE.uid();
@@ -57,23 +48,32 @@ public class EventWindowBean {
 		eventUid = ShadowBehemothEvent.SB.uid();
 		windows.add(new EventWindow("SB", lowLevelEventData.getMaxPeriod(eventUid), lowLevelEventData.getMinPeriod(eventUid)));
 		
-		eventUid = GolemEvent.GOLEM.uid();
-		windows.add(new EventWindow("Golem MKII", lowPriorityEventData.getMaxPeriod(eventUid), lowPriorityEventData.getMinPeriod(eventUid)));
-		
-		eventUid = DredgeEvent.DREDGE.uid();
-		windows.add(new EventWindow("Dredge", lowPriorityEventData.getMaxPeriod(eventUid), lowPriorityEventData.getMinPeriod(eventUid)));
+		eventUid = FoulBearEvent.CHIEF.uid();
+		windows.add(new EventWindow("Foulbear", lowPriorityEventData.getMaxPeriod(eventUid), lowPriorityEventData.getMinPeriod(eventUid)));
 		
 		eventUid = HarathiChestEvent.CENTAUR.uid();
 		windows.add(new EventWindow("Kilava Chest", lowPriorityEventData.getMaxPeriod(eventUid), lowPriorityEventData.getMinPeriod(eventUid)));
 		
-		eventUid = FoulBearEvent.CHIEF.uid();
-		windows.add(new EventWindow("Foulbear", lowPriorityEventData.getMaxPeriod(eventUid), lowPriorityEventData.getMinPeriod(eventUid)));
+		eventUid = DredgeEvent.DREDGE.uid();
+		windows.add(new EventWindow("Dredge", lowPriorityEventData.getMaxPeriod(eventUid), lowPriorityEventData.getMinPeriod(eventUid)));
 		
 		eventUid = HydraQueenEvent.TAIDHA.uid();
 		windows.add(new EventWindow("Hydra Queen", lowPriorityEventData.getMaxPeriod(eventUid), lowPriorityEventData.getMinPeriod(eventUid)));
 		
+		eventUid = DragonEvent.SHATTERER_UP.uid();
+		windows.add(new EventWindow("RageDragon", dragonData.getMaxPeriod(eventUid), dragonData.getMinPeriod(eventUid)));
+		
 		eventUid = FireShamanEnum.SHAMAN.uid();
 		windows.add(new EventWindow("Fire Shaman", lowPriorityEventData.getMaxPeriod(eventUid), lowPriorityEventData.getMinPeriod(eventUid)));
+		
+		eventUid = DragonEvent.TEQUATL.uid();
+		windows.add(new EventWindow("Tequatl", dragonData.getMaxPeriod(eventUid), dragonData.getMinPeriod(eventUid)));
+		
+		eventUid = GolemEvent.GOLEM.uid();
+		windows.add(new EventWindow("Golem MKII", lowPriorityEventData.getMaxPeriod(eventUid), lowPriorityEventData.getMinPeriod(eventUid)));
+		
+		eventUid = DragonEvent.JORMAG_UP.uid();
+		windows.add(new EventWindow("Jormag", dragonData.getMaxPeriod(eventUid), dragonData.getMinPeriod(eventUid)));
 		
 		windows.add(new EventWindow("Scarlett", templeEventData.getMaxPeriod("Scarlett"), templeEventData.getMinPeriod("Scarlett")));
 		
