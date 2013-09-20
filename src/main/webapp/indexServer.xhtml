@@ -23,14 +23,21 @@
 		</script>
     </h:head>
     <h:body onload="startTime(); createClipboards();">
-    	<p:layout fullPage="true">
+    	<p:notificationBar position="top" effect="slide" widgetVar="notifBar" styleClass="top">  
+		    <h:outputText value="Server restart! Please wait 2-3 mins and refresh page." style="color:#FF0000;font-size:36px;" />
+		    <a href="indexServer.jsf">Reload Page</a>  
+		</p:notificationBar>  
+		
+		<p:layout fullPage="true">
     	<p:ajax event="resize" listener="#{checkboxBean.handleResize}"/>
     	<p:ajax event="toggle" listener="#{checkboxBean.handleToggle}"/>
     	<p:layoutUnit position="center" header="Events" resizable="true" closable="false" collapsible="false">       
         <h:form id="form">
+        
         	<p:poll interval="15"   
             	listener="#{ajaxPollBean.updateEventServer(serv1Table, serv2Table, serv3Table)}" 
-            	widgetVar="poll" autoStart="true"/>
+            	widgetVar="poll" autoStart="true"
+            	onerror="PF('notifBar').show();"/>
             	
             <p:poll interval="60"   
             	listener="#{ajaxPollBean.updateEventTempleServer(serv1TempleTable, serv2TempleTable, serv3TempleTable)}" 
