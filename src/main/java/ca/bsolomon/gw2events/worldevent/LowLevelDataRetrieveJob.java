@@ -11,6 +11,7 @@ import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
+import ca.bsolomon.gw2events.worldevent.dynamodb.EventWindowData;
 import ca.bsolomon.gw2events.worldevent.enums.FireEleEvent;
 import ca.bsolomon.gw2events.worldevent.enums.FlameBattleEvent;
 import ca.bsolomon.gw2events.worldevent.enums.JungleWurmEvent;
@@ -27,6 +28,7 @@ public class LowLevelDataRetrieveJob extends DataRetrieveJob implements Job {
 	
 	public void execute(JobExecutionContext context)
 			throws JobExecutionException {
+		EventWindowData.loadInitialData();
 		
 		DateTimeZone zone = DateTimeZone.forID("America/New_York");
 		Chronology gregorianJuian = GJChronology.getInstance(zone);

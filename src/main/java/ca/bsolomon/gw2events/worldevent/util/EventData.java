@@ -24,8 +24,4 @@ public interface EventData {
 	public abstract String getEventStatus(String eventId);
 
 	public abstract DateTime getEventTime(String eventId);
-	
-	public String getMaxPeriod(String eventId);
-	
-	public String getMinPeriod(String eventId);
 }
