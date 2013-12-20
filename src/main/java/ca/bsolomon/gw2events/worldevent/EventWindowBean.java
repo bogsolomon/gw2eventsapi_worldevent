@@ -66,6 +66,7 @@ public class EventWindowBean {
 		eventUid = DragonEvent.JORMAG_UP.uid();
 		windows.add(new EventWindow("Jormag", EventWindowData.getMaxWindow(eventUid), EventWindowData.getMinWindow(eventUid)));
 		
+		eventUid = "Scarlett";
 		windows.add(new EventWindow("Scarlett", EventWindowData.getMaxWindow(eventUid), EventWindowData.getMinWindow(eventUid)));
 		
 		return windows;

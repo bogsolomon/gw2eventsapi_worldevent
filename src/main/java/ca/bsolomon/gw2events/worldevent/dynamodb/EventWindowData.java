@@ -62,6 +62,14 @@ public class EventWindowData {
 	public static void updateMaxEventWindow(String eventUID, Period maxWindow) {
 		DateTime time = new DateTime(gregorianJulian);
 		
+		Period minWindow = minEventWindows.get(eventUID);
+		String minWindowStr;
+		
+		if (minWindow == null)
+			minWindowStr = "N/A";
+		else
+			minWindowStr = minWindow.toString();
+		
 		if (maxEventWindows.containsKey(eventUID)) {
 			Period prevMaxWindow = maxEventWindows.get(eventUID);
 			Duration prevDuration = prevMaxWindow.toDurationFrom(time);
@@ -70,19 +78,27 @@ public class EventWindowData {
 			if (prevDuration.isShorterThan(currentDuration)) {
 				maxEventWindows.put(eventUID, maxWindow);
 				
-				EventWindow window = new EventWindow(eventUID, maxWindow.toString(), minEventWindows.get(eventUID).toString());
+				EventWindow window = new EventWindow(eventUID, maxWindow.toString(), minWindowStr);
 				dbService.updateEventWindow(window);
 			}
 		} else {
 			maxEventWindows.put(eventUID, maxWindow);
 			
-			EventWindow window = new EventWindow(eventUID, maxWindow.toString(), minEventWindows.get(eventUID).toString());
+			EventWindow window = new EventWindow(eventUID, maxWindow.toString(), minWindowStr);
 			dbService.updateEventWindow(window);
 		}
 	}
 	
 	public static void updateMinEventWindow(String eventUID, Period minWindow) {
 		DateTime time = new DateTime(gregorianJulian);
+		
+		Period maxWindow = maxEventWindows.get(eventUID);
+		String maxWindowStr;
+		
+		if (maxWindow == null)
+			maxWindowStr = "N/A";
+		else
+			maxWindowStr = maxWindow.toString();
 		
 		if (minEventWindows.containsKey(eventUID)) {
 			Period prevMinWindow = minEventWindows.get(eventUID);
@@ -92,13 +108,13 @@ public class EventWindowData {
 			if (prevDuration.isLongerThan(currentDuration)) {
 				minEventWindows.put(eventUID, minWindow);
 				
-				EventWindow window = new EventWindow(eventUID, maxEventWindows.get(eventUID).toString(), minWindow.toString());
+				EventWindow window = new EventWindow(eventUID, maxWindowStr, minWindow.toString());
 				dbService.updateEventWindow(window);
 			}
 		} else {
 			minEventWindows.put(eventUID, minWindow);
 			
-			EventWindow window = new EventWindow(eventUID, maxEventWindows.get(eventUID).toString(), minWindow.toString());
+			EventWindow window = new EventWindow(eventUID, maxWindowStr, minWindow.toString());
 			dbService.updateEventWindow(window);
 		}
 	}

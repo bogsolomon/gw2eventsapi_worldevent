@@ -18,6 +18,11 @@ public class EventWindow {
 		this.minWindow = minWindow;
 	}
 
+	//Empty constructor for dynamodb retrieval
+	public EventWindow() {
+		
+	}
+
 	@DynamoDBAttribute(attributeName="maxWindow")
 	public String getMaxWindow() {
 		return maxWindow;
